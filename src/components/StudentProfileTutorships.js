@@ -82,9 +82,10 @@ function StudentProfileTutorships() {
           const { name, focus, profile_photo, email } = tutorship.tutor_id;
           const { status, _id: id, isRated } = tutorship;
           const dateObject = new Date(tutorship.date);
-          const zonedDate = utcToZonedTime(dateObject, 'America/Argentina');
-          const date = format(zonedDate, 'dd/MM/yyyy');
-          const time = format(zonedDate, 'K:mm a');
+          const zonedDate = utcToZonedTime(dateObject);
+          const date = zonedDate ? format(zonedDate, 'dd/MM/yyyy') : 'Invalid date';
+          const time = zonedDate ? format(zonedDate, 'K:mm a') : 'Invalid time';
+          
           return (
             <div key={id} className="student__tutorship-container">
               <div className="student__tutorship__image-container">

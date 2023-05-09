@@ -68,7 +68,7 @@ function TutorsSchedule(props) {
       };
 
       axios
-        .post('/sendAppointment', apponintment)
+        .post('/tutorship', apponintment)
         .then((req, res) => {
           swalStyled
             .fire({

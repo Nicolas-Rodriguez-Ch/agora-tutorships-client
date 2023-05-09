@@ -10,7 +10,7 @@ function errorPage() {
         loop
         src="https://assets2.lottiefiles.com/packages/lf20_ck8dimsp.json"
         className="error__illustration"
-      ></Player>
+      />
     </div>
   );
 }

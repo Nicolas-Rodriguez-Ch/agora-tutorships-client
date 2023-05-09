@@ -423,7 +423,7 @@ function PaymentMethods() {
               <input
                 type="number"
                 name="card[cvc]"
-                value={cardInfo['card[cvc]']}
+                value={cardInfo['card[c vc]']}
                 onChange={cardInfoChange}
                 onBlur={validateinputs}
               />
