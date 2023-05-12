@@ -6,7 +6,7 @@ $title-color: #3f3f3f;
 $color-a: #22b8d9;
 $color-b: rgb(41, 202, 103);
 
-* {
+.tutorsReset {
   margin: 0;
   padding: 0;
 }
@@ -17,7 +17,7 @@ $color-b: rgb(41, 202, 103);
   flex-direction: column;
 }
 
-.tutors__title-container {
+.tutorsTitleContainer {
   font-family: 'Open Sans', sans-serif;
   font-size: 1.8rem;
   font-weight: 700;
