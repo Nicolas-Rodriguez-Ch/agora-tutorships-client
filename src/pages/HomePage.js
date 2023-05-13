@@ -1,5 +1,5 @@
-import '../assets/styles/pages/HomePage.scss';
-import { TutorsContainer } from '../components/TutorsContainer';
+import "../assets/styles/pages/HomePage.scss";
+import { TutorsContainer } from "../components/TutorsContainer";
 
 function HomePage() {
   return (

@@ -212,8 +212,6 @@ export default function CheckoutPage(props) {
     }
   }
 
- 
-
   function customerInfoChange(e) {
     setCustomerInfo((state) => ({
       ...state,
@@ -293,119 +291,122 @@ export default function CheckoutPage(props) {
 
   return (
     <div className="payment__body">
-    <div className="payment__page-body">
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          {count === 1 && (
-            <form action="" className="payment__form">
-              <div className="payment__form-slot">
-                <label>name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={customerInfo.name}
-                  onChange={customerInfoChange}
-                  onBlur={validateinputs}
-                />
-                <span className="payment__errors">{errors.name}</span>
-              </div>
-              <div className="payment__form-slot">
-                <label>last_name</label>
-                <input
-                  type="text"
-                  name="last_name"
-                  value={customerInfo.last_name}
-                  onChange={customerInfoChange}
-                  onBlur={validateinputs}
-                />
-                <span className="payment__errors">{errors.last_name}</span>
-              </div>
-
-              <div className="payment__card-form">
-                <div className="payment__id-type-form-slot">
-                  <label>id type</label>
-                  <select
-                    name="doc_type"
-                    id="doc_type"
-                    onChange={paymentInfoChange}
-                    value={paymentInfo.doc_type}
-                    onBlur={validateinputs}
-                  >
-                    <option value={0} hidden>
-                      please select
-                    </option>
-                    <option value="cc">CC</option>
-                    <option value="nit">NIT</option>
-                  </select>
-                </div>
-                <div className="payment__id-num-form-slot">
-                  <label>id number</label>
+      <div className="payment__page-body">
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            {count === 1 && (
+              <form action="" className="payment__form">
+                <div className="payment__form-slot">
+                  <label>name</label>
                   <input
-                    name="doc_number"
-                    type="number"
-                    value={paymentInfo.doc_number}
-                    onChange={paymentInfoChange}
+                    type="text"
+                    name="name"
+                    value={customerInfo.name}
+                    onChange={customerInfoChange}
                     onBlur={validateinputs}
                   />
+                  <span className="payment__errors">{errors.name}</span>
                 </div>
-              </div>
-              <span className="payment__errors">
-                {errors.doc_type || errors.doc_number}
-              </span>
+                <div className="payment__form-slot">
+                  <label>last_name</label>
+                  <input
+                    type="text"
+                    name="last_name"
+                    value={customerInfo.last_name}
+                    onChange={customerInfoChange}
+                    onBlur={validateinputs}
+                  />
+                  <span className="payment__errors">{errors.last_name}</span>
+                </div>
 
-              <div className="payment__form-slot">
-                <label>email</label>
-                <input
-                  type="text"
-                  name="email"
-                  value={customerInfo.email}
-                  onChange={customerInfoChange}
-                  onBlur={validateinputs}
-                />
-                <span className="payment__errors">{errors.email}</span>
-              </div>
-            </form>
-          )}
+                <div className="payment__card-form">
+                  <div className="payment__id-type-form-slot">
+                    <label>id type</label>
+                    <select
+                      name="doc_type"
+                      id="doc_type"
+                      onChange={paymentInfoChange}
+                      value={paymentInfo.doc_type}
+                      onBlur={validateinputs}
+                    >
+                      <option value={0} hidden>
+                        please select
+                      </option>
+                      <option value="cc">CC</option>
+                      <option value="nit">NIT</option>
+                    </select>
+                  </div>
+                  <div className="payment__id-num-form-slot">
+                    <label>id number</label>
+                    <input
+                      name="doc_number"
+                      type="number"
+                      value={paymentInfo.doc_number}
+                      onChange={paymentInfoChange}
+                      onBlur={validateinputs}
+                    />
+                  </div>
+                </div>
+                <span className="payment__errors">
+                  {errors.doc_type || errors.doc_number}
+                </span>
 
-          {count === 2 && (
-            <form action="" className="payment__form" onSubmit={handleSubmit}>
-              <div className="payment__form-slot">
-                <label>name on card</label>
-                <input
-                  type="text"
-                  name="card_name"
-                  value={cardName.card_name}
-                  onChange={cardNameChange}
-                  onBlur={validateinputs}
-                />
-                <span className="payment__errors">{errors.card_name}</span>
-              </div>
-              <div className="payment__form-slot">
-                <label>card details</label>
-                <CardElement style={{ border: '1px solid red' }} options={{ hidePostalCode: true }} />
-              </div>
-              <button
-                className="payment__pay-button"
-                disabled={
-                  !(
-                    isValid.dues &&
-                    isValid.doc_type &&
-                    isValid.doc_number &&
-                    isValid.name &&
-                    isValid.last_name &&
-                    isValid.email &&
-                    isValid.card_name
-                  )
-                }
-              >
-                pay
-              </button>
-            </form>
-          )}
-        </>
-      )}
+                <div className="payment__form-slot">
+                  <label>email</label>
+                  <input
+                    type="text"
+                    name="email"
+                    value={customerInfo.email}
+                    onChange={customerInfoChange}
+                    onBlur={validateinputs}
+                  />
+                  <span className="payment__errors">{errors.email}</span>
+                </div>
+              </form>
+            )}
+
+            {count === 2 && (
+              <form action="" className="payment__form" onSubmit={handleSubmit}>
+                <div className="payment__form-slot">
+                  <label>name on card</label>
+                  <input
+                    type="text"
+                    name="card_name"
+                    value={cardName.card_name}
+                    onChange={cardNameChange}
+                    onBlur={validateinputs}
+                  />
+                  <span className="payment__errors">{errors.card_name}</span>
+                </div>
+                <div className="payment__form-slot">
+                  <label>card details</label>
+                  <CardElement
+                    style={{ border: "1px solid red" }}
+                    options={{ hidePostalCode: true }}
+                  />
+                </div>
+                <button
+                  className="payment__pay-button"
+                  disabled={
+                    !(
+                      isValid.dues &&
+                      isValid.doc_type &&
+                      isValid.doc_number &&
+                      isValid.name &&
+                      isValid.last_name &&
+                      isValid.email &&
+                      isValid.card_name
+                    )
+                  }
+                >
+                  pay
+                </button>
+              </form>
+            )}
+          </>
+        )}
 
         {loadingPayment && (
           <div>

@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import axios from '../utils/axios';
+import axios from '../../utils/axios';
 import { FaUserAlt, FaEnvelope, FaKey } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { register as registerAction } from '../actions/register';
+import { register as registerAction } from '../../actions/register';
 import { useDispatch, useSelector } from 'react-redux';
-import FormTutor from '../components/FormTutor';
-import { AUTHORIZED } from '../actions/constants';
-import history from '../utils/history';
+import FormTutor from '../../components/FormTutor';
+import { AUTHORIZED } from '../../actions/constants';
+import history from '../../utils/history';
 
-import '../assets/styles/pages/register.scss';
 
 function Register() {
   const auth_status = useSelector((state) => state.auth_status);
