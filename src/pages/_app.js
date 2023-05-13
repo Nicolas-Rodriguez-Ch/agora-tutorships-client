@@ -10,21 +10,38 @@ import "../assets/styles/pages/register.scss";
 import "../assets/styles/pages/TutorEditProfile.scss";
 import "../assets/styles/pages/Tutorship.scss";
 import "../assets/styles/pages/TutorViewProfile.scss";
-import { Provider } from "react-redux";
-import store from "../store";
-import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { wrapper } from "../store";  // Import wrapper from your Redux store file
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { getUserData } from "../slices/userSlice";
+import { useEffect } from "react";
 
-export default function app({ Component, pageProps }) {
-  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
-  const router = useRouter();
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
+function InnerApp({ Component, pageProps }) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("useEffect is running"); // This should print regardless
+    const token = localStorage.getItem("token");
+    console.log("Token: ", token); // Log the token to the console
+    if (token) {
+      dispatch(getUserData(token));
+    }
+  }, [dispatch]);
+
+  return <Component {...pageProps} />;
+}
+
+const WrappedApp = wrapper.withRedux(InnerApp);
+
+function App({ Component, pageProps }) {
   return (
-    <Provider store={store}>
-      <Elements stripe={stripePromise}>
-        <Component {...pageProps} />;
-      </Elements>
-    </Provider>
+    <Elements stripe={stripePromise}>
+      <WrappedApp Component={Component} pageProps={pageProps} />
+    </Elements>
   );
 }
+
+export default App;

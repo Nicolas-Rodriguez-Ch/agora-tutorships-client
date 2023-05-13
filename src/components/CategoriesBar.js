@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../assets/styles/components/CategoriesBar.scss';
+import '../assets/styles/components/CategoriesBar.module.scss';
 
 function CategoriesBar({ Categories, setFilter }) {
   const [selected, setSelected] = useState(null);

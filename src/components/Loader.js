@@ -1,4 +1,4 @@
-import '../assets/styles/components/Loader.scss';
+import '../assets/styles/components/Loader.module.scss';
 
 function Loader() {
   return (

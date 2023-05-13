@@ -1,9 +1,13 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import reducer from './reducers';
-import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
+import { createWrapper } from 'next-redux-wrapper';
+import userReducer from './slices/userSlice';
 
-// const Store = createStore(reducer, applyMiddleware(thunk));
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export default function createAppStore() {
-  return createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
-}
+// Function that returns a new Redux store
+const makeStore = () => configureStore({
+  reducer: {
+    user: userReducer,
+  },
+  devTools: process.env.NODE_ENV !== 'production',
+});
+
+export const wrapper = createWrapper(makeStore, { debug: true });
