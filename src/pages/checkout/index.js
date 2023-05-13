@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
-import axios from "../utils/axios";
+import axios from "../../utils/axios";
 import { useSelector } from "react-redux";
-import Loader from "../components/Loader";
-import history from "../utils/history";
+import Loader from "../../components/Loader";
 import Swal from "sweetalert2";
-import "../assets/styles/pages/checkout.scss";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useRouter } from "next/router";
 
 export default function CheckoutPage(props) {
+  const router = useRouter();
+  const tutorship_id = null;
+  const tutorship_price = null;
+
   const elements = useElements();
   const stripe = useStripe();
-  const tutorshipData = props.location.state.state;
-  const { tutorship_id, tutorship_price } = tutorshipData;
   const [showCardForm, setShowCardForm] = useState(false);
   const [loadingPayment, setLoadingPayment] = useState(false);
-  const user_id = useSelector((state) => state.currentUser._id);
-  const user_email = useSelector((state) => state.currentUser.email);
-  const user_name = useSelector((state) => state.currentUser.name);
+  const user_id = useSelector((state) => state.user.currentUser._id);
+  const user_email = useSelector((state) => state.user.currentUser.email);
+  const user_name = useSelector((state) => state.user.currentUser.name);
+
   const firstName = function (user_name) {
     if (!user_name) return "";
     const fullName = user_name.split(" ");
@@ -283,7 +285,7 @@ export default function CheckoutPage(props) {
         icon: "success",
         title: "Succesfull payment",
       });
-      history.push("/profile/tutorships");
+      router.push("/profile/tutorships");
     } else {
       throw new Error(response.data.message);
     }
