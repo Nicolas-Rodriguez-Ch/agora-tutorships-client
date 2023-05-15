@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
 
-$subtitle-color: #5b5b5b;
-$title-color: #3f3f3f;
-$color-a: #22b8d9;
-$color-b: rgb(41, 202, 103);
-$color-button-backgroud: #f7f7f7;
+$subtitleColor: #5b5b5b;
+$titleColor: #3f3f3f;
+$colorA: #22b8d9;
+$colorB: rgb(41, 202, 103);
+$colorButtonBackground: #f7f7f7;
 
 .html {
   font-size: 16px;
 }
 
-.categories__container {
+.categoriesContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,21 +20,21 @@ $color-button-backgroud: #f7f7f7;
   height: 100%;
 }
 
-.categories__select-focus,
-.category__button {
+.categoriesSelectFocus,
+.categoryButton {
   width: 100%;
   border: none;
   text-align: center;
   height: 45px;
-  background-color: $color-button-backgroud;
+  background-color: $colorButtonBackground;
   font-family: 'Source Code Pro', monospace;
   font-size: 1rem;
   font-weight: 600;
-  color: $subtitle-color;
+  color: $subtitleColor;
   letter-spacing: 3px;
 }
 
-.category__button-selected {
+.categoryButtonSelected {
   width: 100%;
   border: none;
   text-align: center;
@@ -44,50 +44,50 @@ $color-button-backgroud: #f7f7f7;
   letter-spacing: 3px;
   transform: translateY(-3px);
   box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
-  background-color: $color-b;
+  background-color: $colorB;
   color: white;
   cursor: pointer;
   font-weight: 600;
 }
 
-.categories__select-focus {
+.categoriesSelectFocus {
   margin-bottom: 30px;
 }
 
-.category__button-selected,
-.category__button {
+.categoryButtonSelected,
+.categoryButton {
   display: none;
 }
 
-.category__button:hover {
+.categoryButton:hover {
   transform: translateY(-3px);
   /* box-shadow: -5px 5px rgba(0, 0, 0, 0.2); */
-  background-color: $color-b;
+  background-color: $colorB;
   color: white;
   cursor: pointer;
   font-weight: 600;
 }
 
-.categories__select-focus {
+.categoriesSelectFocus {
   background-color: white;
-  color: $color-b;
+  color: $colorB;
   font-weight: 800;
-  border: 2px solid $color-b;
+  border: 2px solid $colorB;
 }
 
 @media (min-width: 768px) {
-  .categories__select-focus {
+  .categoriesSelectFocus {
     width: 480px;
     margin: 0 auto 30px auto;
   }
 }
 
 @media (min-width: 992px) {
-  .categories__select-focus {
+  .categoriesSelectFocus {
     display: none;
   }
 
-  .category__button {
+  .categoryButton {
     display: initial;
     text-align: left;
     font-size: 0.9rem;
@@ -95,12 +95,13 @@ $color-button-backgroud: #f7f7f7;
     font-weight: 400;
   }
 
-  .category__button-selected {
+  .categoryButtonSelected {
     display: initial;
   }
 }
+
 @media (min-width: 1200px) {
-  .category__button {
+  .categoryButton {
     font-size: 1rem;
     padding-left: 30px;
   }

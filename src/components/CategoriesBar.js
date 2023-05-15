@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import '../assets/styles/components/CategoriesBar.module.scss';
+import styles from '../assets/styles/components/CategoriesBar.module.scss';
 
 function CategoriesBar({ Categories, setFilter }) {
   const [selected, setSelected] = useState(null);
+
   return (
-    <main className="categories__container">
+    <main className={styles.categoriesContainer}>
       <select
         placeholder="categories"
         name="categories"
-        className="categories__select-focus"
+        className={styles.categoriesSelectFocus}
         onChange={(e) => setFilter(e.target.value)}
       >
         <option hidden>Choose an area</option>
@@ -18,9 +19,10 @@ function CategoriesBar({ Categories, setFilter }) {
           </option>
         ))}
       </select>
+
       {Categories.map((e, i) => (
         <button
-          className={selected === e.subject ? 'category__button-selected' : 'category__button'}
+          className={selected === e.subject ? styles.categoryButtonSelected : styles.categoryButton}
           key={i}
           onClick={() => {
             setFilter(e.subject);

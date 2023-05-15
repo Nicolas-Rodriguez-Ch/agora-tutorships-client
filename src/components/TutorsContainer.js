@@ -7,19 +7,19 @@ import Loader from "./Loader";
 
 function TutorsContainer({ title }) {
   const [filter, setFilter] = useState("Math");
-  const [Categories, setCategories] = useState([]);
-  const [Tutors, setTutors] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [tutors, setTutors] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function getData() {
       try {
         const responseCat = await axios.get("/categories");
-        const categories = responseCat.data.categories;
-        setCategories(categories);
+        const categoriesData = responseCat.data.categories;
+        setCategories(categoriesData);
         const responseTut = await axios.get(`/tutors/${filter}`);
-        const tutors = responseTut.data.tutors;
-        setTutors(tutors);
+        const tutorsData = responseTut.data.tutors;
+        setTutors(tutorsData);
       } catch (error) {
         console.error(error);
       }
@@ -33,25 +33,22 @@ function TutorsContainer({ title }) {
       {isLoading ? (
         <Loader />
       ) : (
-        <section
-          className={`${styles.tutors__container} ${styles.tutorsReset}`}
-        >
+        <section className={`${styles.tutorsContainer} ${styles.tutorsReset}`}>
           <div
-            className={`${styles.tutorsTitleContainer} ${
-              styles.tutorsReset
-            }`}
+            className={`${styles.tutorsTitleContainer} ${styles.tutorsReset}`}
           >
             <p>{title}</p>
           </div>
           <div
-            className={`${styles.categories__container} ${styles.tutorsReset}`}
+            className={`${styles.categoriesContainer} ${styles.tutorsReset}`}
           >
-            <CategoriesBar Categories={Categories} setFilter={setFilter} />
+            <CategoriesBar Categories={categories} setFilter={setFilter} />
           </div>
-          <CardContainer Tutors={Tutors} />
+          <CardContainer Tutors={tutors} />
         </section>
       )}
     </>
   );
 }
+
 export { TutorsContainer };

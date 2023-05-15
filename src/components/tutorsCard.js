@@ -32,16 +32,16 @@ function TutorsCard(tutor) {
       className={`${styles.card} ${styles.cardReset}`}
       onClick={handleClick}
     >
-      <div className="card-visual-info">
-        <img src={profile_photo} alt="profilepicture"></img>
+      <div className={styles.cardVisualInfo}>
+        <img src={profile_photo} alt="profilepicture" />
         <h1 key={name}>{name}</h1>
-        <div className="card-stars">{starNodes}</div>
-        <p className="price">Tutorship fee</p>
-        <p className="price">
+        <div className={styles.cardStars}>{starNodes}</div>
+        <p className={styles.price}>Tutorship fee</p>
+        <p className={styles.price}>
           {price ? "COP $ " + price.toLocaleString() : "Price not assigned"}
         </p>
       </div>
-      <div className="card-tutor-info">
+      <div className={styles.cardTutorInfo}>
         <h2 key={profession}>{profession}</h2>
         <h3>{focus}</h3>
         <p>{description}</p>

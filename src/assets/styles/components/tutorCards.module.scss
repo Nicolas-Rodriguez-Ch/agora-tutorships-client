@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
 
-$select-color: rgb(41, 202, 103);
-$color-a: #22b8d9;
+$selectColor: rgb(41, 202, 103);
+$colorA: #22b8d9;
 
 .cardReset {
   box-sizing: border-box;
@@ -16,7 +16,7 @@ $color-a: #22b8d9;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   cursor: pointer;
   user-select: none;
   color: #112031;
@@ -24,11 +24,11 @@ $color-a: #22b8d9;
 }
 
 .card:hover {
-  border: 3px $select-color solid;
+  border: 3px $selectColor solid;
   box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
 }
 
-.card-visual-info {
+.cardVisualInfo {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -54,24 +54,27 @@ $color-a: #22b8d9;
   }
 }
 
-.card-tutor-info {
+.cardTutorInfo {
   width: 52%;
   height: 95%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+
   h2 {
     font-size: 4vw;
     margin: 0;
     text-align: center;
   }
+
   h3 {
     font-size: 3.5vw;
     font-style: italic;
     margin: 0;
     text-align: center;
   }
+
   p {
     font-size: 2.9vw;
     text-align: justify;
@@ -81,7 +84,7 @@ $color-a: #22b8d9;
   }
 }
 
-.card-stars {
+.cardStars {
   width: 20vw;
   font-size: 4vw;
   display: flex;
@@ -92,7 +95,7 @@ $color-a: #22b8d9;
 }
 
 .price {
-  color: $color-a;
+  color: $colorA;
   font-size: 4vw;
   font-weight: 600;
 }
@@ -105,7 +108,7 @@ $color-a: #22b8d9;
     height: 20rem;
   }
 
-  .card-visual-info {
+  .cardVisualInfo {
     width: 45%;
     height: 95%;
     text-align: center;
@@ -126,7 +129,7 @@ $color-a: #22b8d9;
     }
   }
 
-  .card-tutor-info {
+  .cardTutorInfo {
     margin: auto 0;
     width: 55%;
     height: 95%;
@@ -202,6 +205,7 @@ $color-a: #22b8d9;
     height: 320px;
   }
 }
+
 @media (min-width: 1400px) {
   .card {
     width: 420px;
