@@ -23,9 +23,9 @@ function InnerApp({ Component, pageProps }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("useEffect is running"); // This should print regardless
+    console.log("useEffect is running"); 
     const token = localStorage.getItem("token");
-    console.log("Token: ", token); // Log the token to the console
+    console.log("Token: ", token);
     if (token) {
       dispatch(getUserData(token));
     }
