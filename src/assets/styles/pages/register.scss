@@ -1,11 +1,11 @@
-$color-primary: #22b8d9;
-$primary-color-dark: #1a90aa;
-$color-gray: #aaa;
+$colorPrimary: #22b8d9;
+$primaryColorDark: #1a90aa;
+$colorGray: #aaa;
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
 
-.register-form__container {
+.registerFormContainer {
   font-family: 'Open Sans';
   min-height: 700px;
   height: 90vh;
@@ -15,7 +15,7 @@ $color-gray: #aaa;
   justify-content: center;
 }
 
-.register-form {
+.registerForm {
   font-family: 'Open Sans';
   display: flex;
   flex-direction: column;
@@ -26,17 +26,17 @@ $color-gray: #aaa;
   text-align: center;
   padding: 15px;
   padding-top: 0;
-  border: 1px solid $color-primary;
+  border: 1px solid $colorPrimary;
 }
 
-.register-form__title {
+.registerFormTitle {
   font-size: 2rem;
   margin: 30px 0;
 }
 
-.register-form__dropdown {
+.registerFormDropdown {
   margin-top: 10px;
-  background-color: $color-primary;
+  background-color: $colorPrimary;
   color: white;
   border: 0;
   cursor: pointer;
@@ -44,7 +44,7 @@ $color-gray: #aaa;
   width: 100px;
 }
 
-.register-form__select-focus {
+.registerFormSelectFocus {
   text-align: center;
   color: gray;
   border: 0;
@@ -53,7 +53,7 @@ $color-gray: #aaa;
   width: 100%;
 }
 
-.register-form__inputs input {
+.registerFormInputs input {
   width: 80%;
   transition: 0.3s ease all;
   border: transparent;
@@ -63,34 +63,38 @@ $color-gray: #aaa;
     outline: none;
   }
 }
-.register-form__inputs {
-  border: 1px solid $color-gray;
+
+.registerFormInputs {
+  border: 1px solid $colorGray;
   text-align: left;
   margin: 20px 0;
   width: 90%;
 }
-.register-form__icon {
+
+.registerFormIcon {
   font-size: 15px;
   color: #aaa;
   margin-left: 8px;
 }
-.register-form__button {
+
+.registerFormButton {
   border-radius: 5px;
   margin: 20px 0;
   width: 90%;
-  background-color: $color-primary;
+  background-color: $colorPrimary;
   border: none;
   padding: 15px;
   font-size: 1rem;
   color: #fff;
   cursor: pointer;
 }
-.register-form__button.disabled {
-  background-color: $primary-color-dark;
+
+.registerFormButton.disabled {
+  background-color: $primaryColorDark;
   cursor: default;
 }
 
-.register-form__choose-role {
+.registerFormChooseRole {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,18 +102,20 @@ $color-gray: #aaa;
   text-align: left;
   padding-left: 8px;
 }
-.register-form__t-s {
+
+.registerFormTS {
   font-size: 1rem;
   display: inline-block;
   margin: 0;
   padding-right: 7px;
 }
-.register-icon {
+
+.registerIcon {
   font-size: 12px;
-  color: $color-gray;
+  color: $colorGray;
 }
 
-.register-form__tutor {
+.registerFormTutor {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -119,32 +125,34 @@ $color-gray: #aaa;
   width: 100%;
 }
 
-.register-form__error {
+.registerFormError {
   font-size: 0.6rem;
 }
 
-.register-form__account {
+.registerFormAccount {
   font-size: 1rem;
   margin: 30px 0;
 }
-.register-form__errors {
+
+.registerFormErrors {
   font-size: 12px;
   text-align: left;
   color: rgb(211, 66, 66);
 }
 @media (min-width: 768px) {
-  .register-form__container {
+  .registerFormContainer {
     height: 80vh;
   }
-  .register-form {
+  .registerForm {
     width: 50%;
   }
 }
+
 @media (min-width: 992px) {
-  .register-form {
+  .registerForm {
     width: 35vw;
   }
-  .register-form__container {
+  .registerFormContainer {
     height: 80vh;
   }
 }

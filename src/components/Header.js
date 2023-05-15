@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import Image from "next/image";
 
 import styles from "../assets/styles/components/Header.module.scss";
 
@@ -115,11 +116,23 @@ function Header() {
           data-testid="logo-image"
           href={getLinkPath(currentUser) || defaultLinkPath}
         >
-          <img className={`${styles.headerLogo}`} src={Logo} alt="Logo" />
+          <Image
+            className={`${styles.headerLogo}`}
+            src={Logo}
+            alt="Logo"
+            width={100}
+            height={75}
+          />
         </Link>
       ) : (
         <Link data-testid="logo-image" href={defaultLinkPath}>
-          <img className={`${styles.headerLogo}`} src={Logo} alt="Logo" />
+          <Image
+            className={`${styles.headerLogo}`}
+            src={Logo}
+            alt="Logo"
+            width={100}
+            height={75}
+          />
         </Link>
       )}
 

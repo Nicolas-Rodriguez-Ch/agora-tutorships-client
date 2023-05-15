@@ -1,26 +1,26 @@
-import { useState, useEffect } from 'react';
-import axios from '../../utils/axios';
-import { FaUserAlt, FaEnvelope, FaKey } from 'react-icons/fa';
+import { useState, useEffect } from "react";
+import axios from "../../utils/axios";
+import { FaUserAlt, FaEnvelope, FaKey } from "react-icons/fa";
 import Link from "next/link";
-import { register as registerAction } from '../../actions/register';
-import { useDispatch, useSelector } from 'react-redux';
-import FormTutor from '../../components/FormTutor';
-import { AUTHORIZED } from '../../actions/constants';
-
+import { register } from "../../slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import FormTutor from "../../components/FormTutor";
+import { AUTHORIZED } from "../../actions/constants";
 
 function Register() {
   const auth_status = useSelector((state) => state.auth_status);
   const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   const [state, setState] = useState({
-    type: 'student',
+    type: "student",
     inputs: {
-      name: '',
-      email: '',
-      password: '',
-      profession: '',
-      focus: '',
-      profile_photo: 'https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar-300x300.jpg',
+      name: "",
+      email: "",
+      password: "",
+      profession: "",
+      focus: "",
+      profile_photo:
+        "https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar-300x300.jpg",
     },
     errors: {
       name: true,
@@ -34,10 +34,10 @@ function Register() {
 
   useEffect(() => {
     if (auth_status === AUTHORIZED) {
-      history.push('/home');
+      history.push("/home");
     }
     axios
-      .get('/categories')
+      .get("/categories")
       .then((response) => {
         const categories = response.data.categories;
         setCategories(categories);
@@ -47,69 +47,80 @@ function Register() {
 
   function validateInputs(e) {
     const inputName = e.target.name;
-    if (inputName === 'name') {
+    if (inputName === "name") {
       if (e.target.value.length < 4) {
         setState((prevState) => ({
           ...prevState,
           errors: {
             ...prevState.errors,
-            name: 'Name is too short',
+            name: "Name is too short",
           },
           isValid: false,
         }));
         return;
       }
-      const re = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
+      const re =
+        /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
       if (re.test(String(e.target.value).toLowerCase())) {
         setState((prevState) => ({
           ...prevState,
-          errors: { ...prevState.errors, name: '' },
+          errors: { ...prevState.errors, name: "" },
           isValid:
-            prevState.type === 'student'
+            prevState.type === "student"
               ? !(state.errors.email || state.errors.password)
-              : !(state.errors.email || state.errors.password || state.errors.profession || state.errors.focus),
+              : !(
+                  state.errors.email ||
+                  state.errors.password ||
+                  state.errors.profession ||
+                  state.errors.focus
+                ),
         }));
       } else {
         setState((prevState) => ({
           ...prevState,
           errors: {
             ...prevState.errors,
-            name: 'Your name must only contain letters',
+            name: "Your name must only contain letters",
           },
         }));
       }
     }
-    if (inputName === 'email') {
+    if (inputName === "email") {
       const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (re.test(String(e.target.value).toLowerCase())) {
         setState((prevState) => ({
           ...prevState,
-          errors: { ...prevState.errors, email: '' },
+          errors: { ...prevState.errors, email: "" },
           isValid:
-            prevState.type === 'student'
+            prevState.type === "student"
               ? !(state.errors.password || state.errors.name)
-              : !(state.errors.password || state.errors.name || state.errors.profession || state.errors.focus),
+              : !(
+                  state.errors.password ||
+                  state.errors.name ||
+                  state.errors.profession ||
+                  state.errors.focus
+                ),
         }));
       } else {
         setState((prevState) => ({
           ...prevState,
           errors: {
             ...prevState.errors,
-            email: 'Invalid email, please enter a valid email',
+            email: "Invalid email, please enter a valid email",
           },
           isValid: false,
         }));
         return;
       }
     }
-    if (inputName === 'password') {
+    if (inputName === "password") {
       if (e.target.value.length < 4) {
         setState((prevState) => ({
           ...prevState,
           errors: {
             ...prevState.errors,
-            password: 'Invalid password, the password is too short',
+            password: "Invalid password, the password is too short",
           },
           isValid: false,
         }));
@@ -117,52 +128,68 @@ function Register() {
       } else {
         setState((prevState) => ({
           ...prevState,
-          errors: { ...prevState.errors, password: '' },
+          errors: { ...prevState.errors, password: "" },
           isValid:
-            prevState.type === 'student'
+            prevState.type === "student"
               ? !(state.errors.email || state.errors.name)
-              : !(state.errors.email || state.errors.name || state.errors.profession || state.errors.focus),
+              : !(
+                  state.errors.email ||
+                  state.errors.name ||
+                  state.errors.profession ||
+                  state.errors.focus
+                ),
         }));
       }
     }
-    if (inputName === 'profession') {
+    if (inputName === "profession") {
       if (e.target.value.length < 4) {
         setState((prevState) => ({
           ...prevState,
           errors: {
             ...prevState.errors,
-            profession: 'Profession name is too short',
+            profession: "Profession name is too short",
           },
           isValid: false,
         }));
         return;
       }
-      const re = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
+      const re =
+        /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
       if (re.test(String(e.target.value).toLowerCase())) {
         setState((prevState) => ({
           ...prevState,
-          errors: { ...prevState.errors, profession: '' },
-          isValid: !(state.errors.email || state.errors.password || state.errors.name || state.errors.focus),
+          errors: { ...prevState.errors, profession: "" },
+          isValid: !(
+            state.errors.email ||
+            state.errors.password ||
+            state.errors.name ||
+            state.errors.focus
+          ),
         }));
       } else {
         setState((prevState) => ({
           ...prevState,
           errors: {
             ...prevState.errors,
-            profession: 'Your profession name must only contain letters',
+            profession: "Your profession name must only contain letters",
           },
         }));
       }
     }
-    if (inputName === 'focus') {
-      if (e.target.value !== '0') {
+    if (inputName === "focus") {
+      if (e.target.value !== "0") {
         setState((prevState) => ({
           ...prevState,
           errors: {
             ...prevState.errors,
-            focus: '',
+            focus: "",
           },
-          isValid: !(state.errors.email || state.errors.password || state.errors.name || state.errors.profession),
+          isValid: !(
+            state.errors.email ||
+            state.errors.password ||
+            state.errors.name ||
+            state.errors.profession
+          ),
         }));
       }
     }
@@ -172,7 +199,7 @@ function Register() {
     // destructure the state, less variables declared
     e.preventDefault();
     const { type, inputs } = state;
-    dispatch(registerAction(type, inputs));
+    dispatch(register({ type, inputs }));
   };
 
   const handleChange = (e) => {
@@ -195,34 +222,51 @@ function Register() {
   };
 
   return (
-    <div className="register-form__container">
-      <form className="register-form">
-        <h2 className="register-form__title" data-testid="register-title">
+    <div className="registerFormContainer">
+      <form className="registerForm">
+        <h2 className="registerFormTitle" data-testid="register-title">
           Register
         </h2>
 
-        <div className="register-form__choose-role">
-          <h5 className="register-form__t-s">Are you a student or a tutor?</h5>
-          <select name="type" onChange={handleTypeChange} className="register-form__dropdown">
+        <div className="registerFormChooseRole">
+          <h5 className="registerFormTS">Are you a student or a tutor?</h5>
+          <select
+            name="type"
+            onChange={handleTypeChange}
+            className="registerFormDropdown"
+          >
             <option>student</option>
             <option>tutor</option>
           </select>
         </div>
 
-        <div className="register-form__inputs">
-          <FaUserAlt className="register-form__icon" />
-          <input onBlur={validateInputs} onChange={handleChange} type="text" placeholder="Name" name="name" required />
+        <div className="registerFormInputs">
+          <FaUserAlt className="registerFormIcon" />
+          <input
+            onBlur={validateInputs}
+            onChange={handleChange}
+            type="text"
+            placeholder="Name"
+            name="name"
+            required
+          />
         </div>
-        <span className="register-form__errors">{state.errors.name}</span>
+        <span className="registerFormErrors">{state.errors.name}</span>
 
-        <div className="register-form__inputs">
-          <FaEnvelope className="register-form__icon" />
-          <input onBlur={validateInputs} type="email" placeholder="Email" name="email" onChange={handleChange} />
+        <div className="registerFormInputs">
+          <FaEnvelope className="registerFormIcon" />
+          <input
+            onBlur={validateInputs}
+            type="email"
+            placeholder="Email"
+            name="email"
+            onChange={handleChange}
+          />
         </div>
-        <span className="register-form__errors">{state.errors.email}</span>
+        <span className="registerFormErrors">{state.errors.email}</span>
 
-        <div className="register-form__inputs">
-          <FaKey className="register-form__icon" />
+        <div className="registerFormInputs">
+          <FaKey className="registerFormIcon" />
           <input
             onBlur={validateInputs}
             type="password"
@@ -231,28 +275,50 @@ function Register() {
             onChange={handleChange}
           />
         </div>
-        <span className="register-form__errors">{state.errors.password}</span>
+        <span className="registerFormErrors">{state.errors.password}</span>
 
-        {state.type === 'tutor' && (
-          <FormTutor
-            handleChange={handleChange}
-            validateInputs={validateInputs}
-            errors={{
-              profession: state.errors.profession,
-              focus: state.errors.focus,
-            }}
-            categories={categories}
-          />
+        {state.type === "tutor" && (
+          <div className="registerFormTutor">
+            <div className="registerFormInputs">
+              <FaUserAlt className="registerFormIcon" />
+              <input
+                onBlur={validateInputs}
+                onChange={handleChange}
+                type="text"
+                placeholder="Profession"
+                name="profession"
+                required
+              />
+            </div>
+            <span className="registerFormErrors">
+              {state.errors.profession}
+            </span>
+
+            <div className="registerFormInputs">
+              <FaUserAlt className="registerFormIcon" />
+              <input
+                onBlur={validateInputs}
+                onChange={handleChange}
+                type="text"
+                placeholder="Focus"
+                name="focus"
+                required
+              />
+            </div>
+            <span className="registerFormErrors">{state.errors.focus}</span>
+          </div>
         )}
+
         <button
           type="submit"
-          className={`register-form__button ${!state.isValid && 'disabled'}`}
+          className={`registerFormButton ${!state.isValid && "disabled"}`}
           disabled={!state.isValid}
           onClick={handleSubmit}
         >
           Register
         </button>
-        <p className="register-form__account">
+
+        <p className="registerFormAccount">
           Do you already have an account? <Link href="/login">Sign in</Link>
         </p>
       </form>

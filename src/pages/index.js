@@ -10,7 +10,6 @@ export default function HomePage() {
         <title>Agora</title>
       </Head>
       <>
-        <Header />
         <main className={styles.homepageContainer}>
           <div className={styles.homepageContent}>
             <TutorsContainer title="Find a tutorship" />

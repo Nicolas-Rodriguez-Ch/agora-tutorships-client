@@ -3,7 +3,6 @@ import "../assets/styles/pages/LoginPage.scss";
 import "../assets/styles/pages/StudentProfile.scss";
 import "../assets/styles/pages/TutorProfile.scss";
 import "../assets/styles/pages/TutorsSchedule.scss";
-import "../assets/styles/pages/errorPage.scss";
 import "../assets/styles/pages/landing-page.scss";
 import "../assets/styles/pages/register.scss";
 import "../assets/styles/pages/TutorEditProfile.scss";
@@ -15,6 +14,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { getUserData } from "../slices/userSlice";
 import { useEffect } from "react";
+import Header from "../components/Header";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
@@ -30,7 +30,12 @@ function InnerApp({ Component, pageProps }) {
     }
   }, [dispatch]);
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Header />
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 const WrappedApp = wrapper.withRedux(InnerApp);
