@@ -3,7 +3,6 @@ import "../assets/styles/pages/LoginPage.scss";
 import "../assets/styles/pages/StudentProfile.scss";
 import "../assets/styles/pages/TutorProfile.scss";
 import "../assets/styles/pages/TutorsSchedule.scss";
-import "../assets/styles/pages/landing-page.scss";
 import "../assets/styles/pages/register.scss";
 import "../assets/styles/pages/TutorEditProfile.scss";
 import "../assets/styles/pages/Tutorship.scss";

@@ -1,21 +1,28 @@
-import Head from "next/head";
+import React, { useEffect } from "react";
+import { LandingPageDescription } from "../components/LandingPageDescription";
 import { TutorsContainer } from "../components/TutorsContainer";
-import Header from "../components/Header";
-import styles from "../assets/styles/pages/HomePage.module.scss";
+import "../assets/styles/pages/landingPage.module.scss";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
-export default function HomePage() {
+function LandingPage() {
+  const state = useSelector((state) => state);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.user.token !== null) {
+      router.push("/homePage");
+    }
+  }, [state.user.token, router]);
+
   return (
-    <>
-      <Head>
-        <title>Agora</title>
-      </Head>
-      <>
-        <main className={styles.homepageContainer}>
-          <div className={styles.homepageContent}>
-            <TutorsContainer title="Find a tutorship" />
-          </div>
-        </main>
-      </>
-    </>
+    <div className="page">
+      <main className="page__inner">
+        <LandingPageDescription />
+        <TutorsContainer title="Meet some of our best tutors" />
+      </main>
+    </div>
   );
 }
+
+export default LandingPage;

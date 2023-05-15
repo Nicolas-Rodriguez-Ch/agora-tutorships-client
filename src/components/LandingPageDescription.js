@@ -1,45 +1,54 @@
-import React from 'react';
-import '../assets/styles/components/LandigPageDescription.scss';
-import { Player } from '@lottiefiles/react-lottie-player';
+import React from "react";
+import styles from "../assets/styles/components/LandigPageDescription.module.scss";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 function LandingPageDescription() {
   return (
     <>
-      <section className="description-main__container">
-        <section className="description-main__text-container">
-          <p className="description__title">
-            For each student,{' '}
-            <span className="description__text--breack">
-              a <span className="description__text--highlight">commited</span> tutor.
+      <section className={styles.descriptionMainContainer}>
+        <section className={styles.descriptionMainTextContainer}>
+          <p className={styles.descriptionTitle}>
+            For each student,{" "}
+            <span className={styles.descriptionTextBreack}>
+              a{" "}
+              <span className={styles.descriptionTextHighlight}>committed</span>{" "}
+              tutor.
             </span>
           </p>
-          <p className="description__subtitle">
-            For each question. <span className="description__text--breack">The right answer.</span>
+          <p className={styles.descriptionSubtitle}>
+            For each question.{" "}
+            <span className={styles.descriptionTextBreack}>
+              The right answer.
+            </span>
           </p>
-          <div className="description__line"></div>
+          <div className={styles.descriptionLine}></div>
         </section>
         <Player
           autoplay
           loop
           src="https://assets6.lottiefiles.com/packages/lf20_tykkhlvn.json"
-          className="description__illustration"
+          className={styles.descriptionIllustration}
         ></Player>
       </section>
-      <section className="description-secondary__container">
-        <div className="description-secondary__text-container">
-          <p className="description__title">
-            Ask <span className="description__text--highlight">anything</span>,{' '}
-            <span className="description__text--breack">we've got you covered</span>
+      <section className={styles.descriptionSecondaryContainer}>
+        <div className={styles.descriptionSecondaryTextContainer}>
+          <p className={styles.descriptionTitle}>
+            Ask{" "}
+            <span className={styles.descriptionTextHighlight}>anything</span>,{" "}
+            <span className={styles.descriptionTextBreack}>
+              we've got you covered
+            </span>
           </p>
-          <p className="description__subtitle">
-            Search for any subject you can imagine, a specialized tutor will help you with your problem
+          <p className={styles.descriptionSubtitle}>
+            Search for any subject you can imagine, a specialized tutor will
+            help you with your problem
           </p>
         </div>
         <Player
           autoplay
           loop
           src="https://assets2.lottiefiles.com/packages/lf20_dikusanq.json"
-          className="description__illustration"
+          className={styles.descriptionIllustration}
         ></Player>
       </section>
     </>
