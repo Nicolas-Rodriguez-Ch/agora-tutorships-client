@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from '../../utils/axios';
 import { FaUserAlt, FaEnvelope, FaKey } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import Link from "next/link";
 import { register as registerAction } from '../../actions/register';
 import { useDispatch, useSelector } from 'react-redux';
 import FormTutor from '../../components/FormTutor';
 import { AUTHORIZED } from '../../actions/constants';
-import history from '../../utils/history';
 
 
 function Register() {
@@ -254,7 +253,7 @@ function Register() {
           Register
         </button>
         <p className="register-form__account">
-          Do you already have an account? <Link to="/login">Sign in</Link>
+          Do you already have an account? <Link href="/login">Sign in</Link>
         </p>
       </form>
     </div>
