@@ -2,7 +2,7 @@ import StudentProfileMenu from '../components/StudentProfileMenu';
 import StudentProfileEdit from '../components/StudentProfileEdit';
 import PaymentMethods from '../components/PaymentMethods';
 import StudentProfileTutorships from '../components/StudentProfileTutorships';
-import '../assets/styles/pages/StudentProfile.scss';
+import styles from '../assets/styles/pages/StudentProfile.module.scss';
 
 function StudentProfile({ props }) {
   const currentPage = props.match.params.section;
@@ -13,11 +13,11 @@ function StudentProfile({ props }) {
   };
 
   return (
-    <div className="student-profile-container">
-      <section className="student-profile__menu-container">
+    <div className={styles.studentProfileContainer}>
+      <section className={styles.studentProfileMenuContainer}>
         <StudentProfileMenu page={currentPage} />
       </section>
-      <main className="student-profile-main">{pages[currentPage]}</main>
+      <main className={styles.studentProfileMain}>{pages[currentPage]}</main>
     </div>
   );
 }

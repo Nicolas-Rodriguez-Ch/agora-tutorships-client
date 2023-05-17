@@ -5,15 +5,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Image from "next/image";
-
+import Head from "next/head";
 import styles from "../assets/styles/components/Header.module.scss";
 
 import { useDispatch, useSelector } from "react-redux";
-import logout from "../actions/logout";
-import toggleProfileTooltip from "../actions/toggleProfileTooltip";
+import { logout, toggleProfileTooltip } from "../slices/userSlice";
 
 function Header() {
   const globalState = useSelector((state) => state);
+  const isProfileTooltipCollapsed = useSelector(
+    (state) => state.user.isProfileTooltipCollapsed
+  );
+
   const dispatch = useDispatch();
   const [state, setState] = useState({
     searchInput: "",
@@ -22,10 +25,10 @@ function Header() {
   });
   const desktopInput = useRef();
   const mobileInput = useRef();
-  const signingOut = useRef(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
   const router = useRouter();
 
-  const { currentUser } = globalState;
+  const { currentUser } = globalState.user;
 
   const handleChange = (e) => {
     setState((prevState) => ({ ...prevState, searchInput: e.target.value }));
@@ -60,27 +63,29 @@ function Header() {
 
   const profileTooltipCollapse = () => {
     setTimeout(() => {
-      !signingOut.current && dispatch(toggleProfileTooltip());
+      !isSigningOut && dispatch(toggleProfileTooltip());
     }, 100);
   };
 
-  const SignOut = () => {
-    signingOut.current = true;
+  const signOut = () => {
+    setIsSigningOut(true);
     setState((prevState) => ({
       ...prevState,
+      searchInput: "",
       isMenuCollapsed: true,
     }));
   };
+
   useEffect(() => {
-    if (signingOut.current) {
+    if (isSigningOut) {
       dispatch(toggleProfileTooltip());
       setTimeout(() => {
-        signingOut.current = false;
+        setIsSigningOut(false);
         dispatch(logout());
         router.push("/");
       }, 200);
     }
-  }, [state, dispatch]);
+  }, [isSigningOut, dispatch, router]);
 
   const search = (e) => {
     if (state.searchInput.length > 0) {
@@ -100,7 +105,7 @@ function Header() {
     if (!user) return "/";
 
     if (user.type === "student") {
-      return "/home";
+      return "/homePage";
     } else if (user.type === "tutor") {
       return "/profile/tutorships";
     }
@@ -110,43 +115,75 @@ function Header() {
   const defaultLinkPath = "/";
 
   return (
-    <header className={`${styles.header} ${styles.headerComponent}`}>
-      {currentUser ? (
-        <Link
-          data-testid="logo-image"
-          href={getLinkPath(currentUser) || defaultLinkPath}
-        >
-          <Image
-            className={`${styles.headerLogo}`}
-            src={Logo}
-            alt="Logo"
-            width={100}
-            height={75}
-          />
-        </Link>
-      ) : (
-        <Link data-testid="logo-image" href={defaultLinkPath}>
-          <Image
-            className={`${styles.headerLogo}`}
-            src={Logo}
-            alt="Logo"
-            width={100}
-            height={75}
-          />
-        </Link>
-      )}
+    <>
+      <Head>
+        <title>Agora</title>
+      </Head>
+      <header className={`${styles.header} ${styles.headerComponent}`}>
+        {currentUser ? (
+          <Link
+            data-testid="logo-image"
+            href={getLinkPath(currentUser) || defaultLinkPath}
+          >
+            <Image
+              className={`${styles.headerLogo}`}
+              src={Logo}
+              alt="Logo"
+              width={100}
+              height={75}
+            />
+          </Link>
+        ) : (
+          <Link data-testid="logo-image" href={defaultLinkPath}>
+            <Image
+              className={`${styles.headerLogo}`}
+              src={Logo}
+              alt="Logo"
+              width={100}
+              height={75}
+            />
+          </Link>
+        )}
+        {currentUser && currentUser.type === "student" && (
+          <div className={`${styles.headerSearchContainer}`}>
+            <input
+              onChange={handleChange}
+              className={`${styles.searchContainerInput}`}
+              type="text"
+              placeholder="Search"
+              onKeyDown={(e) => e.code === "Enter" && search()}
+              ref={desktopInput}
+            />
 
-      {currentUser && currentUser?.type === "student" && (
-        <div className={`${styles.headerSearchContainer}`}>
+            <div
+              className={`${styles.searchContainerIconContainer}`}
+              onClick={search}
+            >
+              <FontAwesomeIcon icon={faSearch} />
+            </div>
+          </div>
+        )}
+
+        <div className={`${styles.mobileNavButtonsContainer}`}>
+          {currentUser.type === "student" && (
+            <FontAwesomeIcon onClick={toggleSearchCollapse} icon={faSearch} />
+          )}
+          <FontAwesomeIcon onClick={toggleMenuCollapse} icon={faBars} />
+        </div>
+
+        <div
+          className={`${styles.mobileSearchInput} ${
+            !state.isSearchCollapsed && `${styles.active}`
+          }`}
+        >
           <input
             onChange={handleChange}
             className={`${styles.searchContainerInput}`}
             type="text"
             placeholder="Search"
             onKeyDown={(e) => e.code === "Enter" && search()}
-            ref={desktopInput}
+            ref={mobileInput}
           />
-
           <div
             className={`${styles.searchContainerIconContainer}`}
             onClick={search}
@@ -154,52 +191,36 @@ function Header() {
             <FontAwesomeIcon icon={faSearch} />
           </div>
         </div>
-      )}
 
-      <div className={`${styles.mobileNavButtonsContainer}`}>
-        {currentUser?.type === "student" && (
-          <FontAwesomeIcon onClick={toggleSearchCollapse} icon={faSearch} />
-        )}
-        <FontAwesomeIcon onClick={toggleMenuCollapse} icon={faBars} />
-      </div>
-
-      <div
-        className={`${styles.mobileSearchInput} ${
-          !state.isSearchCollapsed && `${styles.active}`
-        }`}
-      >
-        <input
-          onChange={handleChange}
-          className={`${styles.searchContainerInput}`}
-          type="text"
-          placeholder="Search"
-          onKeyDown={(e) => e.code === "Enter" && search()}
-          ref={mobileInput}
-        />
-        <div
-          className={`${styles.searchContainerIconContainer}`}
-          onClick={search}
-        >
-          <FontAwesomeIcon icon={faSearch} />
-        </div>
-      </div>
-
-      <div
-        className={`${styles.mobileMenu} ${!state.isMenuCollapsed && "active"}`}
-      >
-        {!!globalState.token ? (
-          <>
-            <div className={`${styles.mobileMenuProfilePhotoContainer}`}>
-              <img
-                className={`${styles.headerProfilePhoto}`}
-                src={currentUser.profile_photo}
-                alt="Profile"
-              />
-              <span className={`${styles.headerProfileName}`}>
+        <div>
+        {!!globalState.user.token ? (
+          <div className={`${styles.headerProfilePhotoContainer}`}>
+            <Image
+              width={100}
+              height={75}
+              onClick={profileTooltipCollapse}
+              onBlur={() => {
+                setTimeout(() => {
+                  !isProfileTooltipCollapsed && profileTooltipCollapse();
+                }, 100);
+              }}
+              className={`${styles.headerProfilePhoto}`}
+              src={
+                currentUser.profile_photo || "/assets/images/defaultProfile.jpg"
+              }
+              alt="Profile"
+              tabIndex="1"
+            />
+            <div
+              className={`${styles.headerProfileTooltip} ${
+                !isProfileTooltipCollapsed
+                  ? styles.headerProfileTooltipActive
+                  : ""
+              }`}
+            >
+              <h3 className={`${styles.profileTooltipName}`}>
                 {currentUser.name}
-              </span>
-            </div>
-            <div className={`${styles.mobileMenuButtons}`}>
+              </h3>
               <Link
                 href="/profile/edit"
                 className={`${styles.profileTooltipProfile}`}
@@ -207,22 +228,23 @@ function Header() {
                 Profile
               </Link>
               <div
-                onClick={SignOut}
-                className={`${styles.mobileMenuSignoutButton}`}
+                data-testid="sign-out-button"
+                onClick={signOut}
+                className={`${styles.profileTooltipSignout}`}
               >
                 Sign out
               </div>
             </div>
-          </>
+          </div>
         ) : (
-          <div className={`${styles.mobileButtonsContainer}`}>
-            <Link href="/profile/edit">
+          <div className={`${styles.headerButtonsContainer}`}>
+            <Link href="/loginPage">
               <button
-                onClick={toggleMenuCollapse}
                 className={`${styles.buttonContainerSigninButton}`}
                 type="button"
+                data-testid="register-button"
               >
-                Sign in
+                Sign In
               </button>
             </Link>
             <Link href="/register">
@@ -236,62 +258,9 @@ function Header() {
             </Link>
           </div>
         )}
-      </div>
-      {!!globalState.token ? (
-        <div className={`${styles.headerProfilePhotoContainer}`}>
-          <img
-            onClick={profileTooltipCollapse}
-            onBlur={() => {
-              setTimeout(() => {
-                !globalState.isProfileTooltipCollapsed &&
-                  profileTooltipCollapse();
-              }, 100);
-            }}
-            className={`${styles.headerProfilePhoto}`}
-            src={currentUser.profile_photo}
-            alt="Profile"
-            tabIndex="1"
-          />
-          <div
-            className={`${styles.headerProfileTooltip} ${
-              !globalState.isProfileTooltipCollapsed &&
-              styles.headerProfileTooltipActive
-            }`}
-          >
-            <h3 className={`${styles.profileTooltipName}`}>
-              {currentUser.name}
-            </h3>
-            <Link
-              href="/profile/edit"
-              className={`${styles.profileTooltipProfile}`}
-            >
-              Profile
-            </Link>
-            <div
-              data-testid="sign-out-button"
-              onClick={SignOut}
-              className={`${styles.profileTooltipSignout}`}
-            >
-              Sign out
-            </div>
-          </div>
         </div>
-      ) : (
-        <div className={`${styles.headerButtonsContainer}`}>
-          <Link data-testid="logo-image" href={getLinkPath(currentUser)}>
-            <img className={`${styles.headerLogo}`} src={Logo} alt="Logo" />
-          </Link>
-          <Link
-            href="/register"
-            className={`${styles.buttonContainerRegisterButton}`}
-            type="button"
-            data-testid="register-button"
-          >
-            Register
-          </Link>
-        </div>
-      )}
-    </header>
+      </header>
+    </>
   );
 }
 

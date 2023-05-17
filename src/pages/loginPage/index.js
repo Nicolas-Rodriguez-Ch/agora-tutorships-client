@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import login from '../../actions/login';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import { login } from "../../slices/userSlice";
 
-import '../assets/styles/pages/LoginPage.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import styles from "../../assets/styles/pages/LoginPage.module.scss";
+import { useDispatch, useSelector } from "react-redux";
 
 function LoginPage() {
   const globalState = useSelector((state) => state);
   const [state, setState] = useState({
     values: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
     errors: {},
     isValid: false,
@@ -22,7 +22,7 @@ function LoginPage() {
 
   const validateInputs = (e) => {
     const inputName = e.target.name;
-    if (inputName === 'email') {
+    if (inputName === "email") {
       const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (re.test(String(e.target.value).toLowerCase())) {
@@ -36,7 +36,7 @@ function LoginPage() {
           ...prevState,
           errors: {
             ...prevState.errors,
-            email: { message: 'Invalid email, please enter a valid email' },
+            email: { message: "Invalid email, please enter a valid email" },
           },
           isValid: false,
         }));
@@ -49,14 +49,14 @@ function LoginPage() {
       }));
       return;
     }
-    if (inputName === 'password') {
+    if (inputName === "password") {
       if (e.target.value.length < 4) {
         setState((prevState) => ({
           ...prevState,
           errors: {
             ...prevState.errors,
             password: {
-              message: 'Invalid password, the password is too short',
+              message: "Invalid password, the password is too short",
             },
           },
           isValid: false,
@@ -89,21 +89,21 @@ function LoginPage() {
   };
 
   return (
-    <div className="login-form-container">
-      <form className="login-form">
-        <fieldset className="login-login-fieldset">
-          <h1 className="login-form__legend" data-testid="login-title">
+    <div className={`${styles.loginFormContainer}`}>
+      <form className={`${styles.loginForm}`}>
+        <fieldset className={`${styles.loginLoginFieldset}`}>
+          <h1 className={`${styles.loginFormLegend}`} data-testid="login-title">
             Sign In
           </h1>
-          <div className="login-input-container">
-            <div className="input-container__input">
-              <span className="login-input__icon">
+          <div className={`${styles.loginInputContainer}`}>
+            <div className={`${styles.inputContainerInput}`}>
+              <span className={`${styles.loginInputIcon}`}>
                 <FontAwesomeIcon icon={faUser} />
               </span>
               <input
                 onBlur={validateInputs}
-                onChange={(e) => handleChange(e, 'email')}
-                className="login-input__input"
+                onChange={(e) => handleChange(e, "email")}
+                className={`${styles.loginInputInput}`}
                 type="email"
                 name="email"
                 id="login-email"
@@ -112,29 +112,29 @@ function LoginPage() {
                 required
               />
             </div>
-            <div className="input-container__error-message">
+            <div className={`${styles.inputContainerErrorMessage}`}>
               <span
-                style={{
-                  color: 'red',
-                  visibility: state.errors.email ? 'visible' : 'hidden',
+                styles={{
+                  color: "red",
+                  visibility: state.errors.email ? "visible" : "hidden",
                 }}
-                className="email-error-span"
+                className={`${styles.emailErrorSpan}`}
               >
                 {state.errors.email
                   ? state.errors.email.message
-                  : 'No hay errores'}
+                  : "No hay errores"}
               </span>
             </div>
           </div>
-          <div className="login-input-container">
-            <div className="input-container__input">
-              <span className="login-input__icon">
+          <div className={`${styles.loginInputContainer}`}>
+            <div className={`${styles.inputContainerInput}`}>
+              <span className={`${styles.loginInputIcon}`}>
                 <FontAwesomeIcon icon={faKey} />
               </span>
               <input
                 onBlur={validateInputs}
-                onChange={(e) => handleChange(e, 'password')}
-                className="login-input__input"
+                onChange={(e) => handleChange(e, "password")}
+                className={`${styles.loginInputInput}`}
                 type="password"
                 name="password"
                 id="login-password"
@@ -143,20 +143,20 @@ function LoginPage() {
                 required
               />
             </div>
-            <div className="input-container__error-message">
+            <div className={`${styles.inputContainerErrorMessage}`}>
               <span
-                style={{
-                  color: 'red',
-                  visibility: state.errors.password ? 'visible' : 'hidden',
+                styles={{
+                  color: "red",
+                  visibility: state.errors.password ? "visible" : "hidden",
                 }}
-                className="password-error-span"
+                className={`${styles.passwordErrorSpan}`}
               >
                 {state.errors.password
                   ? state.errors.password.message
-                  : 'No hay errores'}
+                  : "No hay errores"}
               </span>
               {globalState.login_failed && (
-                <span style={{ color: 'red' }}>
+                <span style={{ color: "red" }}>
                   Incorrect email or password, please try again.
                 </span>
               )}
@@ -165,16 +165,18 @@ function LoginPage() {
           <button
             onClick={handleSubmit}
             disabled={!state.isValid}
-            className={`login-form__submit ${!state.isValid && 'disabled'}`}
+            className={`${styles.loginFormSubmit} ${
+              !state.isValid && styles.loginFormSubmitDisabled
+            }`}
             type="submit"
             data-testid="login-send"
           >
             Sign In
           </button>
         </fieldset>
-        <fieldset className="login-signup-fieldset">
-          <p className="signup__text">
-            Don't have an account? <Link to="/register">Register</Link>
+        <fieldset className={`${styles.loginSignupFieldset}`}>
+          <p className={`${styles.signupText}`}>
+            Don't have an account? <Link href="/register">Register</Link>
           </p>
         </fieldset>
       </form>

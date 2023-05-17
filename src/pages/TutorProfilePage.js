@@ -2,7 +2,7 @@ import TutorDashboard from '../components/TutorDashboard';
 import TutorProfileEdit from '../components/TutorProfileEdit';
 import TutorProfileTutorships from '../components/tutorProfileTutorships';
 import TutorProfileCreateTutorship from '../components/TutorProfileCreateTutorship';
-import '../assets/styles/pages/TutorProfile.scss';
+import styles from '../assets/styles/pages/TutorProfile.module.scss';
 
 function TutorProfile({ props }) {
   const currentPage = props.match.params.section;
@@ -13,11 +13,11 @@ function TutorProfile({ props }) {
   };
 
   return (
-    <div className="tutor-profile-container">
-      <section className="tutor-profile__menu-container">
+    <div className={styles.tutorProfileContainer}>
+      <section className={styles.tutorProfileMenuContainer}>
         <TutorDashboard page={currentPage} />
       </section>
-      <main className="tutor-profile-main">{pages[currentPage]}</main>
+      <main className={styles.tutorProfileMain}>{pages[currentPage]}</main>
     </div>
   );
 }

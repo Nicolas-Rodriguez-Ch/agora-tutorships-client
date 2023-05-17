@@ -7,9 +7,9 @@ import Loader from "./Loader";
 import TutorCancelTutorship from "./tutorCancelTutorship.js";
 import TutorCompleteTutorship from "./TutorCompleteTutorship";
 
-import "../assets/styles/components/tutorProfileTutorships.scss";
+import styles from "../assets/styles/components/tutorProfileTutorships.module.scss";
 import { format } from "date-fns";
-import { utcToZonedTime } from 'date-fns-tz';
+import { utcToZonedTime } from "date-fns-tz";
 
 function TutorProfileTutorships() {
   const id = useSelector((state) => state.currentUser._id);
@@ -67,11 +67,11 @@ function TutorProfileTutorships() {
   }, [id, state.renderSwitch]);
 
   return (
-    <div className="tutor__tutorships-container">
+    <div className={styles.tutorTutorshipsContainer}>
       {!state.loading ? (
         <Loader />
       ) : state.tutorships.length === 0 ? (
-        <p className="tutor__tutorships__title">
+        <p className={styles.tutorTutorshipsTitle}>
           You don't have any pending tutorships
         </p>
       ) : (
@@ -82,35 +82,33 @@ function TutorProfileTutorships() {
           const studentPhoto = tutorship.student_id.profile_photo;
           const dateObject = new Date(tutorship.date);
           const zonedDate = utcToZonedTime(dateObject);
-          const date = zonedDate ? format(zonedDate, 'dd/MM/yyyy') : 'Invalid date';
-          const time = zonedDate ? format(zonedDate, 'K:mm a') : 'Invalid time';
-          
+          const date = zonedDate
+            ? format(zonedDate, "dd/MM/yyyy")
+            : "Invalid date";
+          const time = zonedDate ? format(zonedDate, "K:mm a") : "Invalid time";
 
           return (
-            <div key={id} className="tutor__tutorship-container">
-              <div className="tutor__tutorship__image-container">
+            <div key={id} className={styles.tutorTutorshipContainer}>
+              <div className={styles.tutorTutorshipImageContainer}>
                 <img
                   src={studentPhoto}
                   alt={name}
-                  className="tutor__tutorship__image"
+                  className={styles.tutorTutorshipImage}
                 />
               </div>
-              <div className="tutor__tutorship__description-container">
-                <h2 className="tutor__tutorship__description-title">
+              <div className={styles.tutorTutorshipDescriptionContainer}>
+                <h2 className={styles.tutorTutorshipDescriptionTitle}>
                   {focus} tutorship with {studentName}
                 </h2>
-                <p className="tutor__tutorship__date">
-                  Tutorship scheduled for <strong>{date}</strong>{" "}
-                  at{" "}
-                  <strong>
-                    {time}
-                  </strong>
+                <p className={styles.tutorTutorshipDate}>
+                  Tutorship scheduled for <strong>{date}</strong> at{" "}
+                  <strong>{time}</strong>
                 </p>
-                <div className="tutor__tutorship__status-and-buttons-container">
-                  <div className="tutor__tutorship__status-container">
+                <div className={styles.tutorTutorshipStatusAndButtonsContainer}>
+                  <div className={styles.tutorTutorshipStatusContainer}>
                     <span>STATUS: {status}</span>
                   </div>
-                  <div className="tutor__tutorship__buttons-container">
+                  <div className={styles.tutorTutorshipButtonsContainer}>
                     {status === "pending" && (
                       <button
                         onClick={(e) =>
@@ -119,7 +117,7 @@ function TutorProfileTutorships() {
                             e
                           )
                         }
-                        className="tutor__tutorship__buttons__cancel-button"
+                        className={styles.tutorTutorshipButtonsCancelButton}
                       >
                         Cancel
                       </button>
@@ -128,7 +126,7 @@ function TutorProfileTutorships() {
                       <>
                         <a
                           href={`mailto:${email}`}
-                          className="tutor__tutorship__buttons__contact-button"
+                          className={styles.tutorTutorshipButtonsContactButton}
                         >
                           Contact
                         </a>
@@ -142,7 +140,7 @@ function TutorProfileTutorships() {
                               e
                             )
                           }
-                          className="tutor__tutorship__buttons__complete-button"
+                          className={styles.tutorTutorshipButtonsCompleteButton}
                         >
                           Complete
                         </button>

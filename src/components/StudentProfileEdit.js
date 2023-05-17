@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import history from '../utils/history';
 import axios from '../utils/axios';
 import Swal from 'sweetalert2';
 

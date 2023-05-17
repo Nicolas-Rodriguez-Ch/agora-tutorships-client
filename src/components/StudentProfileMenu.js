@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import history from '../utils/history';
 
 function StudentProfileMenu({ page }) {
   const [selected, setSelected] = useState('Edit Profile');

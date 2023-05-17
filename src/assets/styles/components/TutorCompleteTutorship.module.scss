@@ -1,0 +1,319 @@
+.tutorCompleteTutorshipTitle {
+  color: black;
+}
+$subtitleColor: #5b5b5b;
+$titleColor: #3f3f3f;
+$colorA: #22b8d9;
+$colorB: rgb(41, 202, 103);
+$fontWeight: 400;
+$fontSelectedWeight: 800;
+$borderWidth: 2px;
+$spacing: 30px;
+$warningColor: rgb(235, 99, 99);
+
+.tutorTutorshipsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tutorTutorshipsTitle {
+  margin: 60px 20px;
+  font-family: open sans;
+  color: $subtitleColor;
+  font-weight: 600;
+  text-align: center;
+}
+
+.tutorTutorshipContainer {
+  width: 100%;
+  padding: 15px;
+  background-color: white;
+  margin: 5px 0;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  gap: 10px;
+  color: black;
+  box-shadow: 0 0 5px 2px rgb(161, 161, 161);
+}
+
+.tutorTutorshipImageContainer {
+  width: 90px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.tutorTutorshipImage {
+  border-radius: 50%;
+  margin-right: 30px;
+  justify-self: left;
+  min-width: 90px;
+  min-height: 90px;
+  max-width: 90px;
+  max-height: 90px;
+  object-fit: cover;
+}
+
+.tutorTutorshipsTitle {
+  margin: 20px 0;
+  font-family: open sans;
+  color: $colorB;
+  font-weight: normal;
+}
+
+.tutorTutorshipDescriptionContainer {
+  font-size: 0.9rem;
+  font-family: open sans;
+  width: 80%;
+}
+
+.tutorTutorshipDescriptionTitle {
+  font-size: 1.1rem;
+  color: #5b5b5b;
+}
+
+.tutorTutorshipButtonsContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.tutorTutorshipStatusAndButtonsContainer {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 70px;
+  flex-direction: column;
+}
+
+.tutorTutorshipButtonsPayButton,
+.tutorTutorshipButtonsCancelButton,
+.tutorTutorshipButtonsContactButton,
+.tutorTutorshipButtonsRateButton,
+.tutorTutorshipButtonsCompleteButton {
+  padding: 5px;
+  background-color: white;
+  border: 2px solid green;
+  text-decoration: none;
+  color: $colorA;
+  width: 50%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tutorTutorshipButtonsPayButton {
+  border: 3px solid $colorB;
+  color: $colorB;
+}
+
+.tutorTutorshipButtonsPayButton:hover {
+  background-color: $colorB;
+  color: white;
+}
+
+.tutorTutorshipButtonsCancelButton {
+  border: 3px solid red;
+  color: red;
+}
+
+.tutorTutorshipButtonsCancelButtonHover {
+  background-color: red;
+  color: white;
+}
+
+.tutorTutorshipButtonsContactButton {
+  border: 3px solid blue;
+  color: blue;
+}
+.tutorTutorshipButtonsContactButtonHover {
+  background-color: blue;
+  color: white;
+}
+
+.tutorTutorshipButtonsRateButton {
+  border: 3px solid rgb(199, 199, 0);
+  color: rgb(199, 199, 0);
+}
+.tutorTutorshipButtonsRateButtonHover {
+  background-color: rgb(199, 199, 0);
+  color: white;
+}
+
+.tutorTutorshipButtonsCompleteButton {
+  border: 3px solid $colorB;
+  color: $colorB;
+}
+
+.tutorTutorshipButtonsCompleteButtonHover {
+  background-color: $colorB;
+  color: white;
+}
+
+.tutorTutorshipDate,
+.tutorTutorshipStatus {
+  color: #979797;
+}
+
+.swalButton {
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  color: #fff;
+  font-size: 1em;
+  padding: 10px;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+.swalButtonHover {
+  cursor: pointer;
+}
+
+.green {
+  background-color: lime;
+}
+
+.red {
+  background-color: red;
+}
+.swal2IconSwal2Danger {
+  border-color: red;
+  color: red;
+}
+
+.tutorCancelTutorshipContainer {
+  font-family: open sans;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h1 {
+    color: red;
+  }
+}
+.tutorRateTutorshipContainer {
+  font-family: open sans;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h1 {
+    color: #f8bb86;
+  }
+}
+
+.starRating {
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 5rem;
+  }
+  .on {
+    color: #f8da86;
+  }
+  .off {
+    color: #ccc;
+  }
+}
+
+.tutorCancelTutorshipButtonsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  button {
+    width: 40%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+}
+
+.cancelTutorshipButton {
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.tutorRateTutorshipSubmitButton {
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.tutorRateTutorshipButtonsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tutorRateTutorshipTextarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+  padding: 0 3px;
+  font-size: 1.1rem;
+}
+
+.tutorRateTutorshipTextareaFocus {
+  outline: none;
+}
+
+@media screen and (min-width: 992px) {
+  .tutorTutorshipContainer {
+    width: 95%;
+    flex-direction: row;
+    gap: 0;
+    text-align: left;
+    align-items: center;
+  }
+  .tutorTutorshipStatusAndButtonsContainer {
+    flex-direction: row;
+  }
+  .tutorTutorshipImageContainer {
+    width: 140px;
+  }
+  .tutorTutorshipImage {
+    min-width: 120px;
+    min-height: 120px;
+    max-width: 120px;
+    max-height: 120px;
+  }
+  .tutorTutorshipDescriptionContainer {
+    font-size: 1.2rem;
+  }
+  .tutorTutorshipDescriptionTitle {
+    font-size: 1.3rem;
+  }
+  .tutorTutorshipStatusAndButtonsContainer {
+    align-items: center;
+  }
+  .tutorTutorshipButtonsPayButton,
+  .tutorTutorshipButtonsCancelButton,
+  .tutorTutorshipButtonsContactButton,
+  .tutorTutorshipButtonsRateButton {
+    width: 80px;
+  }
+}

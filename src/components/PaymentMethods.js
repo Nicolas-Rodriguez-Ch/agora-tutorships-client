@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import axios from '../utils/axios';
-import { useSelector } from 'react-redux';
-import Loader from './Loader';
-import CreditCard from './CreditCard';
-import Swal from 'sweetalert2';
-import '../assets/styles/components/PaymentMethods.scss';
+import React, { useState, useEffect } from "react";
+import axios from "../utils/axios";
+import { useSelector } from "react-redux";
+import Loader from "./Loader";
+import CreditCard from "./CreditCard";
+import Swal from "sweetalert2";
+import styles from "../assets/styles/components/PaymentMethods.module.scss";
 
 function PaymentMethods() {
   const user_id = useSelector((state) => state.currentUser._id);
   const user_email = useSelector((state) => state.currentUser.email);
   const user_name = useSelector((state) => state.currentUser.name);
   const firstName = function (user_name) {
-    const fullName = user_name.split(' ');
+    const fullName = user_name.split(" ");
     if (fullName.length > 2) {
-      const result = fullName.slice(0, 2).join(' ');
+      const result = fullName.slice(0, 2).join(" ");
       return result;
     } else {
       return fullName[0];
     }
   };
   const lastName = function (user_name) {
-    const fullName = user_name.split(' ');
+    const fullName = user_name.split(" ");
     if (fullName.length > 2) {
-      const result = fullName.slice(2, 4).join(' ');
+      const result = fullName.slice(2, 4).join(" ");
       return result;
     } else {
       return fullName[1];
     }
   };
   const [paymentInfo, setPaymentInfo] = useState({
-    doc_type: '',
-    doc_number: '',
+    doc_type: "",
+    doc_number: "",
   });
   const [cardName, setCardName] = useState({
     card_name: user_name,
@@ -42,10 +42,10 @@ function PaymentMethods() {
     cards: [],
   });
   const [cardInfo, setCardInfo] = useState({
-    'card[number]': '',
-    'card[exp_year]': '',
-    'card[exp_month]': '',
-    'card[cvc]': '',
+    "card[number]": "",
+    "card[exp_year]": "",
+    "card[exp_month]": "",
+    "card[cvc]": "",
   });
   const [customerInfo] = useState({
     name: firstName(user_name),
@@ -53,41 +53,41 @@ function PaymentMethods() {
     email: user_email,
   });
   const [errors, setErrors] = useState({
-    doc_type: '',
-    doc_number: '',
-    'card[number]': '',
-    'card[exp_year]': '',
-    'card[exp_month]': '',
-    'card[cvc]': '',
-    card_name: '',
+    doc_type: "",
+    doc_number: "",
+    "card[number]": "",
+    "card[exp_year]": "",
+    "card[exp_month]": "",
+    "card[cvc]": "",
+    card_name: "",
   });
   const [isValid, setIsValid] = useState({
     doc_type: false,
     doc_number: false,
-    'card[number]': false,
-    'card[exp_year]': false,
-    'card[exp_month]': false,
-    'card[cvc]': false,
+    "card[number]": false,
+    "card[exp_year]": false,
+    "card[exp_month]": false,
+    "card[cvc]": false,
     card_name: true,
   });
 
   const swalStyled = Swal.mixin({
     customClass: {
-      confirmButton: 'swal__confirm',
-      cancelButton: 'swal__cancel',
-      title: 'swal__title',
-      container: 'swal__text',
-      actions: 'swal__actions',
+      confirmButton: "swal__confirm",
+      cancelButton: "swal__cancel",
+      title: "swal__title",
+      container: "swal__text",
+      actions: "swal__actions",
     },
     buttonsStyling: false,
   });
   const swalStyledDelete = Swal.mixin({
     customClass: {
-      confirmButton: 'swal__delete',
-      cancelButton: 'swal__delete-cancel',
-      title: 'swal__title',
-      container: 'swal__text',
-      actions: 'swal__actions',
+      confirmButton: "swal__delete",
+      cancelButton: "swal__delete-cancel",
+      title: "swal__title",
+      container: "swal__text",
+      actions: "swal__actions",
     },
     buttonsStyling: false,
   });
@@ -141,15 +141,15 @@ function PaymentMethods() {
 
     if (
       !value &&
-      (input === 'card[exp_month]' ||
-        input === 'card[exp_year]' ||
-        input === 'card[cvc]' ||
-        input === 'doc_type' ||
-        input === 'doc_number')
+      (input === "card[exp_month]" ||
+        input === "card[exp_year]" ||
+        input === "card[cvc]" ||
+        input === "doc_type" ||
+        input === "doc_number")
     ) {
       setErrors((state) => ({
         ...state,
-        [input]: 'this fields are mandatory, please fill each one of them',
+        [input]: "this fields are mandatory, please fill each one of them",
       }));
       setIsValid((state) => ({
         ...state,
@@ -158,25 +158,31 @@ function PaymentMethods() {
     } else if (!value) {
       setErrors((state) => ({
         ...state,
-        [input]: 'this field is mandatory',
+        [input]: "this field is mandatory",
       }));
       setIsValid((state) => ({
         ...state,
         [input]: false,
       }));
-    } else if (input === 'card_name' && !textRegex.test(String(e.target.value).toLowerCase())) {
+    } else if (
+      input === "card_name" &&
+      !textRegex.test(String(e.target.value).toLowerCase())
+    ) {
       setErrors((state) => ({
         ...state,
-        [input]: 'field must only contain letters',
+        [input]: "field must only contain letters",
       }));
       setIsValid((state) => ({
         ...state,
         [input]: false,
       }));
-    } else if (input === 'email' && !emailRegex.test(String(value).toLowerCase())) {
+    } else if (
+      input === "email" &&
+      !emailRegex.test(String(value).toLowerCase())
+    ) {
       setErrors((state) => ({
         ...state,
-        [input]: 'please enter a valid email',
+        [input]: "please enter a valid email",
       }));
       setIsValid((state) => ({
         ...state,
@@ -185,7 +191,7 @@ function PaymentMethods() {
     } else {
       setErrors((state) => ({
         ...state,
-        [input]: '',
+        [input]: "",
       }));
       setIsValid((state) => ({
         ...state,
@@ -200,12 +206,12 @@ function PaymentMethods() {
     handleCancel();
     try {
       if (epayco_customer_id) {
-        await axios.post('/create-card', {
+        await axios.post("/create-card", {
           epayco_customer_id,
           cardInfo,
         });
       } else {
-        await axios.post('/create-user', {
+        await axios.post("/create-user", {
           user_id,
           customerInfo,
           cardInfo,
@@ -231,8 +237,8 @@ function PaymentMethods() {
         .then(() => {
           setIsLoading(false);
           swalStyled.fire({
-            icon: 'success',
-            title: 'Card created',
+            icon: "success",
+            title: "Card created",
           });
         });
       setIsLoading(false);
@@ -240,8 +246,8 @@ function PaymentMethods() {
       setIsLoading(false);
       const errorMessage = err.response.data;
       swalStyled.fire({
-        icon: 'error',
-        title: 'Oops... Please try again',
+        icon: "error",
+        title: "Oops... Please try again",
         text: errorMessage,
       });
     }
@@ -253,7 +259,7 @@ function PaymentMethods() {
         title: `Are you sure?`,
         text: `this action can't be undone`,
         showCancelButton: true,
-        confirmButtonText: 'delete',
+        confirmButtonText: "delete",
       })
       .then((result) => {
         if (result.isConfirmed) {
@@ -264,7 +270,7 @@ function PaymentMethods() {
     async function confirmDelete(card) {
       setIsLoading(true);
       try {
-        await axios.post('/delete-card', {
+        await axios.post("/delete-card", {
           epayco_customer_id,
           franchise: card.franchise,
           mask: card.mask,
@@ -289,19 +295,19 @@ function PaymentMethods() {
           .then(() => {
             setIsLoading(false);
             swalStyled.fire({
-              icon: 'success',
-              title: 'Card deleted',
-              confirmButtonColor: '#0de26f',
+              icon: "success",
+              title: "Card deleted",
+              confirmButtonColor: "#0de26f",
             });
           });
       } catch (err) {
         setIsLoading(false);
         const errorMessage = err.response.data;
         swalStyled.fire({
-          icon: 'error',
+          icon: "error",
           title: <p className="swal__tittle">Oops... Please try again</p>,
           text: errorMessage,
-          confirmButtonColor: '#ce4c4c',
+          confirmButtonColor: "#ce4c4c",
         });
       }
     }
@@ -310,56 +316,60 @@ function PaymentMethods() {
   function handleCancel() {
     setHidden(true);
     setCardInfo({
-      'card[number]': '',
-      'card[exp_year]': '',
-      'card[exp_month]': '',
-      'card[cvc]': '',
+      "card[number]": "",
+      "card[exp_year]": "",
+      "card[exp_month]": "",
+      "card[cvc]": "",
     });
     setErrors({
-      doc_type: '',
-      doc_number: '',
-      'card[number]': '',
-      'card[exp_year]': '',
-      'card[exp_month]': '',
-      'card[cvc]': '',
-      card_name: '',
+      doc_type: "",
+      doc_number: "",
+      "card[number]": "",
+      "card[exp_year]": "",
+      "card[exp_month]": "",
+      "card[cvc]": "",
+      card_name: "",
     });
     if (epayco_customer_id) {
       setIsValid({
         doc_type: true,
         doc_number: true,
-        'card[number]': false,
-        'card[exp_year]': false,
-        'card[exp_month]': false,
-        'card[cvc]': false,
+        "card[number]": false,
+        "card[exp_year]": false,
+        "card[exp_month]": false,
+        "card[cvc]": false,
         card_name: true,
       });
     } else {
       setIsValid({
         doc_type: false,
         doc_number: false,
-        'card[number]': false,
-        'card[exp_year]': false,
-        'card[exp_month]': false,
-        'card[cvc]': false,
+        "card[number]": false,
+        "card[exp_year]": false,
+        "card[exp_month]": false,
+        "card[cvc]": false,
         card_name: true,
       });
     }
     setPaymentInfo({
-      doc_type: '',
-      doc_number: '',
+      doc_type: "",
+      doc_number: "",
     });
   }
 
   return (
-    <div className="payment-method__page-body">
-      <h2 className="payment-method__credit-card-title">My Credit Cards</h2>
-      <button onClick={() => setHidden(false)} hidden={!hidden} className="payment-method__button-add">
+    <div className="paymentMethodPageBody">
+      <h2 className="paymentMethodCreditCardTitle">My Credit Cards</h2>
+      <button
+        onClick={() => setHidden(false)}
+        hidden={!hidden}
+        className="paymentMethodButtonAdd"
+      >
         add card
       </button>
       {!hidden && (
-        <div action="" className="payment-method__form">
-          <div className="payment-method__form-slot">
+        <div action="" className="paymentMethodForm">
+          <div className="paymentMethodFormSlot">
             <label>name on card</label>
             <input
               type="text"
@@ -368,28 +378,30 @@ function PaymentMethods() {
               onChange={cardNameChange}
               onBlur={validateinputs}
             />
-            <span className="payment-method__errors">{errors.card_name}</span>
+            <span className="paymentMethodErrors">{errors.card_name}</span>
           </div>
-          <div className="payment-method__form-slot">
+          <div className="paymentMethodFormSlot">
             <label>card number</label>
             <input
               type="number"
               name="card[number]"
-              value={cardInfo['card[number]']}
+              value={cardInfo["card[number]"]}
               onChange={cardInfoChange}
               onBlur={validateinputs}
             />
-            <span className="payment-method__errors">{errors['card[number]']}</span>
+            <span className="paymentMethodErrors">
+              {errors["card[number]"]}
+            </span>
           </div>
-          <div className="payment-method__card-form">
-            <div className="payment-method__card-form-slot">
+          <div className="paymentMethodCardForm">
+            <div className="paymentMethodCardFormSlot">
               <label>exp date</label>
               <select
                 name="card[exp_month]"
                 id="month"
                 onChange={cardInfoChange}
                 onBlur={validateinputs}
-                value={cardInfo['card[exp_month]']}
+                value={cardInfo["card[exp_month]"]}
               >
                 <option value={0} hidden>
                   month
@@ -408,8 +420,8 @@ function PaymentMethods() {
                 <option value={12}>12</option>
               </select>
             </div>
-            <div className="payment-method__card-form-slot">
-              <label className="payment-method__hidden">.</label>
+            <div className="paymentMethodCardFormSlot">
+              <label className="paymentMethodHidden">.</label>
               <input
                 type="number"
                 name="card[exp_year]"
@@ -418,23 +430,25 @@ function PaymentMethods() {
                 onBlur={validateinputs}
               />
             </div>
-            <div className="payment-method__cvc-form-slot">
+            <div className="paymentMethodCvcFormSlot">
               <label>cvc</label>
               <input
                 type="number"
                 name="card[cvc]"
-                value={cardInfo['card[c vc]']}
+                value={cardInfo["card[cvc]"]}
                 onChange={cardInfoChange}
                 onBlur={validateinputs}
               />
             </div>
           </div>
-          <span className="payment-method__errors">
-            {errors['card[cvc]'] || errors['card[exp_year]'] || errors['card[exp_month]']}
+          <span className="paymentMethodErrors">
+            {errors["card[cvc]"] ||
+              errors["card[exp_year]"] ||
+              errors["card[exp_month]"]}
           </span>
           {!epayco_customer_id && (
-            <div className="payment-method__card-form">
-              <div className="payment-method__id-type-form-slot">
+            <div className="paymentMethodCardForm">
+              <div className="paymentMethodIdTypeFormSlot">
                 <label>id type</label>
                 <select
                   name="doc_type"
@@ -450,7 +464,7 @@ function PaymentMethods() {
                   <option value="nit">NIT</option>
                 </select>
               </div>
-              <div className="payment-method__id-num-form-slot">
+              <div className="paymentMethodIdNumFormSlot">
                 <label>id number</label>
                 <input
                   name="doc_number"
@@ -462,26 +476,31 @@ function PaymentMethods() {
               </div>
             </div>
           )}
-          <span className="payment-method__errors">{errors.doc_type || errors.doc_number}</span>
-          <div className="payment-method__button-container">
+          <span className="paymentMethodErrors">
+            {errors.doc_type || errors.doc_number}
+          </span>
+          <div className="paymentMethodButtonContainer">
             <button
               onClick={handleSubmit}
-              className="payment-method__button-add"
+              className="paymentMethodButtonAdd"
               disabled={
                 !(
                   isValid.doc_type &&
                   isValid.doc_number &&
-                  isValid['card[number]'] &&
-                  isValid['card[exp_year]'] &&
-                  isValid['card[exp_month]'] &&
-                  isValid['card[cvc]'] &&
+                  isValid["card[number]"] &&
+                  isValid["card[exp_year]"] &&
+                  isValid["card[exp_month]"] &&
+                  isValid["card[cvc]"] &&
                   isValid.card_name
                 )
               }
             >
               add card
             </button>
-            <button onClick={handleCancel} className="payment-method__button-cancel">
+            <button
+              onClick={handleCancel}
+              className="paymentMethodButtonCancel"
+            >
               cancel
             </button>
           </div>
@@ -494,7 +513,13 @@ function PaymentMethods() {
       ) : (
         <div>
           {existingCards.cards.map((card) => {
-            return <CreditCard card={card} key={card.token} deleteCard={deleteCard} />;
+            return (
+              <CreditCard
+                card={card}
+                key={card.token}
+                deleteCard={deleteCard}
+              />
+            );
           })}
         </div>
       )}

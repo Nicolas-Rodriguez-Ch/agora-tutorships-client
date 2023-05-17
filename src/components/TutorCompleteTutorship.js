@@ -1,7 +1,7 @@
-import React from 'react';
-import axios from '../utils/axios';
+import React from "react";
+import axios from "../utils/axios";
 
-import '../assets/styles/components/TutorCompleteTutorship.scss'
+import styles from "../assets/styles/components/TutorCompleteTutorship.module.scss";
 
 function TutorCancelTutorship({ swal, tutorshipId, setState }) {
   const handleClick = (e) => {
@@ -45,14 +45,16 @@ function TutorCancelTutorship({ swal, tutorshipId, setState }) {
   };
 
   return (
-    <div className="tutorCancelTutorship-container">
-      <h1 className="tutorCompleteTutorship-title">Are you sure you want to complete this tutorship?</h1>
+    <div className={style.tutorCancelTutorshipContainer}>
+      <h1 className={style.tutorCompleteTutorshipTitle}>
+        Are you sure you want to complete this tutorship?
+      </h1>
       <h2>This action cannot be undone</h2>
-      <div className="tutorCancelTutorship-buttons-container">
-        <button onClick={handleClick} id="confirm" className="green">
+      <div className={style.tutorCancelTutorshipButtonsContainer}>
+        <button onClick={handleClick} id="confirm" className={style.green}>
           Yes, complete
         </button>
-        <button onClick={handleClick} id="cancel" className="red">
+        <button onClick={handleClick} id="cancel" className={style.red}>
           No, return
         </button>
       </div>

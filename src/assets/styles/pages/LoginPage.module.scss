@@ -1,0 +1,143 @@
+$primaryColorDark: #1a90aa;
+$primaryColor: #22b8d9;
+$secondaryColor: #ffffff;
+$secondaryColorDark: #d3d3d3;
+$alphaBackground: #55555555;
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+.loginFormContainer {
+  font-family: 'Open Sans';
+  min-height: 700px;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginForm {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $primaryColor;
+  color: black;
+  padding: 20px;
+}
+
+.loginFormLegend {
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  margin: 50px 0;
+}
+
+.loginLoginFieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  border: none;
+  margin: 0;
+}
+
+.loginSignupFieldset {
+  height: 20%;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.loginInputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.loginFormSubmit {
+  border-radius: 5px;
+  margin-bottom: 30px;
+  width: 90%;
+  background-color: $primaryColor;
+  border: none;
+  padding: 15px;
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.loginInputLabel {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.loginInputInput {
+  height: 40px;
+  width: 100%;
+  padding-left: 30px;
+  justify-content: flex-start;
+  font-size: 20px;
+}
+
+.inputContainerInput {
+  display: flex;
+}
+
+.loginInputIcon {
+  align-self: center;
+  position: absolute;
+  margin-left: 10px;
+  color: gray;
+}
+
+.signupText {
+  text-align: center;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.inputContainerErrorMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.emailErrorSpan,
+.passwordErrorSpan {
+  height: 30px;
+}
+
+.loginFormSubmitDisabled {
+  background-color: $primaryColorDark;
+  cursor: auto;
+}
+
+@media (min-width: 768px) {
+  .loginFormContainer {
+    height: 80vh;
+  }
+
+  .loginForm {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .loginForm {
+    width: 35vw;
+  }
+  .signupText {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .loginFormContainer {
+    height: 80vh;
+  }
+  .signupText {
+    font-size: 1rem;
+  }
+}

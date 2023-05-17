@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
+
+$subtitleColor: #5b5b5b;
+$titleColor: #3f3f3f;
+$colorA: #22b8d9;
+$colorB: rgb(41, 202, 103);
+$fontWeight: 400;
+$fontSelectedWeight: 800;
+$borderWidth: 2px;
+$spacing: 30px;
+$inputHeight: 45px;
+$inputMargin: 10px 0px;
+$warningColor: rgb(235, 99, 99);
+
+.swalActions {
+  width: 90%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.swalConfirm {
+  width: 80px;
+  height: 40px;
+  font-family: 'Open Sans';
+  font-weight: 600;
+  color: white;
+  font-size: 0.9rem;
+  background-color: $colorB;
+  border: none;
+  border-radius: 4px;
+}
+
+.swalCancel {
+  width: 80px;
+  height: 40px;
+  font-family: 'Open Sans';
+  font-weight: 600;
+  color: white;
+  font-size: 0.9rem;
+  background-color: $warningColor;
+  border: none;
+  border-radius: 4px;
+}
+
+.swalDelete {
+  width: 80px;
+  margin: 20px;
+  height: 40px;
+  font-family: 'Open Sans';
+  font-weight: 600;
+  color: white;
+  font-size: 0.9rem;
+  background-color: $warningColor;
+  border: none;
+  border-radius: 4px;
+}
+
+.swalDeleteCancel {
+  width: 80px;
+  margin: 20px;
+  height: 40px;
+  font-family: 'Open Sans';
+  font-weight: 600;
+  color: white;
+  font-size: 0.9rem;
+  background-color: $subtitleColor;
+  border: none;
+  border-radius: 4px;
+}
+
+.swalTitle {
+  font-family: 'Open Sans';
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.swalText {
+  font-family: 'Open Sans';
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.paymentMethodPageBody {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Open Sans';
+  box-sizing: border-box;
+  padding: 20px;
+  width: 100%;
+  background-color: white;
+}
+
+.paymentMethodPhotoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.paymentMethodPhoto {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 20px;
+}
+
+.paymentMethodForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.paymentMethodCreditCardTitle {
+  font-family: 'Open Sans';
+  margin-bottom: 40px;
+}
+
+.paymentMethodCardForm {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.paymentMethodErrors{
+  color: $warningColor;
+  margin-bottom: 20px;
+}
+
+.paymentMethodFormSlot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  input {
+    box-sizing: border-box;
+    padding: 0px 10px;
+    padding-left: 10px;
+    width: 100%;
+    height: $inputHeight;
+    border: 1px solid $subtitleColor;
+    text-align: left;
+    margin: $inputMargin;
+    color: $subtitleColor;
+    font-size: 1rem;
+    font-family: 'Open Sans';
+    font-weight: 600;
+  }
+  label {
+    font-family: 'Open Sans';
+    font-weight: 700;
+    color: $subtitleColor;
+  }
+  .paymentMethodErrors {
+    color: $warningColor;
+    margin-bottom: 20px;
+  }
+}
+
+.paymentMethodCvcFormSlot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 40%;
+  input {
+    box-sizing: border-box;
+    padding: 0px 10px;
+    padding-left: 10px;
+    width: 100%;
+    height: $inputHeight;
+    border: 1px solid $subtitleColor;
+    text-align: left;
+    margin: $inputMargin;
+    color: $subtitleColor;
+    font-size: 1rem;
+    font-family: 'Open Sans';
+    font-weight: 600;
+  }
+  label {
+    font-family: 'Open Sans';
+    font-weight: 700;
+    color: $subtitleColor;
+  }
+}
+
+.paymentMethodCardFormSlot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 50%;
+  input,
+  select {
+    box-sizing: border-box;
+    padding: 0px 10px;
+    padding-left: 10px;
+    width: 90%;
+    height: $inputHeight;
+    border: 1px solid $subtitleColor;
+    text-align: center;
+    margin: $inputMargin;
+    margin-right: 8px;
+    color: $subtitleColor;
+    font-size: 1rem;
+    font-family: 'Open Sans';
+    font-weight: 600;
+  }
+  label {
+    font-family: 'Open Sans';
+    font-weight: 700;
+    color: $subtitleColor;
+  }
+  .paymentMethodHidden {
+    visibility: hidden;
+  }
+}
+
+.paymentMethodIdNumFormSlot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  input {
+    box-sizing: border-box;
+    padding: 0px 10px;
+    padding-left: 10px;
+    width: 100%;
+    height: $inputHeight;
+    border: 1px solid $subtitleColor;
+    text-align: left;
+    margin: $inputMargin;
+    color: $subtitleColor;
+    font-size: 1rem;
+    font-family: 'Open Sans';
+    font-weight: 600;
+  }
+  label {
+    font-family: 'Open Sans';
+    font-weight: 700;
+    color: $subtitleColor;
+  }
+}
+
+.paymentMethodIdTypeFormSlot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 60%;
+  input,
+  select {
+    box-sizing: border-box;
+    padding: 0px 10px;
+    padding-left: 10px;
+    width: 90%;
+    height: $inputHeight;
+    border: 1px solid $subtitleColor;
+    text-align: left;
+    margin: $inputMargin;
+    color: $subtitleColor;
+    font-family: 1rem;
+    font-family: 'Open Sans';
+    font-weight: 600;
+  }
+  label {
+    font-family: 'Open Sans';
+    font-weight: 700;
+    color: $subtitleColor;
+  }
+}
+
+.paymentMethodButtonContainer {
+  display: flex;
+  width: 100%;
+  font-family: 'Source Code Pro', monospace;
+}
+
+.paymentMethodButtonAdd {
+  background-color: white;
+  color: $colorB;
+  border: $borderWidth solid $colorB;
+  height: 40px;
+  margin: 0px 0px 40px 0px;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: $fontSelectedWeight;
+  letter-spacing: 1px;
+  &:hover:enabled {
+    background-color: $colorB;
+    color: white;
+    border: $borderWidth solid $colorB;
+    cursor: pointer;
+  }
+  &:disabled {
+    color: $subtitleColor;
+    border: $borderWidth solid $subtitleColor;
+  }
+}
+
+.paymentMethodButtonCancel {
+  background-color: white;
+  color: $warningColor;
+  border: $borderWidth solid $warningColor;
+  height: 40px;
+  margin: 0px 0px 40px 20px;
+  width: 50%;
+  font-size: 1.2rem;
+  font-weight: $fontSelectedWeight;
+  letter-spacing: 1px;
+  &:hover:enabled {
+    background-color: $warningColor;
+    color: white;
+    border: $borderWidth solid $warningColor;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 992px) {
+  .paymentMethodPageBody {
+    font-family: 'Open Sans';
+    box-sizing: border-box;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 50px;
+  }
+
+  .paymentMethodForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .paymentMethodButtonPhotoDisabled {
+    margin-left: 30px;
+    font-weight: 700;
+    height: 40px;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    width: 180px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .paymentMethodDashboardBody {
+    width: 27%;
+    position: sticky;
+    top: 191px;
+  }
+}

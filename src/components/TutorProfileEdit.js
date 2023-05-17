@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import axios from '../utils/axios';
-import { useSelector } from 'react-redux';
-import history from '../utils/history';
-import Swal from 'sweetalert2';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import '../assets/styles/pages/TutorEditProfile.scss';
+import React, { useState, useEffect } from "react";
+import axios from "../utils/axios";
+import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import styles from "../assets/styles/pages/TutorEditProfile.module.scss";
 
 function TutorProfilePage() {
   const globalUser = useSelector((state) => state.currentUser);
   const token = useSelector((state) => state.token);
-  const [previewPhoto, setPreviewPhoto] = useState('');
-  const [image, setImage] = useState('');
+  const [previewPhoto, setPreviewPhoto] = useState("");
+  const [image, setImage] = useState("");
   const [isDisabled, setIsDisabled] = useState({
     name: true,
     email: true,
@@ -22,45 +21,54 @@ function TutorProfilePage() {
     price: true,
   });
   const [previewData, setPreviewData] = useState({
-    name: '',
-    email: '',
-    description: '',
-    schedule: '',
-    price: '',
-    rating: '',
+    name: "",
+    email: "",
+    description: "",
+    schedule: "",
+    price: "",
+    rating: "",
   });
   const [userData, setUserData] = useState({
     inputs: {
-      name: '',
-      email: '',
-      password: '',
-      description: '',
-      schedule: '',
-      price: '',
+      name: "",
+      email: "",
+      password: "",
+      description: "",
+      schedule: "",
+      price: "",
     },
     errors: {
-      name: '',
-      email: '',
-      password: '',
-      schedule: '',
-      price: '',
+      name: "",
+      email: "",
+      password: "",
+      schedule: "",
+      price: "",
     },
-    isValid: { name: true, password: true, email: true, schedule: true, price: true, description: true },
+    isValid: {
+      name: true,
+      password: true,
+      email: true,
+      schedule: true,
+      price: true,
+      description: true,
+    },
     enableUpload: false,
   });
-  const swalStyled = Swal.mixin({
+  const swalstylesd = Swal.mixin({
     customClass: {
-      confirmButton: 'swal__confirm',
-      cancelButton: 'swal__cancel',
-      title: 'swal__title',
-      container: 'swal__text',
-      actions: 'swal__actions',
+      confirmButton: "swal__confirm",
+      cancelButton: "swal__cancel",
+      title: "swal__title",
+      container: "swal__text",
+      actions: "swal__actions",
     },
     buttonsStyling: false,
   });
   const starNodes = [];
   for (let i = 1; i <= previewData.rating; i++) {
-    starNodes.push(<FontAwesomeIcon icon={faStar} key={i} title="tutor-rating-star" />);
+    starNodes.push(
+      <FontAwesomeIcon icon={faStar} key={i} title="tutor-rating-star" />
+    );
   }
 
   useEffect(() => {
@@ -94,14 +102,14 @@ function TutorProfilePage() {
   function validateInput(e) {
     const input = e.target.name;
     const value = e.target.value;
-    if (input === 'name') {
+    if (input === "name") {
       const re = /^[a-zA-Z\s]*$/;
       if (value.length < 4) {
         setUserData((state) => ({
           ...state,
           errors: {
             ...state.errors,
-            name: 'Name is too short',
+            name: "Name is too short",
           },
           isValid: { ...state.isValid, name: false },
           enableUpload: false,
@@ -111,7 +119,7 @@ function TutorProfilePage() {
           ...state,
           errors: {
             ...state.errors,
-            name: 'Name must only contain letters',
+            name: "Name must only contain letters",
           },
           isValid: { ...state.isValid, name: false },
           enableUpload: false,
@@ -121,14 +129,18 @@ function TutorProfilePage() {
           ...state,
           errors: {
             ...state.errors,
-            name: '',
+            name: "",
           },
           isValid: { ...state.isValid, name: true },
-          enableUpload: state.isValid.password && state.isValid.email && state.isValid.schedule && state.isValid.price,
+          enableUpload:
+            state.isValid.password &&
+            state.isValid.email &&
+            state.isValid.schedule &&
+            state.isValid.price,
         }));
       }
     }
-    if (input === 'email') {
+    if (input === "email") {
       const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!re.test(String(value).toLowerCase())) {
@@ -136,7 +148,7 @@ function TutorProfilePage() {
           ...state,
           errors: {
             ...state.errors,
-            email: 'Invalid email, please enter a valid email',
+            email: "Invalid email, please enter a valid email",
           },
           isValid: { ...state.isValid, email: false },
           enableUpload: false,
@@ -146,20 +158,24 @@ function TutorProfilePage() {
           ...state,
           errors: {
             ...state.errors,
-            email: '',
+            email: "",
           },
           isValid: { ...state.isValid, email: true },
-          enableUpload: state.isValid.name && state.isValid.password && state.isValid.schedule && state.isValid.price,
+          enableUpload:
+            state.isValid.name &&
+            state.isValid.password &&
+            state.isValid.schedule &&
+            state.isValid.price,
         }));
       }
     }
-    if (input === 'password') {
+    if (input === "password") {
       if (value.length < 4 || value.length === null) {
         setUserData((state) => ({
           ...state,
           errors: {
             ...state.errors,
-            password: 'Password is too short',
+            password: "Password is too short",
           },
           isValid: { ...state.isValid, password: false },
           enableUpload: false,
@@ -169,20 +185,25 @@ function TutorProfilePage() {
           ...state,
           errors: {
             ...state.errors,
-            password: '',
+            password: "",
           },
           isValid: { ...state.isValid, password: true },
-          enableUpload: state.isValid.name && state.isValid.email && state.isValid.schedule && state.isValid.price,
+          enableUpload:
+            state.isValid.name &&
+            state.isValid.email &&
+            state.isValid.schedule &&
+            state.isValid.price,
         }));
       }
     }
-    if (input === 'schedule') {
-      if (!value.includes('from') && !value.includes('to')) {
+    if (input === "schedule") {
+      if (!value.includes("from") && !value.includes("to")) {
         setUserData((state) => ({
           ...state,
           errors: {
             ...state.errors,
-            schedule: 'Invalid format, please type from (day) to (day), from (hour) to (hour)',
+            schedule:
+              "Invalid format, please type from (day) to (day), from (hour) to (hour)",
           },
           isValid: { ...state.isValid, schedule: false },
           enableUpload: false,
@@ -192,20 +213,24 @@ function TutorProfilePage() {
           ...state,
           errors: {
             ...state.errors,
-            schedule: '',
+            schedule: "",
           },
           isValid: { ...state.isValid, schedule: true },
-          enableUpload: state.isValid.name && state.isValid.password && state.isValid.email && state.isValid.price,
+          enableUpload:
+            state.isValid.name &&
+            state.isValid.password &&
+            state.isValid.email &&
+            state.isValid.price,
         }));
       }
     }
-    if (input === 'price') {
+    if (input === "price") {
       if (value.length === 0) {
         setUserData((state) => ({
           ...state,
           errors: {
             ...state.errors,
-            price: 'this field is mandatory',
+            price: "this field is mandatory",
           },
           isValid: { ...state.isValid, price: false },
           enableUpload: false,
@@ -215,14 +240,18 @@ function TutorProfilePage() {
           ...state,
           errors: {
             ...state.errors,
-            price: '',
+            price: "",
           },
           isValid: { ...state.isValid, price: true },
-          enableUpload: state.isValid.name && state.isValid.password && state.isValid.email && state.isValid.schedule,
+          enableUpload:
+            state.isValid.name &&
+            state.isValid.password &&
+            state.isValid.email &&
+            state.isValid.schedule,
         }));
       }
     }
-    if (input === 'description') {
+    if (input === "description") {
       setUserData((state) => ({
         ...state,
         enableUpload: true,
@@ -242,9 +271,15 @@ function TutorProfilePage() {
     } else if (buttonClass.match(/name/)) {
       setIsDisabled((prevState) => ({ ...prevState, name: !prevState.name }));
     } else if (buttonClass.match(/description/)) {
-      setIsDisabled((prevState) => ({ ...prevState, description: !prevState.description }));
+      setIsDisabled((prevState) => ({
+        ...prevState,
+        description: !prevState.description,
+      }));
     } else if (buttonClass.match(/schedule/)) {
-      setIsDisabled((prevState) => ({ ...prevState, schedule: !prevState.schedule }));
+      setIsDisabled((prevState) => ({
+        ...prevState,
+        schedule: !prevState.schedule,
+      }));
     } else if (buttonClass.match(/price/)) {
       setIsDisabled((prevState) => ({ ...prevState, price: !prevState.price }));
     }
@@ -263,26 +298,26 @@ function TutorProfilePage() {
     e.preventDefault();
     const formData = new FormData();
     if (image) {
-      formData.append('image', image);
+      formData.append("image", image);
     }
     updateTutorProfile(userData.inputs, formData, token);
   };
 
   const updateTutorProfile = async (inputs, formData, token) => {
     try {
-      const { data: url } = await axios.patch('/uploadProfileImage', formData);
-      const response = await axios.patch('/update', {
+      const { data: url } = await axios.patch("/uploadProfileImage", formData);
+      const response = await axios.patch("/update", {
         formData,
         inputs,
         url,
         token,
-        type: 'tutor',
+        type: "tutor",
       });
-      localStorage.setItem('token', response.data);
-      swalStyled
+      localStorage.setItem("token", response.data);
+      swalstylesd
         .fire({
-          icon: 'success',
-          title: 'Your data was updated successfully',
+          icon: "success",
+          title: "Your data was updated successfully",
         })
         .then(() => {
           history.go(0);
@@ -292,7 +327,7 @@ function TutorProfilePage() {
         ...state,
         errors: {
           ...state.errors,
-          email: 'Email is taken, please use a different email',
+          email: "Email is taken, please use a different email",
         },
       }));
     }
@@ -300,21 +335,31 @@ function TutorProfilePage() {
 
   return (
     <>
-      <div className="tutor-edit__photo-container">
-        <img src={previewPhoto} className="tutor-edit__photo" alt="user" />
-        <label htmlFor="upload" className="tutor-edit__button-photo">
+      <div className={styles.tutorEditPhotoContainer}>
+        <img src={previewPhoto} className={styles.tutorEditPhoto} alt="user" />
+        <label htmlFor="upload" className={styles.tutorEditButtonPhoto}>
           upload photo
         </label>
-        <input type="file" id="upload" onChange={onChangeFile} hidden accept="image/png, image/jpeg" />
-        <div className="tutor-edit__rating">
+        <input
+          type="file"
+          id="upload"
+          onChange={onChangeFile}
+          hidden
+          accept="image/png, image/jpeg"
+        />
+        <div className={styles.tutorEditRating}>
           <label>My Rating</label>
-          {starNodes.length !== 0 ? <div className="tutor-edit__stars">{starNodes}</div> : <p>{previewData.rating}</p>}
+          {starNodes.length !== 0 ? (
+            <div className={styles.tutorEditStars}>{starNodes}</div>
+          ) : (
+            <p>{previewData.rating}</p>
+          )}
         </div>
       </div>
-      <form action="" className="tutor-edit__form" onSubmit={onSubmit}>
-        <div className="tutor-edit__form-slot">
+      <form action="" className={styles.tutorEditForm} onSubmit={onSubmit}>
+        <div className={styles.tutorEditFormSlot}>
           <label>Name</label>
-          <div className="tutor-edit__form-slot-container">
+          <div className={styles.tutorEditFormSlotContainer}>
             <input
               onBlur={validateInput}
               type="text"
@@ -323,15 +368,19 @@ function TutorProfilePage() {
               onChange={handleChange}
               disabled={isDisabled.name}
             />
-            <button onClick={handleClick} className="tutor-profile__credentials__name-input-button" type="button">
+            <button
+              onClick={handleClick}
+              className={styles.tutorProfileCredentialsNameInputButton}
+              type="button"
+            >
               <FontAwesomeIcon icon={faPencilAlt} />
             </button>
           </div>
-          <span className="tutor-edit__errors">{userData.errors.name}</span>
+          <span className={styles.tutorEditErrors}>{userData.errors.name}</span>
         </div>
-        <div className="tutor-edit__form-slot">
+        <div className={styles.tutorEditFormSlot}>
           <label>Email</label>
-          <div className="tutor-edit__form-slot-container">
+          <div className={styles.tutorEditFormSlotContainer}>
             <input
               onBlur={validateInput}
               defaultValue={previewData.email}
@@ -340,15 +389,21 @@ function TutorProfilePage() {
               onChange={handleChange}
               disabled={isDisabled.email}
             />
-            <button onClick={handleClick} className="tutor-profile__credentials__email-input-button" type="button">
+            <button
+              onClick={handleClick}
+              className={styles.tutorProfileCredentialsEmailInputButton}
+              type="button"
+            >
               <FontAwesomeIcon icon={faPencilAlt} />
             </button>
           </div>
-          <span className="tutor-edit__errors">{userData.errors.email}</span>
+          <span className={styles.tutorEditErrors}>
+            {userData.errors.email}
+          </span>
         </div>
-        <div className="tutor-edit__form-slot">
+        <div className={styles.tutorEditFormSlot}>
           <label>Password</label>
-          <div className="tutor-edit__form-slot-container">
+          <div className={styles.tutorEditFormSlotContainer}>
             <input
               onBlur={validateInput}
               defaultValue="12345"
@@ -357,15 +412,21 @@ function TutorProfilePage() {
               onChange={handleChange}
               disabled={isDisabled.password}
             />
-            <button onClick={handleClick} className="tutor-profile__credentials__password-input-button" type="button">
+            <button
+              onClick={handleClick}
+              className={styles.tutorProfileCredentialsPasswordInputButton}
+              type="button"
+            >
               <FontAwesomeIcon icon={faPencilAlt} />
             </button>
           </div>
-          <span className="tutor-edit__errors">{userData.errors.password}</span>
+          <span className={styles.tutorEditErrors}>
+            {userData.errors.password}
+          </span>
         </div>
-        <div className="tutor-edit__form-slot">
+        <div className={styles.tutorEditFormSlot}>
           <label>Tutorship Fee</label>
-          <div className="tutor-edit__form-slot-container">
+          <div className={styles.tutorEditFormSlotContainer}>
             <input
               defaultValue={previewData.price}
               onBlur={validateInput}
@@ -374,15 +435,21 @@ function TutorProfilePage() {
               onChange={handleChange}
               disabled={isDisabled.price}
             />
-            <button onClick={handleClick} className="tutor-profile__credentials__price-input-button" type="button">
+            <button
+              onClick={handleClick}
+              className={styles.tutorProfileCredentialsPriceInputButton}
+              type="button"
+            >
               <FontAwesomeIcon icon={faPencilAlt} />
             </button>
           </div>
-          <span className="tutor-edit__errors">{userData.errors.price}</span>
+          <span className={styles.tutorEditErrors}>
+            {userData.errors.price}
+          </span>
         </div>
-        <div className="tutor-edit__form-slot">
+        <div className={styles.tutorEditFormSlot}>
           <label>Schedule</label>
-          <div className="tutor-edit__form-slot-container">
+          <div className={styles.tutorEditFormSlotContainer}>
             <input
               onBlur={validateInput}
               defaultValue={previewData.schedule}
@@ -392,15 +459,21 @@ function TutorProfilePage() {
               onChange={handleChange}
               disabled={isDisabled.schedule}
             />
-            <button onClick={handleClick} className="tutor-profile__credentials__schedule-input-button" type="button">
+            <button
+              onClick={handleClick}
+              className={style.tutorProfileCredentialsScheduleInputButton}
+              type="button"
+            >
               <FontAwesomeIcon icon={faPencilAlt} />
             </button>
           </div>
-          <span className="tutor-edit__errors">{userData.errors.schedule}</span>
+          <span className={style.tutorEditErrors}>
+            {userData.errors.schedule}
+          </span>
         </div>
-        <div className="tutor-edit__form-slot">
+        <div className={style.tutorEditFormSlot}>
           <label>Description</label>
-          <div className="tutor-edit__form-slot-container">
+          <div className={style.tutorEditFormSlotContainer}>
             <textarea
               id="form"
               name="description"
@@ -410,23 +483,25 @@ function TutorProfilePage() {
               placeholder="Let our students know something about you"
               cols="30"
               rows="10"
-              className="tutor-edit__form-description"
+              className={style.tutorEditFormDescription}
               disabled={isDisabled.description}
             ></textarea>
             <button
               onClick={handleClick}
-              className="tutor-profile__credentials__description-input-button"
+              className={style.tutorProfileCredentialsDescriptionInputButton}
               type="button"
             >
               <FontAwesomeIcon icon={faPencilAlt} />
             </button>
           </div>
         </div>
-        <div className="tutor-edit__button-container">
+        <div className={style.tutorEditButtonContainer}>
           <input
             type="submit"
             value="save changes"
-            className={`tutor-edit__button-submit ${!userData.enableUpload && 'disabled'}`}
+            className={`${style.tutorEditButtonSubmit} ${
+              !userData.enableUpload && "disabled"
+            }`}
             disabled={!userData.enableUpload}
           />
         </div>
