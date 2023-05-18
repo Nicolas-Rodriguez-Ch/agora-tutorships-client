@@ -1,9 +1,9 @@
-import TutorsCard from './tutorsCard';
-import '../assets/styles/components/SearchResult.scss';
+import TutorsCard from "./tutorsCard";
+import styles from "../assets/styles/components/SearchResult.module.scss";
 
 const SearchResult = (Tutors) => {
   return (
-    <main className="search__result">
+    <main className={styles.search__result}>
       {Tutors.Tutors.map((element, i) => (
         <TutorsCard props={element} key={i} />
       ))}

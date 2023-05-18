@@ -93,13 +93,14 @@ function Header() {
       mobileInput.current.value = "";
       !state.isSearchCollapsed &&
         setState((prevState) => ({ ...prevState, isSearchCollapsed: true }));
-
+  
       router.push({
-        pathname: `/search/?query=${state.searchInput}&page=1`,
-        state: state.searchInput,
+        pathname: `/search`,
+        query: { query: state.searchInput, page: 1 }
       });
     }
   };
+  
 
   const getLinkPath = (user) => {
     if (!user) return "/";

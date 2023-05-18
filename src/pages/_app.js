@@ -5,6 +5,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getUserData } from "../slices/userSlice";
 import { useEffect } from "react";
 import Header from "../components/Header";
+import "../assets/styles/global.scss";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
@@ -12,9 +13,7 @@ function InnerApp({ Component, pageProps }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("useEffect is running");
     const token = localStorage.getItem("token");
-    console.log("Token: ", token);
     if (token) {
       dispatch(getUserData(token));
     }

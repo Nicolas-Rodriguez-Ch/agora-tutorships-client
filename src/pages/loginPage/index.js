@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { login } from "../../slices/userSlice";
-
+import { useRouter } from "next/router";
 import styles from "../../assets/styles/pages/LoginPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 
 function LoginPage() {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const globalState = useSelector((state) => state);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const [state, setState] = useState({
     values: {
       email: "",
@@ -18,7 +21,11 @@ function LoginPage() {
     isValid: false,
   });
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/homePage");
+    }
+  }, [isAuthenticated]);
 
   const validateInputs = (e) => {
     const inputName = e.target.name;

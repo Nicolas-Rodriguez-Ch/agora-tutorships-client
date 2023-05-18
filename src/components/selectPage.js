@@ -1,5 +1,5 @@
-import React from 'react';
-import '../assets/styles/components/SearchPage.scss';
+import React from "react";
+import styles from "../assets/styles/components/SearchPage.module.scss";
 
 const SelectPage = ({ Page, setPage, Pages }) => {
   const prevPage = (e) => {
@@ -15,15 +15,29 @@ const SelectPage = ({ Page, setPage, Pages }) => {
   };
 
   return (
-    <div className="change__page_container">
-      <button className={Page > 1 ? 'change__page_button' : 'change__page_button-hidden'} onClick={prevPage}>
+    <div className={styles.changePageContainer}>
+      <button
+        className={
+          Page > 1
+            ? styles.changePageButton
+            : `${styles.changePageButton}-hidden`
+        }
+        onClick={prevPage}
+      >
         Prev
       </button>
 
-      <p className="change__page_p">
-        Page {Page} / {Pages>1? Pages: 1}
+      <p className={styles.changePageP}>
+        Page {Page} / {Pages > 1 ? Pages : 1}
       </p>
-      <button className={Page < Pages ? 'change__page_button' : 'change__page_button-hidden'} onClick={nextPage}>
+      <button
+        className={
+          Page < Pages
+            ? styles.changePageButton
+            : `${styles.changePageButton}-hidden`
+        }
+        onClick={nextPage}
+      >
         Next
       </button>
     </div>

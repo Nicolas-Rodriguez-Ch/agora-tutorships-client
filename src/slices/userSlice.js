@@ -34,6 +34,7 @@ export const login = createAsyncThunk(
   "user/login",
   async ({ email, password }, { dispatch, getState }) => {
     const response = await axios.post("/login", { email, password });
+    dispatch(getUserData(response.data.token));
     return response.data;
   }
 );
@@ -100,6 +101,7 @@ const userSlice = createSlice({
         state.currentUser = action.payload.userData;
         state.auth_status = "authorized";
       })
+
       .addCase(getUserData.rejected, (state) => {
         state.auth_status = "unauthorized";
       });

@@ -6,4 +6,10 @@ const nextConfig = {
   }
 }
 
+module.exports = {
+  sassOptions: {
+    prependData: `@import "./styles/global.scss";`,
+  },
+};
+
 module.exports = nextConfig
