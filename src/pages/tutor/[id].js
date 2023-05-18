@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { TutorPageHead } from '../../components/TutorPageHead';
 import { TutorDescription } from '../../components/TutorDescription';
 import { ReviewsContainer } from '../../components/ReviewsContainer';
-import '../../assets/styles/pages/TutorViewProfile.scss';
+import styles from '../../assets/styles/pages/TutorViewProfile.module.scss';
 import axios from '../../utils/axios';
 import Loader from '../../components/Loader';
-import history from '../utils/history';
 
-function TutorDetailsPage(props) {
+function TutorDetailsPage() {
   const [tutor, setTutor] = useState({});
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const id = props.match.params.id;
+  
+  const router = useRouter();
+  const { id } = router.query;
 
   useEffect(() => {
     async function tutorDetailsData(id) {
@@ -23,15 +25,17 @@ function TutorDetailsPage(props) {
         setReviews(reviewData);
         setLoading(false);
       } catch (err) {
-        history.replace('/home');
+        router.replace('/homePage');
       }
     }
-    tutorDetailsData(id);
+    if (id) {
+      tutorDetailsData(id);
+    }
   }, [id]);
 
   return (
     <>
-      <div className="tutor-profile__body">
+      <div className={styles.tutorProfileBody}>
         {loading ? (
           <Loader />
         ) : (

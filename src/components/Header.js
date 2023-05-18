@@ -165,7 +165,7 @@ function Header() {
         )}
 
         <div className={`${styles.mobileNavButtonsContainer}`}>
-          {currentUser.type === "student" && (
+          {global.type === "student" && (
             <FontAwesomeIcon onClick={toggleSearchCollapse} icon={faSearch} />
           )}
           <FontAwesomeIcon onClick={toggleMenuCollapse} icon={faBars} />

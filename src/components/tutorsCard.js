@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
 import styles from "../assets/styles/components/tutorCards.module.scss";
+import Image from "next/image";
 
 function TutorsCard(tutor) {
   const {
@@ -33,7 +34,12 @@ function TutorsCard(tutor) {
       onClick={handleClick}
     >
       <div className={styles.cardVisualInfo}>
-        <img src={profile_photo} alt="profilepicture" />
+        <Image
+          src={profile_photo}
+          alt="profilepicture"
+          width={100}
+          height={75}
+        />
         <h1 key={name}>{name}</h1>
         <div className={styles.cardStars}>{starNodes}</div>
         <p className={styles.price}>Tutorship fee</p>

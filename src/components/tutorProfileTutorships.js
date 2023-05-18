@@ -6,7 +6,7 @@ import withReactContent from "sweetalert2-react-content";
 import Loader from "./Loader";
 import TutorCancelTutorship from "./tutorCancelTutorship.js";
 import TutorCompleteTutorship from "./TutorCompleteTutorship";
-
+import Image from "next/image";
 import styles from "../assets/styles/components/tutorProfileTutorships.module.scss";
 import { format } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
@@ -90,10 +90,12 @@ function TutorProfileTutorships() {
           return (
             <div key={id} className={styles.tutorTutorshipContainer}>
               <div className={styles.tutorTutorshipImageContainer}>
-                <img
+                <Image
                   src={studentPhoto}
                   alt={name}
                   className={styles.tutorTutorshipImage}
+                  width={100}
+                  height={75}
                 />
               </div>
               <div className={styles.tutorTutorshipDescriptionContainer}>

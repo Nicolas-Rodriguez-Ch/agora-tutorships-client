@@ -7,9 +7,14 @@ import Swal from "sweetalert2";
 import styles from "../assets/styles/components/PaymentMethods.module.scss";
 
 function PaymentMethods() {
-  const user_id = useSelector((state) => state.currentUser._id);
-  const user_email = useSelector((state) => state.currentUser.email);
-  const user_name = useSelector((state) => state.currentUser.name);
+  const {
+    _id: user_id,
+    email: user_email,
+    name: user_name,
+  } = useSelector((state) => {
+    return state.user.currentUser;
+  });
+
   const firstName = function (user_name) {
     const fullName = user_name.split(" ");
     if (fullName.length > 2) {
@@ -358,18 +363,18 @@ function PaymentMethods() {
   }
 
   return (
-    <div className="paymentMethodPageBody">
-      <h2 className="paymentMethodCreditCardTitle">My Credit Cards</h2>
+    <div className={styles.paymentMethodPageBody}>
+      <h2 className={styles.paymentMethodCreditCardTitle}>My Credit Cards</h2>
       <button
         onClick={() => setHidden(false)}
         hidden={!hidden}
-        className="paymentMethodButtonAdd"
+        className={styles.paymentMethodButtonAdd}
       >
         add card
       </button>
       {!hidden && (
-        <div action="" className="paymentMethodForm">
-          <div className="paymentMethodFormSlot">
+        <div action="" className={styles.paymentMethodForm}>
+          <div className={styles.paymentMethodFormSlot}>
             <label>name on card</label>
             <input
               type="text"
@@ -378,9 +383,11 @@ function PaymentMethods() {
               onChange={cardNameChange}
               onBlur={validateinputs}
             />
-            <span className="paymentMethodErrors">{errors.card_name}</span>
+            <span className={styles.paymentMethodErrors}>
+              {errors.card_name}
+            </span>
           </div>
-          <div className="paymentMethodFormSlot">
+          <div className={styles.paymentMethodFormSlot}>
             <label>card number</label>
             <input
               type="number"
@@ -389,12 +396,12 @@ function PaymentMethods() {
               onChange={cardInfoChange}
               onBlur={validateinputs}
             />
-            <span className="paymentMethodErrors">
+            <span className={styles.paymentMethodErrors}>
               {errors["card[number]"]}
             </span>
           </div>
-          <div className="paymentMethodCardForm">
-            <div className="paymentMethodCardFormSlot">
+          <div className={styles.paymentMethodCardForm}>
+            <div className={styles.paymentMethodCardFormSlot}>
               <label>exp date</label>
               <select
                 name="card[exp_month]"
@@ -420,8 +427,8 @@ function PaymentMethods() {
                 <option value={12}>12</option>
               </select>
             </div>
-            <div className="paymentMethodCardFormSlot">
-              <label className="paymentMethodHidden">.</label>
+            <div className={styles.paymentMethodCardFormSlot}>
+              <label className={styles.paymentMethodHidden}>.</label>
               <input
                 type="number"
                 name="card[exp_year]"
@@ -430,7 +437,7 @@ function PaymentMethods() {
                 onBlur={validateinputs}
               />
             </div>
-            <div className="paymentMethodCvcFormSlot">
+            <div className={styles.paymentMethodCvcFormSlot}>
               <label>cvc</label>
               <input
                 type="number"
@@ -441,14 +448,14 @@ function PaymentMethods() {
               />
             </div>
           </div>
-          <span className="paymentMethodErrors">
+          <span className={styles.paymentMethodErrors}>
             {errors["card[cvc]"] ||
               errors["card[exp_year]"] ||
               errors["card[exp_month]"]}
           </span>
           {!epayco_customer_id && (
-            <div className="paymentMethodCardForm">
-              <div className="paymentMethodIdTypeFormSlot">
+            <div className={styles.paymentMethodCardForm}>
+              <div className={styles.paymentMethodIdTypeFormSlot}>
                 <label>id type</label>
                 <select
                   name="doc_type"
@@ -464,7 +471,7 @@ function PaymentMethods() {
                   <option value="nit">NIT</option>
                 </select>
               </div>
-              <div className="paymentMethodIdNumFormSlot">
+              <div className={styles.paymentMethodIdNumFormSlot}>
                 <label>id number</label>
                 <input
                   name="doc_number"
@@ -476,13 +483,13 @@ function PaymentMethods() {
               </div>
             </div>
           )}
-          <span className="paymentMethodErrors">
+          <span className={styles.paymentMethodErrors}>
             {errors.doc_type || errors.doc_number}
           </span>
-          <div className="paymentMethodButtonContainer">
+          <div className={styles.paymentMethodButtonContainer}>
             <button
               onClick={handleSubmit}
-              className="paymentMethodButtonAdd"
+              className={styles.paymentMethodButtonAdd}
               disabled={
                 !(
                   isValid.doc_type &&
@@ -499,7 +506,7 @@ function PaymentMethods() {
             </button>
             <button
               onClick={handleCancel}
-              className="paymentMethodButtonCancel"
+              className={styles.paymentMethodButtonCancel}
             >
               cancel
             </button>

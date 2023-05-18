@@ -1,7 +1,3 @@
-import "../assets/styles/pages/checkout.scss";
-import "../assets/styles/pages/TutorsSchedule.scss";
-import "../assets/styles/pages/register.scss";
-import "../assets/styles/pages/TutorViewProfile.scss";
 import { useDispatch, Provider } from "react-redux";
 import { wrapper } from "../store";
 import { Elements } from "@stripe/react-stripe-js";

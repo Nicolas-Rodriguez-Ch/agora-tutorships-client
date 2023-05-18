@@ -3,9 +3,13 @@ import StudentProfileEdit from '../components/StudentProfileEdit';
 import PaymentMethods from '../components/PaymentMethods';
 import StudentProfileTutorships from '../components/StudentProfileTutorships';
 import styles from '../assets/styles/pages/StudentProfile.module.scss';
+import { useRouter } from 'next/router';
+
 
 function StudentProfile({ props }) {
-  const currentPage = props.match.params.section;
+  const router = useRouter();
+  const { section } = router.query;
+
   const pages = {
     edit: <StudentProfileEdit />,
     'payment-methods': <PaymentMethods />,
@@ -15,9 +19,9 @@ function StudentProfile({ props }) {
   return (
     <div className={styles.studentProfileContainer}>
       <section className={styles.studentProfileMenuContainer}>
-        <StudentProfileMenu page={currentPage} />
+        <StudentProfileMenu page={section} />
       </section>
-      <main className={styles.studentProfileMain}>{pages[currentPage]}</main>
+      <main className={styles.studentProfileMain}>{pages[section]}</main>
     </div>
   );
 }

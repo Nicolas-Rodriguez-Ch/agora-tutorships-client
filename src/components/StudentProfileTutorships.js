@@ -8,11 +8,13 @@ import StudentRateTutorship from "./StudentRateTutorship";
 import Loader from "./Loader";
 import { format } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
-
+import Image from "next/image";
+import { useRouter } from "next/router";
 import styles from "../assets/styles/components/StudentProfileTutorships.module.scss";
 
 function StudentProfileTutorships() {
-  const id = useSelector((state) => state.currentUser._id);
+  const router = useRouter();
+  const id = useSelector((state) => state.user.currentUser._id);
   const [state, setState] = useState({
     tutorships: [],
     loading: true,
@@ -71,14 +73,9 @@ function StudentProfileTutorships() {
 
   function handlePayment(data, e) {
     e.preventDefault();
-    history.push(`/checkout/${data.tutorshipId}`, {
-      state: {
-        tutorship_id: data.tutorshipId,
-        tutorship_price: data.tutorshipPrice,
-      },
-    });
+    router.push(`/checkout/${data.tutorshipId}?tutorship_price=${data.tutorshipPrice}`);
   }
-
+  
   return (
     <div className={styles.studentTutorshipsContainer}>
       {state.loading ? (
@@ -101,10 +98,12 @@ function StudentProfileTutorships() {
           return (
             <div key={id} className={styles.studentTutorshipContainer}>
               <div className={styles.studentTutorshipImageContainer}>
-                <img
+                <Image
                   src={profile_photo}
                   alt={name}
                   className={styles.studentTutorshipImage}
+                  width={100}
+                  height={75}
                 />
               </div>
               <div className={styles.studentTutorshipDescriptionContainer}>

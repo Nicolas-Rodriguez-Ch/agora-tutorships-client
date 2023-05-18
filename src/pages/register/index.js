@@ -6,6 +6,7 @@ import { register } from "../../slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import FormTutor from "../../components/FormTutor";
 import { AUTHORIZED } from "../../actions/constants";
+import styles from "../../assets/styles/pages/register.module.scss";
 
 function Register() {
   const auth_status = useSelector((state) => state.auth_status);
@@ -222,26 +223,28 @@ function Register() {
   };
 
   return (
-    <div className="registerFormContainer">
-      <form className="registerForm">
-        <h2 className="registerFormTitle" data-testid="register-title">
+    <div className={styles.registerFormContainer}>
+      <form className={styles.registerForm}>
+        <h2 className={styles.registerFormTitle} data-testid="register-title">
           Register
         </h2>
 
-        <div className="registerFormChooseRole">
-          <h5 className="registerFormTS">Are you a student or a tutor?</h5>
+        <div className={styles.registerFormChooseRole}>
+          <h5 className={styles.registerFormTS}>
+            Are you a student or a tutor?
+          </h5>
           <select
             name="type"
             onChange={handleTypeChange}
-            className="registerFormDropdown"
+            className={styles.registerFormDropdown}
           >
             <option>student</option>
             <option>tutor</option>
           </select>
         </div>
 
-        <div className="registerFormInputs">
-          <FaUserAlt className="registerFormIcon" />
+        <div className={styles.registerFormInputs}>
+          <FaUserAlt className={styles.registerFormIcon} />
           <input
             onBlur={validateInputs}
             onChange={handleChange}
@@ -251,10 +254,9 @@ function Register() {
             required
           />
         </div>
-        <span className="registerFormErrors">{state.errors.name}</span>
-
-        <div className="registerFormInputs">
-          <FaEnvelope className="registerFormIcon" />
+        <span className={styles.registerFormErrors}>{state.errors.name}</span>
+        <div className={styles.registerFormInputs}>
+          <FaEnvelope className={styles.registerFormIcon} />
           <input
             onBlur={validateInputs}
             type="email"
@@ -263,10 +265,9 @@ function Register() {
             onChange={handleChange}
           />
         </div>
-        <span className="registerFormErrors">{state.errors.email}</span>
-
-        <div className="registerFormInputs">
-          <FaKey className="registerFormIcon" />
+        <span className={styles.registerFormErrors}>{state.errors.email}</span>
+        <div className={styles.registerFormInputs}>
+          <FaKey className={styles.registerFormIcon} />
           <input
             onBlur={validateInputs}
             type="password"
@@ -275,12 +276,13 @@ function Register() {
             onChange={handleChange}
           />
         </div>
-        <span className="registerFormErrors">{state.errors.password}</span>
-
+        <span className={styles.registerFormErrors}>
+          {state.errors.password}
+        </span>
         {state.type === "tutor" && (
-          <div className="registerFormTutor">
-            <div className="registerFormInputs">
-              <FaUserAlt className="registerFormIcon" />
+          <div className={styles.registerFormTutor}>
+            <div className={styles.registerFormInputs}>
+              <FaUserAlt className={styles.registerFormIcon} />
               <input
                 onBlur={validateInputs}
                 onChange={handleChange}
@@ -290,12 +292,11 @@ function Register() {
                 required
               />
             </div>
-            <span className="registerFormErrors">
+            <span className={styles.registerFormErrors}>
               {state.errors.profession}
             </span>
-
-            <div className="registerFormInputs">
-              <FaUserAlt className="registerFormIcon" />
+            <div className={styles.registerFormInputs}>
+              <FaUserAlt className={styles.registerFormIcon} />
               <input
                 onBlur={validateInputs}
                 onChange={handleChange}
@@ -305,20 +306,22 @@ function Register() {
                 required
               />
             </div>
-            <span className="registerFormErrors">{state.errors.focus}</span>
+            <span className={styles.registerFormErrors}>
+              {state.errors.focus}
+            </span>
           </div>
         )}
-
         <button
           type="submit"
-          className={`registerFormButton ${!state.isValid && "disabled"}`}
+          className={`${styles.registerFormButton} ${
+            !state.isValid && styles.disabled
+          }`}
           disabled={!state.isValid}
           onClick={handleSubmit}
         >
           Register
         </button>
-
-        <p className="registerFormAccount">
+        <p className={styles.registerFormAccount}>
           Do you already have an account? <Link href="/login">Sign in</Link>
         </p>
       </form>

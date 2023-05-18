@@ -1,24 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap");
 
-$subtitle-color: #5b5b5b;
-$title-color: #3f3f3f;
-$color-a: #22b8d9;
-$color-b: rgb(41, 202, 103);
-$font-weight: 400;
-$font-selected-weight: 800;
-$border-width: 2px;
+$subtitleColor: #5b5b5b;
+$titleColor: #3f3f3f;
+$colorA: #22b8d9;
+$colorB: rgb(41, 202, 103);
+$fontWeight: 400;
+$fontSelectedWeight: 800;
+$borderWidth: 2px;
 $spacing: 30px;
-$input-height: 45px;
-$input-margin: 10px 0px;
-$warning-color: rgb(235, 99, 99);
+$inputHeight: 45px;
+$inputMargin: 10px 0px;
+$warningColor: rgb(235, 99, 99);
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
-.payment__body {
+.paymentBody {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,10 +21,10 @@ $warning-color: rgb(235, 99, 99);
   margin: 20px;
 }
 
-.payment__page-body {
+.paymentPageBody {
   display: flex;
   flex-direction: column;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   box-sizing: border-box;
   padding: 45px 30px 30px 30px;
   width: 100%;
@@ -37,13 +32,13 @@ $warning-color: rgb(235, 99, 99);
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
 }
 
-.payment__photo-container {
+.paymentPhotoContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.payment__photo {
+.paymentPhoto {
   width: 160px;
   height: 160px;
   object-fit: cover;
@@ -51,40 +46,40 @@ $warning-color: rgb(235, 99, 99);
   margin: 20px;
 }
 
-.payment__form {
+.paymentForm {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.payment__credit-card-title {
-  font-family: 'Open Sans';
+.paymentCreditCardTitle {
+  font-family: "Open Sans";
   margin-bottom: 40px;
 }
 
-.payment__loader-title {
+.paymentLoaderTitle {
   display: flex;
   justify-content: center;
   text-align: center;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-weight: 500;
   margin-bottom: 60px;
 }
 
-.payment__card-form {
+.paymentCardForm {
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 }
 
-.payment__errors {
-  color: $warning-color;
+.paymentErrors {
+  color: $warningColor;
   margin-bottom: 20px;
 }
 
-.payment__form-slot {
+.paymentFormSlot {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -94,27 +89,27 @@ $warning-color: rgb(235, 99, 99);
     padding: 0px 10px;
     padding-left: 10px;
     width: 100%;
-    height: $input-height;
-    border: 1px solid $subtitle-color;
+    height: $inputHeight;
+    border: 1px solid $subtitleColor;
     text-align: left;
-    margin: $input-margin;
-    color: $subtitle-color;
+    margin: $inputMargin;
+    color: $subtitleColor;
     font-family: 1rem;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-weight: 600;
   }
   label {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-weight: 700;
-    color: $subtitle-color;
+    color: $subtitleColor;
   }
-  .payment__errors {
-    color: $warning-color;
+  .paymentErrors {
+    color: $warningColor;
     margin-bottom: 20px;
   }
 }
 
-.payment__cvc-form-slot {
+.paymentCvcFormSlot {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -124,23 +119,23 @@ $warning-color: rgb(235, 99, 99);
     padding: 0px 10px;
     padding-left: 10px;
     width: 100%;
-    height: $input-height;
-    border: 1px solid $subtitle-color;
+    height: $inputHeight;
+    border: 1px solid $subtitleColor;
     text-align: left;
-    margin: $input-margin;
-    color: $subtitle-color;
+    margin: $inputMargin;
+    color: $subtitleColor;
     font-family: 1rem;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-weight: 600;
   }
   label {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-weight: 700;
-    color: $subtitle-color;
+    color: $subtitleColor;
   }
 }
 
-.payment__card-form-slot {
+.paymentCardFormSlot {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -151,27 +146,27 @@ $warning-color: rgb(235, 99, 99);
     padding: 0px 10px;
     padding-left: 10px;
     width: 90%;
-    height: $input-height;
-    border: 1px solid $subtitle-color;
+    height: $inputHeight;
+    border: 1px solid $subtitleColor;
     text-align: center;
-    margin: $input-margin;
+    margin: $inputMargin;
     margin-right: 8px;
-    color: $subtitle-color;
+    color: $subtitleColor;
     font-family: 1rem;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-weight: 600;
   }
   label {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-weight: 700;
-    color: $subtitle-color;
+    color: $subtitleColor;
   }
-  .payment__hidden {
+  .paymentHidden {
     visibility: hidden;
   }
 }
 
-.payment__id-num-form-slot {
+.paymentIdNumFormSlot {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -181,23 +176,23 @@ $warning-color: rgb(235, 99, 99);
     padding: 0px 10px;
     padding-left: 10px;
     width: 100%;
-    height: $input-height;
-    border: 1px solid $subtitle-color;
+    height: $inputHeight;
+    border: 1px solid $subtitleColor;
     text-align: left;
-    margin: $input-margin;
-    color: $subtitle-color;
+    margin: $inputMargin;
+    color: $subtitleColor;
     font-family: 1rem;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-weight: 600;
   }
   label {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-weight: 700;
-    color: $subtitle-color;
+    color: $subtitleColor;
   }
 }
 
-.payment__id-type-form-slot {
+.paymentIdTypeFormSlot {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -208,57 +203,57 @@ $warning-color: rgb(235, 99, 99);
     padding: 0px 10px;
     padding-left: 10px;
     width: 90%;
-    height: $input-height;
-    border: 1px solid $subtitle-color;
+    height: $inputHeight;
+    border: 1px solid $subtitleColor;
     text-align: left;
-    margin: $input-margin;
-    color: $subtitle-color;
+    margin: $inputMargin;
+    color: $subtitleColor;
     font-family: 1rem;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-weight: 600;
   }
   label {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-weight: 700;
-    color: $subtitle-color;
+    color: $subtitleColor;
   }
 }
 
-.payment__button-container {
+.paymentButtonContainer {
   display: flex;
   justify-content: space-between;
   width: 100%;
   height: 40%;
-  font-family: 'Source Code Pro', monospace;
+  font-family: "Source Code Pro", monospace;
   text-align: center;
 }
 
-.payment__pay-button {
+.paymentPayButton {
   background-color: white;
-  color: $color-b;
-  border: $border-width solid $color-b;
+  color: $colorB;
+  border: $borderWidth solid $colorB;
   height: 60px;
   margin: 10px 0px 15px 0px;
   width: 100%;
   font-size: 1.2rem;
-  font-weight: $font-selected-weight;
+  font-weight: $fontSelectedWeight;
   letter-spacing: 1px;
   &:hover:enabled {
-    background-color: $color-b;
+    background-color: $colorB;
     color: white;
-    border: $border-width solid $color-b;
+    border: $borderWidth solid $colorB;
     cursor: pointer;
   }
   &:disabled {
-    color: $subtitle-color;
-    border: $border-width solid $subtitle-color;
+    color: $subtitleColor;
+    border: $borderWidth solid $subtitleColor;
   }
 }
 
-.payment__page-button {
+.paymentPageButton {
   background-color: white;
-  color: $subtitle-color;
-  border: 1.5px solid $subtitle-color;
+  color: $subtitleColor;
+  border: 1.5px solid $subtitleColor;
   height: 40px;
   margin: 20px 0px 0px 0px;
   width: 100px;
@@ -266,29 +261,29 @@ $warning-color: rgb(235, 99, 99);
   font-weight: 600;
   letter-spacing: 1px;
   &:hover {
-    background-color: $color-b;
+    background-color: $colorB;
     color: white;
-    border: $border-width solid $color-b;
+    border: $borderWidth solid $colorB;
     cursor: pointer;
   }
 }
-
-.payment__previous-button-disabled {
+.paymentPreviousButtonDisabled {
   visibility: hidden;
 }
-.payment__next-button-disabled {
+
+.paymentNextButtonDisabled {
   visibility: hidden;
 }
 
 @media (min-width: 768px) {
-  .payment__body {
+  .paymentBody {
     width: 700px;
     margin: 20px auto;
   }
 }
 
 @media (min-width: 992px) {
-  .payment__body {
+  .paymentBody {
     width: 930px;
     flex-direction: column;
     align-items: flex-start;
@@ -296,8 +291,8 @@ $warning-color: rgb(235, 99, 99);
     margin: 50px auto 30px auto;
   }
 
-  .payment__page-body {
-    font-family: 'Open Sans';
+  .paymentPageBody {
+    font-family: "Open Sans";
     box-sizing: border-box;
     width: 100%;
     background-color: white;
@@ -305,24 +300,24 @@ $warning-color: rgb(235, 99, 99);
     margin-bottom: 50px;
   }
 
-  .payment__form {
+  .paymentForm {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .payment__photo-container {
+  .paymentPhotoContainer {
     width: 50%;
   }
 
-  .payment__photo {
+  .paymentPhoto {
     width: 200px;
     height: 200px;
     margin: 20px 0px 20px 30px;
   }
 
-  .payment__button-photo {
+  .paymentButtonPhoto {
     margin-left: 30px;
     font-weight: 700;
     height: 40px;
@@ -331,7 +326,7 @@ $warning-color: rgb(235, 99, 99);
     width: 180px;
   }
 
-  .payment__button-photo-disabled {
+  .paymentButtonPhotoDisabled {
     margin-left: 30px;
     font-weight: 700;
     height: 40px;
@@ -340,27 +335,27 @@ $warning-color: rgb(235, 99, 99);
     width: 180px;
   }
 
-  .payment__button-container {
+  .paymentButtonContainer {
     margin-bottom: 0px;
   }
 
-  .payment__button-submit {
+  .paymentButtonSubmit {
     margin: 35px 0px;
     width: 80%;
   }
 
-  .payment__button-cancel {
+  .paymentButtonCancel {
     margin: 35px 0px 10px 10px;
     width: 20%;
   }
 }
 
 @media (min-width: 1200px) {
-  .payment__body {
+  .paymentBody {
     width: 1130px;
   }
 
-  .payment-dashboard__body {
+  .paymentDashboardBody {
     width: 27%;
     position: sticky;
     top: 191px;

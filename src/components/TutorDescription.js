@@ -1,10 +1,11 @@
 import React from 'react';
+import styles from '../assets/styles/pages/TutorViewProfile.module.scss';
 
 function TutorDescription({ tutor }) {
   return (
-    <div className="tutor-profile__description-container">
-      <h1 className="tutor-profile__title">About me</h1>
-      <p className="tutor-profile__text">{tutor.description}</p>
+    <div className={styles.tutorProfileDescriptionContainer}>
+      <h1 className={styles.tutorProfileTitle}>About me</h1>
+      <p className={styles.tutorProfileText}>{tutor.description}</p>
     </div>
   );
 }
