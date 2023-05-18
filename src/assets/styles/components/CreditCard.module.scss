@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
+
+$subtitleColor: #5b5b5b;
+$titleColor: #3f3f3f;
+$colorA: #22b8d9;
+$colorB: rgb(41, 202, 103);
+$fontWeight: 400;
+$fontSelectedWeight: 800;
+$borderWidth: 2px;
+$spacing: 30px;
+$inputHeight: 45px;
+$inputMargin: 10px 0px;
+$warningColor: rgb(235, 99, 99);
+
+.creditCardBody {
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.creditCardText {
+  font-family: 'Open Sans';
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.creditCardButton {
+  background-color: white;
+  border: $borderWidth solid rgb(197, 197, 197);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  font-size: 1rem;
+  font-weight: $fontSelectedWeight;
+  letter-spacing: 1px;
+  &:hover {
+    background-color: $colorB;
+    color: white;
+    border: $borderWidth solid $colorB;
+    cursor: pointer;
+  }
+  &-selected {
+    background-color: $colorB;
+    border: $borderWidth solid $colorB;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    font-size: 1rem;
+    font-weight: $fontSelectedWeight;
+    letter-spacing: 1px;
+  }
+}
+
+.creditCardButtonDelete {
+  background-color: white;
+  color: $warningColor;
+  border: $borderWidth solid $warningColor;
+  border-radius: 6px;
+  height: 30px;
+  width: 100px;
+  font-size: 0.8rem;
+  font-weight: $fontSelectedWeight;
+  &:hover:enabled {
+    background-color: $warningColor;
+    color: white;
+    border: $borderWidth solid $warningColor;
+    cursor: pointer;
+  }
+}

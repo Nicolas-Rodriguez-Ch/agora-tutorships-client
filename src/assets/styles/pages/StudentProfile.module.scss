@@ -1,0 +1,333 @@
+$primaryColorDark: #1a90aa;
+$primaryColor: #22b8d9;
+$secondaryColor: #ffffff;
+$secondaryColorDark: #d3d3d3;
+$alphaBackground: #55555555;
+$colorB: rgb(41, 202, 103);
+$colorBDark: #0b753d;
+
+.studentProfileMain {
+  margin: 10px 10px 40px 10px;
+  box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 15%);
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.studentProfilePhotoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.studentProfilePhoto {
+  border-radius: 100%;
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.studentProfilePhotoInput {
+  display: none;
+}
+
+.studentProfilePhotoButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Open Sans';
+  background-color: white;
+  color: $primaryColor;
+  border: 2px solid $primaryColor;
+  height: 40px;
+  margin-bottom: 55px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  width: 130px;
+  &:hover {
+    background-color: $primaryColor;
+    color: white;
+    border: 2px solid $primaryColor;
+    cursor: pointer;
+  }
+}
+
+.studentProfileMenuContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.studentProfileMenuSelect {
+  border: 1px solid $colorB;
+  color: $colorB;
+  font-size: 2rem;
+  width: 100%;
+  margin: 10px;
+  padding: 15px 0;
+}
+
+.studentProfileMenuOption {
+  height: 40px;
+}
+
+.studentProfileMenuSelect:focus {
+  outline: none;
+}
+
+.studentProfileCredentials {
+  display: flex;
+  flex-direction: column;
+}
+
+.studentProfileCredentialsNameContainer,
+.studentProfileCredentialsEmailContainer,
+.studentProfileCredentialsPasswordContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.studentProfileCredentialsNameLabel,
+.studentProfileCredentialsEmailLabel,
+.studentProfileCredentialsPasswordLabel {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  font-family: open sans;
+
+  font-family: 'Open Sans';
+  font-weight: 700;
+  color: #5b5b5b;
+}
+
+.studentProfileCredentialsNameInputContainer,
+.studentProfileCredentialsEmailInputContainer,
+.studentProfileCredentialsPasswordInputContainer {
+  display: flex;
+}
+
+.studentProfileCredentialsNameInput,
+.studentProfileCredentialsEmailInput,
+.studentProfileCredentialsPasswordInput {
+  height: 40px;
+  padding: 0 2px;
+  flex: 1;
+  width: 90%;
+  box-sizing: border-box;
+  padding: 0px 10px;
+  padding-left: 10px;
+  width: 100%;
+  height: 54px;
+  border: 1px solid #5b5b5b;
+  text-align: left;
+  margin: 20px 0;
+  color: #5b5b5b;
+  font-size: 1rem;
+  font-family: 'Open Sans';
+  font-weight: 600;
+}
+
+.studentProfileCredentialsNameInputButton,
+.studentProfileCredentialsEmailInputButton,
+.studentProfileCredentialsPasswordInputButton {
+  width: 10%;
+  background: none;
+  border: none;
+}
+
+.studentProfileCredentialsNameInputButton:hover,
+.studentProfileCredentialsEmailInputButton:hover,
+.studentProfileCredentialsPasswordInputButton:hover {
+  cursor: pointer;
+}
+
+.studentProfileCredentialsNameInputButton:focus,
+.studentProfileCredentialsEmailInputButton:focus,
+.studentProfileCredentialsPasswordInputButton:focus {
+  outline: none;
+}
+
+.studentProfileCredentialsNameInputButton > svg,
+.studentProfileCredentialsEmailInputButton > svg,
+.studentProfileCredentialsPasswordInputButton > svg {
+  font-size: 1.5rem;
+  margin-left: 5px;
+}
+
+.studentProfileCredentialsSubmitButtonContainer {
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.studentProfileSubmitButton {
+  background-color: white;
+  color: $colorB;
+  border: 2px solid $colorB;
+  height: 40px;
+  width: 90.5%;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  &:hover:enabled {
+    background-color: $colorB;
+    color: white;
+    border: 2px solid $colorB;
+    cursor: pointer;
+  }
+  &:disabled {
+    color: #5b5b5b;
+    border: 2px solid #5b5b5b;
+  }
+}
+
+.studentProfileErrorMessage {
+  color: red;
+  margin-top: 5px;
+}
+
+.studentProfileMenuList {
+  list-style: none;
+}
+
+.studentProfileMenuList > a {
+  text-decoration: none;
+}
+
+.studentProfileMenuItem {
+  display: flex;
+  align-items: center;
+  font-family: 'Source Code Pro', monospace;
+  background-color: white;
+  color: #5b5b5b;
+  border: 1px solid #5b5b5b;
+  text-align: left;
+  padding-left: 20px;
+  height: 54px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 100%;
+  cursor: pointer;
+}
+
+.studentProfileMenuItem:hover {
+  color: $colorB;
+  font-weight: 600;
+  border-width: 2px;
+  border-color: $colorB;
+}
+
+.studentProfileMenuItemSelected {
+  font-family: 'Source Code Pro', monospace;
+  text-align: left;
+  padding-left: 20px;
+  height: 54px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 100%;
+  transform: translateY(-3px);
+  box-shadow: -5px 5px rgb(0 0 0 / 20%);
+  border: 1px solid $colorB;
+  background-color: $colorB;
+  color: white;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.studentProfileMenuMd {
+  display: none;
+}
+
+.studentProfileMenuSelect {
+  font-family: 'Source Code Pro', monospace;
+  letter-spacing: 1px;
+  background-color: white;
+  color: $colorB;
+  border: 2px solid $colorB;
+  text-align: left;
+  padding-left: 10px;
+  height: 54px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: 800;
+  width: 100%;
+  box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 15%);
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .studentProfileContainer {
+    width: 930px;
+    min-width: 930px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 50px auto 30px auto;
+  }
+
+  .studentProfileMenuContainer {
+    top: 160px;
+    margin-top: 10px;
+    margin-right: 30px;
+    margin-bottom: 50px;
+    width: 25%;
+  }
+
+  .studentProfileMain {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 30px;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 15%);
+    margin-bottom: 50px;
+  }
+
+  .studentProfileCredentials {
+    width: 100%;
+  }
+
+  .studentProfileMenuSelectSm {
+    display: none;
+  }
+  .studentProfileMenuMd {
+    width: 100%;
+    display: block;
+  }
+}
+
+@media (min-width: 1200px) {
+  .studentProfileContainer {
+    width: 1130px;
+  }
+
+  .studentProfileMenuContainer {
+    width: 23%;
+    position: sticky;
+    top: 201px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .studentProfileContainer {
+    width: 1330px;
+    max-width: 1330px;
+  }
+
+  .studentProfileMenuContainer {
+    width: 25%;
+    top: 201px;
+  }
+}

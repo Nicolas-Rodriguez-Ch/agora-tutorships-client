@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap");
+
+$subtitleColor: #5b5b5b;
+$titleColor: #3f3f3f;
+$colorA: #22b8d9;
+$colorB: rgb(41, 202, 103);
+
+.tutorProfileBody {
+  font-family: "Open Sans";
+  margin: 30px;
+  padding: 40px;
+  background-color: white;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
+}
+
+.tutorProfileProfileContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tutorProfileScheduleContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.tutorProfileDescriptionContainer {
+  width: 100%;
+  padding: 50px 0px;
+  border-top: 2px solid $colorB;
+}
+
+.tutorProfileReviewsContainer {
+  width: 100%;
+  border-top: 2px solid $colorB;
+  padding: 50px 0px;
+}
+
+.tutorProfileProfileContainerText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tutorProfileReviewContainer {
+  padding: 40px 0px;
+  border-bottom: 1px solid rgb(168, 168, 168);
+}
+
+.tutorProfileTitle {
+  font-size: 2rem;
+  color: $titleColor;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.tutorProfileAvailability,
+.tutorProfileSubtitle {
+  font-size: 1.3rem;
+  color: $titleColor;
+  font-weight: 400;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.tutorProfileText {
+  font-size: 1rem;
+  color: $subtitleColor;
+  text-align: justify;
+  text-justify: inter-words;
+}
+
+.tutorProfileReviewName {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.tutorProfileStars {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffb319;
+  margin: 20px 0px;
+}
+
+.tutorProfileReviewStars {
+  font-size: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #ffb319;
+  margin: 15px 0px;
+}
+
+.tutorProfilePhoto {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 30px;
+}
+
+.tutorProfileScheduleButton {
+  border: none;
+  text-align: center;
+  height: 70px;
+  padding: 0px 20px;
+  margin-top: 30px;
+  font-family: "Source Code Pro", monospace;
+  line-height: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  cursor: pointer;
+  background-color: white;
+  color: $colorB;
+  border: 2px solid $colorB;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.tutorProfileScheduleButton:hover {
+  background-color: $colorB;
+  color: white;
+}
+
+.tutorProfileScheduleButton:focus {
+  background-color: $colorB;
+  color: white;
+}
+
+@media (min-width: 992px) {
+  .tutorProfileBody {
+    width: 822px;
+    margin: 30px auto;
+    padding: 60px;
+  }
+
+  .tutorProfileProfileContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 50px;
+
+    .tutorProfileTitle {
+      margin-bottom: 5px;
+      text-align: center;
+    }
+  }
+
+  .tutorProfileScheduleContainer {
+    width: 225px;
+    flex-direction: column;
+  }
+
+  .tutorProfileProfileContainerText {
+    width: auto;
+  }
+
+  .tutorProfilePhoto {
+    width: 200px;
+    height: 200px;
+    margin: 0px;
+  }
+
+  .tutorProfileScheduleButton {
+    padding: 0px 0px;
+    width: 100%;
+  }
+
+  .tutorProfileAvailability {
+    font-size: 1.2rem;
+    color: $titleColor;
+    font-weight: 400;
+    margin-top: 10px;
+    text-align: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tutorProfileBody {
+    width: 1040px;
+    margin: 30px auto;
+    padding: 60px;
+  }
+
+  .tutorProfileScheduleContainer {
+    width: 230px;
+    flex-direction: column;
+  }
+
+  .tutorProfileProfileContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 50px;
+  }
+}

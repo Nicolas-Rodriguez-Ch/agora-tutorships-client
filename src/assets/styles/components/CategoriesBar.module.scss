@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
+
+$subtitleColor: #5b5b5b;
+$titleColor: #3f3f3f;
+$colorA: #22b8d9;
+$colorB: rgb(41, 202, 103);
+$colorButtonBackground: #f7f7f7;
+
+.html {
+  font-size: 16px;
+}
+
+.categoriesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.categoriesSelectFocus,
+.categoryButton {
+  width: 100%;
+  border: none;
+  text-align: center;
+  height: 45px;
+  background-color: $colorButtonBackground;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $subtitleColor;
+  letter-spacing: 3px;
+}
+
+.categoryButtonSelected {
+  width: 100%;
+  border: none;
+  text-align: center;
+  height: 45px;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 1rem;
+  letter-spacing: 3px;
+  transform: translateY(-3px);
+  box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
+  background-color: $colorB;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.categoriesSelectFocus {
+  margin-bottom: 30px;
+}
+
+.categoryButtonSelected,
+.categoryButton {
+  display: none;
+}
+
+.categoryButton:hover {
+  transform: translateY(-3px);
+  /* box-shadow: -5px 5px rgba(0, 0, 0, 0.2); */
+  background-color: $colorB;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.categoriesSelectFocus {
+  background-color: white;
+  color: $colorB;
+  font-weight: 800;
+  border: 2px solid $colorB;
+}
+
+@media (min-width: 768px) {
+  .categoriesSelectFocus {
+    width: 480px;
+    margin: 0 auto 30px auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .categoriesSelectFocus {
+    display: none;
+  }
+
+  .categoryButton {
+    display: initial;
+    text-align: left;
+    font-size: 0.9rem;
+    padding-left: 25px;
+    font-weight: 400;
+  }
+
+  .categoryButtonSelected {
+    display: initial;
+  }
+}
+
+@media (min-width: 1200px) {
+  .categoryButton {
+    font-size: 1rem;
+    padding-left: 30px;
+  }
+}

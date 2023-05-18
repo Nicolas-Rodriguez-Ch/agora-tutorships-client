@@ -1,19 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import axios from '../utils/axios';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-import history from '../utils/history';
-import StudentCancelTutorship from './StudentCancelTutorship';
-import StudentRateTutorship from './StudentRateTutorship';
-import Loader from './Loader';
-import { format } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
-
-import '../assets/styles/components/StudentProfileTutorships.scss';
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "../utils/axios";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import StudentCancelTutorship from "./StudentCancelTutorship";
+import StudentRateTutorship from "./StudentRateTutorship";
+import Loader from "./Loader";
+import { format } from "date-fns";
+import { utcToZonedTime } from "date-fns-tz";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import styles from "../assets/styles/components/StudentProfileTutorships.module.scss";
 
 function StudentProfileTutorships() {
-  const id = useSelector((state) => state.currentUser._id);
+  const router = useRouter();
+  const id = useSelector((state) => state.user.currentUser._id);
   const [state, setState] = useState({
     tutorships: [],
     loading: true,
@@ -37,9 +38,15 @@ function StudentProfileTutorships() {
     const mySwal = withReactContent(Swal);
     const buttons = {
       Cancel: {
-        component: <StudentCancelTutorship swal={mySwal} tutorshipId={data.tutorshipId} setState={setState} />,
-        confirm: 'Yes, cancel',
-        cancel: 'No, return',
+        component: (
+          <StudentCancelTutorship
+            swal={mySwal}
+            tutorshipId={data.tutorshipId}
+            setState={setState}
+          />
+        ),
+        confirm: "Yes, cancel",
+        cancel: "No, return",
       },
       Rate: {
         component: (
@@ -66,71 +73,103 @@ function StudentProfileTutorships() {
 
   function handlePayment(data, e) {
     e.preventDefault();
-    history.push(`/checkout/${data.tutorshipId}`, {
-      state: { tutorship_id: data.tutorshipId, tutorship_price: data.tutorshipPrice },
-    });
+    router.push(`/checkout/${data.tutorshipId}?tutorship_price=${data.tutorshipPrice}`);
   }
-
+  
   return (
-    <div className="student__tutorships-container">
+    <div className={styles.studentTutorshipsContainer}>
       {state.loading ? (
         <Loader />
       ) : state.tutorships.length === 0 ? (
-        <p className="student__tutorships__title">You don't have any pending tutorships</p>
+        <p className={styles.studentTutorshipsTitle}>
+          You don't have any pending tutorships
+        </p>
       ) : (
         state.tutorships.map((tutorship) => {
           const { name, focus, profile_photo, email } = tutorship.tutor_id;
           const { status, _id: id, isRated } = tutorship;
           const dateObject = new Date(tutorship.date);
           const zonedDate = utcToZonedTime(dateObject);
-          const date = zonedDate ? format(zonedDate, 'dd/MM/yyyy') : 'Invalid date';
-          const time = zonedDate ? format(zonedDate, 'K:mm a') : 'Invalid time';
-          
+          const date = zonedDate
+            ? format(zonedDate, "dd/MM/yyyy")
+            : "Invalid date";
+          const time = zonedDate ? format(zonedDate, "K:mm a") : "Invalid time";
+
           return (
-            <div key={id} className="student__tutorship-container">
-              <div className="student__tutorship__image-container">
-                <img src={profile_photo} alt={name} className="student__tutorship__image" />
+            <div key={id} className={styles.studentTutorshipContainer}>
+              <div className={styles.studentTutorshipImageContainer}>
+                <Image
+                  src={profile_photo}
+                  alt={name}
+                  className={styles.studentTutorshipImage}
+                  width={100}
+                  height={75}
+                />
               </div>
-              <div className="student__tutorship__description-container">
-                <h2 className="student__tutorship__description-title">
+              <div className={styles.studentTutorshipDescriptionContainer}>
+                <h2 className={styles.studentTutorshipDescriptionTitle}>
                   {focus} tutorship with {name}
                 </h2>
-                <p className="student__tutorship__date">
-                  Tutorship scheduled for <strong>{date}</strong> at{' '}
+                <p className={styles.studentTutorshipDate}>
+                  Tutorship scheduled for <strong>{date}</strong> at{" "}
                   <strong>{time}</strong>
                 </p>
-                <div className="student__tutorship__status-and-buttons-container">
-                  <div className="student__tutorship__status-container">
+                <div
+                  className={styles.studentTutorshipStatusAndButtonsContainer}
+                >
+                  <div className={styles.studentTutorshipStatusContainer}>
                     <span>STATUS: {status}</span>
                   </div>
-                  <div className="student__tutorship__buttons-container">
-                    {status === 'pending' && (
+                  <div className={styles.studentTutorshipButtonsContainer}>
+                    {status === "pending" && (
                       <>
                         <button
                           onClick={(e) =>
-                            handlePayment({ tutorshipPrice: tutorship.tutor_id.price, tutorshipId: id }, e)
+                            handlePayment(
+                              {
+                                tutorshipPrice: tutorship.tutor_id.price,
+                                tutorshipId: id,
+                              },
+                              e
+                            )
                           }
-                          className="student__tutorship__buttons__pay-button"
+                          className={styles.studentTutorshipButtonsPayButton}
                         >
                           Pay
                         </button>
                         <button
-                          onClick={(e) => handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)}
-                          className="student__tutorship__buttons__cancel-button"
+                          onClick={(e) =>
+                            handleClick(
+                              {
+                                tutor: tutorship.tutor_id._id,
+                                tutorshipId: id,
+                              },
+                              e
+                            )
+                          }
+                          className={styles.studentTutorshipButtonsCancelButton}
                         >
                           Cancel
                         </button>
                       </>
                     )}
-                    {status === 'accepted' && (
-                      <a href={`mailto:${email}`} className="student__tutorship__buttons__contact-button">
+                    {status === "accepted" && (
+                      <a
+                        href={`mailto:${email}`}
+                        className={styles.studentTutorshipButtonsContactButton}
+                      >
                         Contact
                       </a>
                     )}
-                    {status === 'completed' && !isRated && (
+                    {status === "completed" && !isRated && (
                       <button
-                        onClick={(e) => handleClick({ tutor: tutorship.tutor_id._id, tutorshipId: id }, e)}
-                        className="student__tutorship__buttons__rate-button"
+                        onClick={(e) =>
+                          handleClick(
+                            { tutor: tutorship.tutor_id._id, tutorshipId: id },
+                            e
+                          )
+                        }
+                        className={styles.studentTutorshipButtonsRateButton}
                       >
                         Rate
                       </button>

@@ -1,10 +1,10 @@
-import { React } from 'react';
-import '../assets/styles/components/CardCointainer.scss';
-import TutorsCard from './tutorsCard';
+import { React } from "react";
+import styles from "../assets/styles/components/CardCointainer.module.scss";
+import TutorsCard from "./tutorsCard";
 
 function CardContainer({ Tutors }) {
   return (
-    <main className="cards__container">
+    <main className={styles.cardContainer}>
       {Tutors.map((tutor, i) => {
         return <TutorsCard props={tutor} key={i} />;
       })}

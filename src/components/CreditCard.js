@@ -1,19 +1,19 @@
 import React from 'react';
-import '../assets/styles/components/CreditCard.scss';
+import styles from '../assets/styles/components/CreditCard.module.scss';
 
 function CreditCard({ card, selectCard, deleteCard, token_card }) {
   return (
-    <div className="credit-card__body">
-      <div className="credit-card__text">
+    <div className={styles.creditCardBody}>
+      <div className={styles.creditCardText}>
         <div>{card.mask}</div>
       </div>
       {deleteCard ? (
-        <button className="credit-card__button-delete" onClick={() => deleteCard(card)}>
+        <button className={styles.creditCardButtonDelete} onClick={() => deleteCard(card)}>
           delete card
         </button>
       ) : (
         <button
-          className={`credit-card__button${card.token === token_card ? '-selected' : ''}`}
+          className={`${styles.creditCardButton}${card.token === token_card ? '-selected' : ''}`}
           onClick={(e) => {
             e.preventDefault();
             selectCard(card);

@@ -1,0 +1,158 @@
+$colorPrimary: #22b8d9;
+$primaryColorDark: #1a90aa;
+$colorGray: #aaa;
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
+
+.registerFormContainer {
+  font-family: 'Open Sans';
+  min-height: 700px;
+  height: 90vh;
+  margin: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registerForm {
+  font-family: 'Open Sans';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1px;
+  width: 90%;
+  text-align: center;
+  padding: 15px;
+  padding-top: 0;
+  border: 1px solid $colorPrimary;
+}
+
+.registerFormTitle {
+  font-size: 2rem;
+  margin: 30px 0;
+}
+
+.registerFormDropdown {
+  margin-top: 10px;
+  background-color: $colorPrimary;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  height: 30px;
+  width: 100px;
+}
+
+.registerFormSelectFocus {
+  text-align: center;
+  color: gray;
+  border: 0;
+  cursor: pointer;
+  height: 38px;
+  width: 100%;
+}
+
+.registerFormInputs input {
+  width: 80%;
+  transition: 0.3s ease all;
+  border: transparent;
+  // margin-left: 8px;
+  padding: 10px;
+  &:focus {
+    outline: none;
+  }
+}
+
+.registerFormInputs {
+  border: 1px solid $colorGray;
+  text-align: left;
+  margin: 20px 0;
+  width: 90%;
+}
+
+.registerFormIcon {
+  font-size: 15px;
+  color: #aaa;
+  margin-left: 8px;
+}
+
+.registerFormButton {
+  border-radius: 5px;
+  margin: 20px 0;
+  width: 90%;
+  background-color: $colorPrimary;
+  border: none;
+  padding: 15px;
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.registerFormButton.disabled {
+  background-color: $primaryColorDark;
+  cursor: default;
+}
+
+.registerFormChooseRole {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  text-align: left;
+  padding-left: 8px;
+}
+
+.registerFormTS {
+  font-size: 1rem;
+  display: inline-block;
+  margin: 0;
+  padding-right: 7px;
+}
+
+.registerIcon {
+  font-size: 12px;
+  color: $colorGray;
+}
+
+.registerFormTutor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: 8px;
+  text-align: left;
+  width: 100%;
+}
+
+.registerFormError {
+  font-size: 0.6rem;
+}
+
+.registerFormAccount {
+  font-size: 1rem;
+  margin: 30px 0;
+}
+
+.registerFormErrors {
+  font-size: 12px;
+  text-align: left;
+  color: rgb(211, 66, 66);
+}
+@media (min-width: 768px) {
+  .registerFormContainer {
+    height: 80vh;
+  }
+  .registerForm {
+    width: 50%;
+  }
+}
+
+@media (min-width: 992px) {
+  .registerForm {
+    width: 35vw;
+  }
+  .registerFormContainer {
+    height: 80vh;
+  }
+}

@@ -2,10 +2,14 @@ import StudentProfileMenu from '../components/StudentProfileMenu';
 import StudentProfileEdit from '../components/StudentProfileEdit';
 import PaymentMethods from '../components/PaymentMethods';
 import StudentProfileTutorships from '../components/StudentProfileTutorships';
-import '../assets/styles/pages/StudentProfile.scss';
+import styles from '../assets/styles/pages/StudentProfile.module.scss';
+import { useRouter } from 'next/router';
+
 
 function StudentProfile({ props }) {
-  const currentPage = props.match.params.section;
+  const router = useRouter();
+  const { section } = router.query;
+
   const pages = {
     edit: <StudentProfileEdit />,
     'payment-methods': <PaymentMethods />,
@@ -13,11 +17,11 @@ function StudentProfile({ props }) {
   };
 
   return (
-    <div className="student-profile-container">
-      <section className="student-profile__menu-container">
-        <StudentProfileMenu page={currentPage} />
+    <div className={styles.studentProfileContainer}>
+      <section className={styles.studentProfileMenuContainer}>
+        <StudentProfileMenu page={section} />
       </section>
-      <main className="student-profile-main">{pages[currentPage]}</main>
+      <main className={styles.studentProfileMain}>{pages[section]}</main>
     </div>
   );
 }

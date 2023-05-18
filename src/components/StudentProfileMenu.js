@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
-import history from '../utils/history';
+import { useEffect, useState } from "react";
+import styles from "../assets/styles/pages/StudentProfile.module.scss";
+import { useRouter } from 'next/router';
 
 function StudentProfileMenu({ page }) {
-  const [selected, setSelected] = useState('Edit Profile');
+  const [selected, setSelected] = useState("Edit Profile");
+  const router = useRouter();
 
   const handleSelect = (e) => {
     const value = e.target.id || e.target.value;
     setSelected(value);
-    history.push(`/profile/${value}`);
+    router.push(`/profile/${value}`);
   };
 
   useEffect(() => {
@@ -16,24 +18,33 @@ function StudentProfileMenu({ page }) {
 
   return (
     <>
-      <select onChange={handleSelect} className="student-profile-menu-select sm" value={selected}>
-        <option className="student-profile-menu-option" value="edit">
+      <select
+        onChange={handleSelect}
+        className={styles.studentProfileMenuSelect + " " + styles.sm}
+        value={selected}
+      >
+        <option className={styles.studentProfileMenuOption} value="edit">
           Edit Profile
         </option>
-        <option className="student-profile-menu-option" value="payment-methods">
+        <option
+          className={styles.studentProfileMenuOption}
+          value="payment-methods"
+        >
           Payment methods
         </option>
-        <option className="student-profile-menu-option" value="tutorships">
+        <option className={styles.studentProfileMenuOption} value="tutorships">
           My tutorships
         </option>
       </select>
-      <section className="student-profile-menu md">
-        <ul className="student-profile-menu-list">
+      <section className={styles.studentProfileMenu + " " + styles.md}>
+        <ul className={styles.studentProfileMenuList}>
           <div to="edit">
             <li
               onClick={handleSelect}
               id="edit"
-              className={`student-profile-menu-item ${selected === 'edit' && 'selected'}`}
+              className={`${styles.studentProfileMenuItem} ${
+                selected === "edit" ? styles.selected : ""
+              }`}
             >
               Profile
             </li>
@@ -42,7 +53,9 @@ function StudentProfileMenu({ page }) {
             <li
               onClick={handleSelect}
               id="payment-methods"
-              className={`student-profile-menu-item ${selected === 'payment-methods' && 'selected'}`}
+              className={`${styles.studentProfileMenuItem} ${
+                selected === "payment-methods" ? styles.selected : ""
+              }`}
             >
               Payment Methods
             </li>
@@ -51,7 +64,9 @@ function StudentProfileMenu({ page }) {
             <li
               onClick={handleSelect}
               id="tutorships"
-              className={`student-profile-menu-item ${selected === 'tutorships' && 'selected'}`}
+              className={`${styles.studentProfileMenuItem} ${
+                selected === "tutorships" ? styles.selected : ""
+              }`}
             >
               My Tutorships
             </li>

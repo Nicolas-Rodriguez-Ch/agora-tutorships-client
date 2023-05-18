@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
+
+$subtitleColor: #5b5b5b;
+$titleColor: #3f3f3f;
+$colorA: #22b8d9;
+$colorB: rgb(41, 202, 103);
+
+.descriptionTextHighlight {
+  color: $colorB;
+}
+
+.descriptionTextBreack::before {
+  content: '\a';
+  white-space: pre;
+}
+
+.descriptionMainContainer {
+  margin: 20px 10vw 120px 10vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.descriptionMainTextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.descriptionSecondaryContainer {
+  margin: 0px 10vw 120px 10vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.descriptionSecondaryTextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.descriptionIllustration {
+  width: 100%;
+}
+
+.descriptionLine {
+  height: 5px;
+  width: 85%;
+  background-color: $colorB;
+  margin-bottom: 40px;
+}
+
+.descriptionTitle {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 3rem;
+  text-align: center;
+  color: $titleColor;
+  letter-spacing: 4px;
+  margin: 15px 2vw;
+}
+
+.descriptionSubtitle {
+  margin: 20px 5vw;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 2rem;
+  color: $subtitleColor;
+  letter-spacing: 4px;
+}
+
+@media (min-width: 768px) {
+  .descriptionIllustration {
+    width: 80%;
+    margin: 80px 0px;
+  }
+}
+
+@media (min-width: 992px) {
+  .descriptionMainContainer {
+    margin: 20px 20px 90px 20px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .descriptionMainTextContainer {
+    align-items: flex-start;
+  }
+
+  .descriptionIllustration {
+    width: 550px;
+  }
+
+  .descriptionTitle {
+    font-size: 2rem;
+    line-height: 4rem;
+    text-align: left;
+    margin: 15px 0px;
+  }
+
+  .descriptionSubtitle {
+    margin: 20px 0px;
+    text-align: left;
+    font-size: 1.5rem;
+    line-height: 3rem;
+    padding-right: 20%;
+  }
+
+  .descriptionSecondaryContainer {
+    margin: 0px 25px 170px 25px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1200px) {
+  .descriptionMainContainer {
+    margin: 20px 20px 90px 20px;
+  }
+
+  .descriptionMainTextContainer {
+    width: 400px;
+  }
+
+  .descriptionIllustration {
+    width: 700px;
+  }
+
+  .descriptionTitle {
+    padding-right: 10%;
+  }
+
+  .descriptionSecondaryContainer {
+    margin: 0px 0px 180px 0px;
+  }
+}

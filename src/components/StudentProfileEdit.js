@@ -1,14 +1,17 @@
-import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import history from '../utils/history';
-import axios from '../utils/axios';
-import Swal from 'sweetalert2';
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import axios from "../utils/axios";
+import Swal from "sweetalert2";
+import Image from "next/image";
+import style from "../assets/styles/pages/StudentProfile.module.scss";
 
 const StudentProfileEdit = () => {
-  const state = useSelector((state) => state.currentUser);
-  const token = useSelector((state) => state.token);
+  const state = useSelector((state) => state.user.currentUser);
+
+  const token = useSelector((state) => state.user.token);
+  
   const [isDisabled, setIsDisabled] = useState({
     name: true,
     email: true,
@@ -16,9 +19,9 @@ const StudentProfileEdit = () => {
     submit: true,
   });
   const [inputs, setInputs] = useState({
-    name: '',
-    email: '',
-    password: '',
+    name: "",
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState({
     name: null,
@@ -29,7 +32,7 @@ const StudentProfileEdit = () => {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
-    if (inputs.name !== '' || inputs.email !== '' || inputs.password !== '') {
+    if (inputs.name !== "" || inputs.email !== "" || inputs.password !== "") {
       setIsDisabled((prevState) => ({ ...prevState, submit: false }));
     } else {
       setIsDisabled((prevState) => ({ ...prevState, submit: true }));
@@ -37,34 +40,27 @@ const StudentProfileEdit = () => {
   }, [inputs, state]);
   const swalStyled = Swal.mixin({
     customClass: {
-      confirmButton: 'swal__confirm',
-      cancelButton: 'swal__cancel',
-      title: 'swal__title',
-      container: 'swal__text',
-      actions: 'swal__actions',
+      confirmButton: "swal__confirm",
+      cancelButton: "swal__cancel",
+      title: "swal__title",
+      container: "swal__text",
+      actions: "swal__actions",
     },
     buttonsStyling: false,
   });
 
-  const handleClick = (e) => {
-    const buttonClass = e.currentTarget.className;
-    if (buttonClass.match(/email/)) {
-      setIsDisabled((prevState) => ({ ...prevState, email: !prevState.email }));
-    } else if (buttonClass.match(/password/)) {
-      setIsDisabled((prevState) => ({
-        ...prevState,
-        password: !prevState.password,
-      }));
-    } else if (buttonClass.match(/name/)) {
-      setIsDisabled((prevState) => ({ ...prevState, name: !prevState.name }));
-    }
+  const handleClick = (inputName) => {
+    setIsDisabled((prevState) => ({
+      ...prevState,
+      [inputName]: !prevState[inputName],
+    }));
   };
 
   const validateInputs = (name, email, password) => {
     if (name && (name.length < 4 || name.match(/[0-9]/))) {
       setErrors((prevState) => ({
         ...prevState,
-        name: 'Invalid name, the name must be at least 4 characters in length and contain only letters',
+        name: "Invalid name, the name must be at least 4 characters in length and contain only letters",
       }));
       return false;
     } else {
@@ -83,7 +79,7 @@ const StudentProfileEdit = () => {
     } else {
       setErrors((prevState) => ({
         ...prevState,
-        email: 'Invalid email, please enter a valid email and try again.',
+        email: "Invalid email, please enter a valid email and try again.",
       }));
       return false;
     }
@@ -91,7 +87,7 @@ const StudentProfileEdit = () => {
     if (password && password.length < 4) {
       setErrors((prevState) => ({
         ...prevState,
-        password: 'Invalid password, the password is too short',
+        password: "Invalid password, the password is too short",
       }));
       return false;
     } else {
@@ -107,7 +103,7 @@ const StudentProfileEdit = () => {
     e.preventDefault();
     const formData = new FormData();
     if (image) {
-      formData.append('image', image);
+      formData.append("image", image);
     }
     if (validateInputs(inputs.name, inputs.email, inputs.password)) {
       updateStudentProfile(inputs, formData, token);
@@ -128,19 +124,25 @@ const StudentProfileEdit = () => {
 
   const updateStudentProfile = async (inputs, formData, token) => {
     try {
-      const { data: url } = await axios.patch('/uploadProfileImage', formData);
-      const response = await axios.patch('/update', {
+      const { data: url } = await axios.patch("/uploadProfileImage", formData);
+  
+      const updatedInputs = Object.fromEntries(
+        Object.entries(inputs).filter(([key, value]) => value)
+      );
+  
+      const response = await axios.patch("/update", {
         formData,
-        inputs,
+        inputs: updatedInputs,
         url,
         token,
-        type: 'student',
+        type: "student",
       });
-      localStorage.setItem('token', response.data);
+  
+      localStorage.setItem("token", response.data);
       swalStyled
         .fire({
-          icon: 'success',
-          title: 'Your data was updated successfully',
+          icon: "success",
+          title: "Your data was updated successfully",
         })
         .then(() => {
           history.go(0);
@@ -148,110 +150,138 @@ const StudentProfileEdit = () => {
     } catch (error) {
       setErrors((prevState) => ({
         ...prevState,
-        email: 'Email is taken, please use a different email',
+        email: "Email is taken, please use a different email",
       }));
     }
   };
+  
 
   return (
     <>
-      <section className="student-profile__photo-container">
-        <img
-          className="student-profile__photo"
-          src={image ? URL.createObjectURL(image) : state.profile_photo}
+      <section className={style.studentProfilePhotoContainer}>
+        <Image
+          className={style.studentProfilePhoto}
+          src={image ? URL.createObjectURL(image) : state.rofile_photo}
           alt={state.name}
+          width={100}
+          height={75}
         />
-        <label htmlFor="student-profile__photo__input" className="student-profile__photo__button">
+        <label
+          htmlFor="student-profile__photo__input"
+          className={style.studentProfilePhotoButton}
+        >
           Upload photo
         </label>
         <input
           onChange={handleUpload}
           id="student-profile__photo__input"
-          className="student-profile__photo__input"
+          className={style.studentProfilePhotoInput}
           type="file"
           accept="image/png, image/jpeg"
         />
       </section>
-      <section className="student-profile__credentials">
-        <div className="student-profile__credentials__name-container">
+      <section className={style.studentProfileCredentials}>
+        <div className={style.studentProfileCredentialsNameContainer}>
           <label
-            className="student-profile__credentials__name-label"
+            className={style.studentProfileCredentialsNameLabel}
             htmlFor="student-profile__credentials__name-input"
           >
             Name
           </label>
-          <div className="student-profile__credentials__name-input-container">
+          <div className={style.studentProfileCredentialsNameInputContainer}>
             <input
               onChange={handleChange}
               name="name"
               disabled={isDisabled.name}
               placeholder="name"
               id="student-profile__credentials__name-input"
-              className="student-profile__credentials__name-input"
+              className={style.studentProfileCredentialsNameInput}
               defaultValue={state.name}
               type="name"
             />
-            <button onClick={handleClick} className="student-profile__credentials__name-input-button" type="button">
+            <button
+              onClick={() => handleClick("name")}
+              className={style.studentProfileCredentialsNameInputButton}
+              type="button"
+            >
               <FontAwesomeIcon icon={faPencilAlt} />
             </button>
           </div>
-          <span className="student-profile__error-message">{errors.name}</span>
+          <span className={style.studentProfileErrorMessage}>
+            {errors.name}
+          </span>
         </div>
 
-        <div className="student-profile__credentials__email-container">
+        <div className={style.studentProfileCredentialsEmailContainer}>
           <label
-            className="student-profile__credentials__email-label"
+            className={style.studentProfileCredentialsEmailLabel}
             htmlFor="student-profile__credentials__email-input"
           >
             Email
           </label>
-          <div className="student-profile__credentials__email-input-container">
+          <div className={style.studentProfileCredentialsEmailInputContainer}>
             <input
               onChange={handleChange}
               name="email"
               disabled={isDisabled.email}
               placeholder="Email"
               id="student-profile__credentials__email-input"
-              className="student-profile__credentials__email-input"
+              className={style.studentProfileCredentialsEmailInput}
               defaultValue={state.email}
               type="email"
             />
-            <button onClick={handleClick} className="student-profile__credentials__email-input-button" type="button">
+            <button
+              onClick={() => handleClick("email")}
+              className={style.studentProfileCredentialsEmailInputButton}
+              type="button"
+            >
               <FontAwesomeIcon icon={faPencilAlt} />
             </button>
           </div>
-          <span className="student-profile__error-message">{errors.email}</span>
+          <span className={style.studentProfileErrorMessage}>
+            {errors.email}
+          </span>
         </div>
 
-        <div className="student-profile__credentials__password-container">
+        <div className={style.studentProfileCredentialsPasswordContainer}>
           <label
-            className="student-profile__credentials__password-label"
+            className={style.studentProfileCredentialsPasswordLabel}
             htmlFor="student-profile__credentials__password-input"
           >
             Password
           </label>
-          <div className="student-profile__credentials__password-input-container">
+          <div
+            className={style.studentProfileCredentialsPasswordInputContainer}
+          >
             <input
               onChange={handleChange}
               name="password"
               disabled={isDisabled.password}
               placeholder="Password"
               id="student-profile__credentials__password-input"
-              className="student-profile__credentials__password-input"
+              className={style.studentProfileCredentialsPasswordInput}
               defaultValue="**********"
               type="password"
             />
-            <button onClick={handleClick} className="student-profile__credentials__password-input-button" type="button">
+            <button
+              onClick={() => handleClick("password")}
+              className={style.studentProfileCredentialsPasswordInputButton}
+              type="button"
+            >
               <FontAwesomeIcon icon={faPencilAlt} />
             </button>
           </div>
-          <span className="student-profile__error-message">{errors.password}</span>
+          <span className={style.studentProfileErrorMessage}>
+            {errors.password}
+          </span>
         </div>
-        <div className="student-profile__credentials__submit-button-container">
+        <div className={style.studentProfileCredentialsSubmitButtonContainer}>
           <button
             disabled={isDisabled.submit}
             onClick={handleSubmit}
-            className={`student-profile__submit-button ${isDisabled.submit && 'disabled'}`}
+            className={`${style.studentProfileSubmitButton} ${
+              isDisabled.submit && "disabled"
+            }`}
             type="submit"
           >
             Submit changes

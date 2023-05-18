@@ -1,10 +1,11 @@
 import React from 'react';
 import { Review } from './Review';
+import styles from '../assets/styles/pages/TutorViewProfile.module.scss';
 
 function ReviewsContainer({ reviews }) {
   return (
-    <div className="tutor-profile__reviews-container">
-      <h1 className="tutor-profile__title">Student feedback</h1>
+    <div className={styles.tutorProfileReviewsContainer}>
+      <h1 className={styles.tutorProfileTitle}>Student feedback</h1>
       <div>
         {reviews.map((props) => {
           return (
@@ -22,3 +23,4 @@ function ReviewsContainer({ reviews }) {
 }
 
 export { ReviewsContainer };
+

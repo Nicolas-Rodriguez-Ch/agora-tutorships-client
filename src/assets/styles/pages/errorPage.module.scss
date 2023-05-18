@@ -1,0 +1,21 @@
+.errorIllustration {
+  width: 90%;
+  height: 70vh;
+}
+
+@media (min-width: 768px) {
+  .errorIllustration {
+    width: 70%;
+    height: 75vh;
+  }
+}
+
+@media (min-width: 992px) {
+  .errorIllustration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30vw;
+    height: 70vh;
+  }
+}
