@@ -5,6 +5,7 @@ import Loader from "../../components/Loader";
 import Swal from "sweetalert2";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useRouter } from "next/router";
+import styles from "../../assets/styles/pages/checkout.module.scss";
 
 export default function CheckoutPage(props) {
   const router = useRouter();
@@ -272,12 +273,11 @@ export default function CheckoutPage(props) {
       });
       return;
     }
-
     const response = await axios.post("/payment", {
-      tutorship_id,
+      tutorship_id: tutorship_id,
       user_id,
       paymentMethodId: paymentMethod.id,
-      amount: paymentInfo.value,
+      amount: tutorship_price,
     });
 
     if (response.data.success) {
@@ -292,15 +292,15 @@ export default function CheckoutPage(props) {
   }
 
   return (
-    <div className="payment__body">
-      <div className="payment__page-body">
+    <div className={styles.paymentBody}>
+      <div className={styles.paymentPageBody}>
         {isLoading ? (
           <Loader />
         ) : (
           <>
             {count === 1 && (
-              <form action="" className="payment__form">
-                <div className="payment__form-slot">
+              <form action="" className={styles.paymentForm}>
+                <div className={styles.paymentFormSlot}>
                   <label>name</label>
                   <input
                     type="text"
@@ -309,9 +309,9 @@ export default function CheckoutPage(props) {
                     onChange={customerInfoChange}
                     onBlur={validateinputs}
                   />
-                  <span className="payment__errors">{errors.name}</span>
+                  <span className={styles.paymentErrors}>{errors.name}</span>
                 </div>
-                <div className="payment__form-slot">
+                <div className={styles.paymentFormSlot}>
                   <label>last_name</label>
                   <input
                     type="text"
@@ -320,11 +320,13 @@ export default function CheckoutPage(props) {
                     onChange={customerInfoChange}
                     onBlur={validateinputs}
                   />
-                  <span className="payment__errors">{errors.last_name}</span>
+                  <span className={styles.paymentErrors}>
+                    {errors.last_name}
+                  </span>
                 </div>
 
-                <div className="payment__card-form">
-                  <div className="payment__id-type-form-slot">
+                <div className={styles.paymentCardForm}>
+                  <div className={styles.paymentIdTypeFormSlot}>
                     <label>id type</label>
                     <select
                       name="doc_type"
@@ -340,7 +342,7 @@ export default function CheckoutPage(props) {
                       <option value="nit">NIT</option>
                     </select>
                   </div>
-                  <div className="payment__id-num-form-slot">
+                  <div className={styles.paymentIdNumFormSlot}>
                     <label>id number</label>
                     <input
                       name="doc_number"
@@ -351,11 +353,11 @@ export default function CheckoutPage(props) {
                     />
                   </div>
                 </div>
-                <span className="payment__errors">
+                <span className={styles.paymentErrors}>
                   {errors.doc_type || errors.doc_number}
                 </span>
 
-                <div className="payment__form-slot">
+                <div className={styles.paymentFormSlot}>
                   <label>email</label>
                   <input
                     type="text"
@@ -364,14 +366,18 @@ export default function CheckoutPage(props) {
                     onChange={customerInfoChange}
                     onBlur={validateinputs}
                   />
-                  <span className="payment__errors">{errors.email}</span>
+                  <span className={styles.paymentErrors}>{errors.email}</span>
                 </div>
               </form>
             )}
 
             {count === 2 && (
-              <form action="" className="payment__form" onSubmit={handleSubmit}>
-                <div className="payment__form-slot">
+              <form
+                action=""
+                className={styles.paymentForm}
+                onSubmit={handleSubmit}
+              >
+                <div className={styles.paymentFormSlot}>
                   <label>name on card</label>
                   <input
                     type="text"
@@ -380,9 +386,11 @@ export default function CheckoutPage(props) {
                     onChange={cardNameChange}
                     onBlur={validateinputs}
                   />
-                  <span className="payment__errors">{errors.card_name}</span>
+                  <span className={styles.paymentErrors}>
+                    {errors.card_name}
+                  </span>
                 </div>
-                <div className="payment__form-slot">
+                <div className={styles.paymentFormSlot}>
                   <label>card details</label>
                   <CardElement
                     style={{ border: "1px solid red" }}
@@ -390,7 +398,7 @@ export default function CheckoutPage(props) {
                   />
                 </div>
                 <button
-                  className="payment__pay-button"
+                  className={styles.paymentPayButton}
                   disabled={
                     !(
                       isValid.dues &&
@@ -412,21 +420,21 @@ export default function CheckoutPage(props) {
 
         {loadingPayment && (
           <div>
-            <h1 className="payment__loader-title">
+            <h1 className={styles.paymentLoaderTitle}>
               Processing payment, please wait
             </h1>
             <Loader />
           </div>
         )}
-        <div className="payment__button-container">
+        <div className={styles.paymentButtonContainer}>
           <button
             onClick={previous}
             disabled={count === 1}
             hidden={isLoading || loadingPayment}
             className={
               count === 1
-                ? "payment__previous-button-disabled"
-                : "payment__page-button"
+                ? styles.paymentPreviousButtonDisabled
+                : styles.paymentPageButton
             }
           >
             previous
@@ -437,8 +445,8 @@ export default function CheckoutPage(props) {
             hidden={isLoading || loadingPayment}
             className={
               count === 2
-                ? "payment__next-button-disabled"
-                : "payment__page-button"
+                ? styles.paymentNextButtonDisabled
+                : styles.paymentPageButton
             }
           >
             next
