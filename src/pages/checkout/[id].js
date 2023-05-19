@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../utils/axios";
 import Loader from "../../components/Loader";
-import {
-  useStripe,
-  useElements,
-  CardElement,
-  Elements,
-} from "@stripe/react-stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import styles from "../../assets/styles/pages/checkout.module.scss";
 import { useRouter } from "next/router";
+import CreditCard from "../../components/CreditCard";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe(
+  "pk_test_51N2I3CBnCg0IxhERW2nX06gzu1OaOqbhAnwzv1kbqyStHhkun0M456wgmyJdA3Rk6TLXoHnoJX4NBxaAHw3QR84i00PVWSOoCt"
+);
 
-function CheckoutForm() {
+function CheckoutPage() {
   const [tutorshipDetails, setTutorshipDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const { id: tutorshipId } = router.query;
-
-  const stripe = useStripe();
-  const elements = useElements();
 
   useEffect(() => {
     const fetchTutorshipDetails = async () => {
@@ -38,27 +33,6 @@ function CheckoutForm() {
       fetchTutorshipDetails();
     }
   }, [tutorshipId]);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!stripe || !elements) {
-      return;
-    }
-
-    const card = elements.getElement(CardElement);
-
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: card,
-    });
-
-    if (error) {
-      console.log("[error]", error);
-    } else {
-      console.log("[PaymentMethod]", paymentMethod);
-    }
-  };
 
   return (
     <div className={styles.paymentBody}>
@@ -83,34 +57,16 @@ function CheckoutForm() {
                 : "Price not assigned"}
             </p>
           </div>
-          <form onSubmit={handleSubmit} className={styles.paymentForm}>
-            <CardElement
-              options={{
-                style: {
-                  base: {
-                    fontSize: "20px",
-                  },
-                },
-              }}
-            />{" "}
-            <button
-              type="submit"
-              className={styles.paymentPayButton}
-              disabled={!stripe}
-            >
-              Pay
-            </button>
-          </form>
+          <Elements stripe={stripePromise}>
+            <CreditCard
+              tutorshipId={tutorshipId}
+              tutorshipDetails={tutorshipDetails}
+            />
+          </Elements>
         </div>
       )}
     </div>
   );
 }
 
-export default function CheckoutPage() {
-  return (
-    <Elements stripe={stripePromise}>
-      <CheckoutForm />
-    </Elements>
-  );
-}
+export default CheckoutPage;
