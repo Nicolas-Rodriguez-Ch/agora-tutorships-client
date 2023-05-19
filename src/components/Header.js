@@ -93,14 +93,13 @@ function Header() {
       mobileInput.current.value = "";
       !state.isSearchCollapsed &&
         setState((prevState) => ({ ...prevState, isSearchCollapsed: true }));
-  
+
       router.push({
         pathname: `/search`,
-        query: { query: state.searchInput, page: 1 }
+        query: { query: state.searchInput, page: 1 },
       });
     }
   };
-  
 
   const getLinkPath = (user) => {
     if (!user) return "/";
@@ -121,30 +120,23 @@ function Header() {
         <title>Agora</title>
       </Head>
       <header className={`${styles.header} ${styles.headerComponent}`}>
-        {currentUser ? (
-          <Link
-            data-testid="logo-image"
-            href={getLinkPath(currentUser) || defaultLinkPath}
-          >
-            <Image
-              className={`${styles.headerLogo}`}
-              src={Logo}
-              alt="Logo"
-              width={100}
-              height={75}
-            />
-          </Link>
-        ) : (
-          <Link data-testid="logo-image" href={defaultLinkPath}>
-            <Image
-              className={`${styles.headerLogo}`}
-              src={Logo}
-              alt="Logo"
-              width={100}
-              height={75}
-            />
-          </Link>
-        )}
+        <Link
+          data-testid="logo-image"
+          href={
+            currentUser && getLinkPath(currentUser)
+              ? getLinkPath(currentUser)
+              : defaultLinkPath
+          }
+        >
+          <Image
+            className={`${styles.headerLogo}`}
+            src={Logo}
+            alt="Logo"
+            width={100}
+            height={75}
+          />
+        </Link>
+
         {currentUser && currentUser.type === "student" && (
           <div className={`${styles.headerSearchContainer}`}>
             <input
@@ -192,10 +184,11 @@ function Header() {
             <FontAwesomeIcon icon={faSearch} />
           </div>
         </div>
-
         <div>
-        {!!globalState.user.token ? (
-          <div className={`${styles.headerProfilePhotoContainer}`}>
+          <div
+            style={!!globalState.user.token ? null : { display: "none" }}
+            className={`${styles.headerProfilePhotoContainer}`}
+          >
             <Image
               width={100}
               height={75}
@@ -237,8 +230,11 @@ function Header() {
               </div>
             </div>
           </div>
-        ) : (
-          <div className={`${styles.headerButtonsContainer}`}>
+
+          <div
+            style={!globalState.user.token ? null : { display: "none" }}
+            className={`${styles.headerButtonsContainer}`}
+          >
             <Link href="/loginPage">
               <button
                 className={`${styles.buttonContainerSigninButton}`}
@@ -258,7 +254,6 @@ function Header() {
               </button>
             </Link>
           </div>
-        )}
         </div>
       </header>
     </>
