@@ -74,9 +74,9 @@ function StudentProfileTutorships() {
   function handlePayment(data, e) {
     e.preventDefault();
     router.push(
-      `/checkout/${id}?tutorship_price=${data.tutorshipPrice}`
+      `/checkout/${id}/${data.tutorshipId}?tutorship_price=${data.tutorshipPrice}`
     );
-  }
+  }  
 
   return (
     <div className={styles.studentTutorshipsContainer}>

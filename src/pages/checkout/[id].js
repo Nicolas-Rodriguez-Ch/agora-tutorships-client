@@ -15,13 +15,14 @@ function CheckoutPage() {
   const [tutorshipDetails, setTutorshipDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const { id: tutorshipId } = router.query;
+  const { id: studentId, tutorshipId } = router.query;
 
   useEffect(() => {
     const fetchTutorshipDetails = async () => {
       try {
-        const response = await axios.get(`/tutorships/${tutorshipId}`);
-        setTutorshipDetails(response.data[0]);
+        const response = await axios.get(`/tutorships/${studentId}`);
+        const tutorshipDetail = response.data.find(tutorship => tutorship._id === tutorshipId);
+        setTutorshipDetails(tutorshipDetail);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -29,10 +30,10 @@ function CheckoutPage() {
       }
     };
 
-    if (tutorshipId) {
+    if (studentId) {
       fetchTutorshipDetails();
     }
-  }, [tutorshipId]);
+  }, [studentId, tutorshipId]);
 
   return (
     <div className={styles.paymentBody}>
