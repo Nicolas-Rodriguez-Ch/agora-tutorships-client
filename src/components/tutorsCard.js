@@ -24,9 +24,6 @@ function TutorsCard(tutor) {
     starNodes.push(<FontAwesomeIcon key={i} icon={faStar} />);
   }
 
-  function handleClick() {
-    router.push(`/tutor/${_id}`);
-  }
 
   return (
     <Link href={`/tutor/${_id}`}>

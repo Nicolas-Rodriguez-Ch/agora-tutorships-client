@@ -12,17 +12,16 @@ const stripePromise = loadStripe(
 );
 
 function CheckoutPage() {
-  const [tutorshipDetails, setTutorshipDetails] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const { id: studentId, tutorshipId } = router.query;
+  const { tutorshipId } = router.query;
+  const [tutorshipDetails, setTutorshipDetails] = useState([])
+  const [isLoading, setIsLoading] = useState('')
 
   useEffect(() => {
     const fetchTutorshipDetails = async () => {
       try {
-        const response = await axios.get(`/tutorships/${studentId}`);
-        const tutorshipDetail = response.data.find(tutorship => tutorship._id === tutorshipId);
-        setTutorshipDetails(tutorshipDetail);
+        const response = await axios.get(`/tutorship/${tutorshipId}`);
+        setTutorshipDetails(response.data.tutor_id);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -30,10 +29,10 @@ function CheckoutPage() {
       }
     };
 
-    if (studentId) {
+    if (tutorshipId) {
       fetchTutorshipDetails();
     }
-  }, [studentId, tutorshipId]);
+  }, [tutorshipId]);
 
   return (
     <div className={styles.paymentBody}>
@@ -44,17 +43,17 @@ function CheckoutPage() {
           <h2 className={styles.paymentFormSlotTitle}>Tutorship Details</h2>
           <div className={styles.paymentFormSlotContent}>
             <p className={styles.paymentFormSlotText}>
-              Tutor: {tutorshipDetails.tutor_id.name}
+              Tutor: {tutorshipDetails.name}
             </p>
             <p className={styles.paymentFormSlotText}>
-              Subject: {tutorshipDetails.tutor_id.focus}
+              Subject: {tutorshipDetails.focus}
             </p>
             <p className={styles.paymentFormSlotText}>
-              Description: {tutorshipDetails.tutor_id.description}
+              Description: {tutorshipDetails.description}
             </p>
             <p className={`${styles.paymentFormSlotText} ${styles.price}`}>
-              {tutorshipDetails.tutor_id.price
-                ? `COP $ ${tutorshipDetails.tutor_id.price.toLocaleString()}`
+              {tutorshipDetails.price
+                ? `COP $ ${tutorshipDetails.price.toLocaleString()}`
                 : "Price not assigned"}
             </p>
           </div>

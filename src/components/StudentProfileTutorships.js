@@ -11,6 +11,7 @@ import { utcToZonedTime } from "date-fns-tz";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "../assets/styles/components/StudentProfileTutorships.module.scss";
+import Link from "next/link";
 
 function StudentProfileTutorships() {
   const router = useRouter();
@@ -27,11 +28,10 @@ function StudentProfileTutorships() {
         ...prevState,
         loading: false,
         tutorships: data,
-        renderSwitch: false,
       }));
     };
     getTutorships();
-  }, [id, state.renderSwitch]);
+  }, [id]);
 
   const handleClick = async (data, e) => {
     const button = e.target.innerText;
@@ -70,13 +70,6 @@ function StudentProfileTutorships() {
       showConfirmButton: false,
     });
   };
-
-  function handlePayment(data, e) {
-    e.preventDefault();
-    router.push(
-      `/checkout/${id}/${data.tutorshipId}?tutorship_price=${data.tutorshipPrice}`
-    );
-  }  
 
   return (
     <div className={styles.studentTutorshipsContainer}>
@@ -125,31 +118,17 @@ function StudentProfileTutorships() {
                   <div className={styles.studentTutorshipButtonsContainer}>
                     {status === "pending" && (
                       <>
-                        <button
-                          onClick={(e) =>
-                            handlePayment(
-                              {
-                                tutorshipPrice: tutorship.tutor_id.price,
-                                tutorshipId: tutorship._id,
-                              },
-                              e
-                            )
-                          }
-                          className={styles.studentTutorshipButtonsPayButton}
+                        <Link
+                          href={`/checkout/${tutorship._id}?tutorship_price=${tutorship.tutor_id.price}`}
                         >
-                          Pay
-                        </button>
+                          <button
+                            className={styles.studentTutorshipButtonsPayButton}
+                          >
+                            Pay
+                          </button>
+                        </Link>
 
                         <button
-                          onClick={(e) =>
-                            handleClick(
-                              {
-                                tutor: tutorship.tutor_id._id,
-                                tutorshipId: id,
-                              },
-                              e
-                            )
-                          }
                           className={styles.studentTutorshipButtonsCancelButton}
                         >
                           Cancel

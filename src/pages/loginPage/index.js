@@ -23,7 +23,7 @@ function LoginPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push("/homePage");
+      router.push("/homePage", undefined, { shallow: true });
     }
   }, [isAuthenticated]);
 
