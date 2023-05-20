@@ -12,7 +12,7 @@ import { format } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
 
 function TutorProfileTutorships() {
-  const id = useSelector((state) => state.currentUser._id);
+  const id = useSelector((state) => state.user.currentUser._id);
   const [state, setState] = useState({
     tutorships: [],
     loading: false,

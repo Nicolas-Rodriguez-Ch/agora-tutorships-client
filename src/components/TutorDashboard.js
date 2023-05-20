@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import styles from '../assets/styles/components/TutorDashboard.module.scss';
+import { useRouter } from 'next/router';
 
 function TutorshipDashboard({ page }) {
   const [selected, setSelected] = useState('Edit Profile');
+  const router = useRouter();
 
   const handleSelect = (e) => {
     const value = e.target.id || e.target.value;
     setSelected(value);
-    history.push(`/profile/${value}`);
+    router.push(`/profile/${value}`);
   };
 
   useEffect(() => {

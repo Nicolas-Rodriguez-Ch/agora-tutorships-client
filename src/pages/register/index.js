@@ -197,14 +197,12 @@ function Register() {
   }
 
   const handleSubmit = (e) => {
-    // destructure the state, less variables declared
     e.preventDefault();
     const { type, inputs } = state;
     dispatch(register({ type, inputs }));
   };
 
   const handleChange = (e) => {
-    // changes the inputs values
     setState((state) => ({
       ...state,
       inputs: {
@@ -215,7 +213,6 @@ function Register() {
   };
 
   const handleTypeChange = (e) => {
-    // change type student or tutor
     setState((state) => ({
       ...state,
       [e.target.name]: e.target.value,

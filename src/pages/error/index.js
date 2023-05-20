@@ -8,7 +8,7 @@ function ErrorPage() {
       <Player
         autoplay
         loop
-        src="https://assets2.lottiefiles.com/packages/lf20_ck8dimsp.json"
+        src="https:assets2.lottiefiles.com/packages/lf20_ck8dimsp.json"
         className={styles.errorIllustration}
       />
     </div>

@@ -1,23 +1,26 @@
-import TutorDashboard from '../components/TutorDashboard';
-import TutorProfileEdit from '../components/TutorProfileEdit';
-import TutorProfileTutorships from '../components/tutorProfileTutorships';
-import TutorProfileCreateTutorship from '../components/TutorProfileCreateTutorship';
-import styles from '../assets/styles/pages/TutorProfile.module.scss';
+import TutorDashboard from "../components/TutorDashboard";
+import TutorProfileEdit from "../components/TutorProfileEdit";
+import TutorProfileTutorships from "../components/tutorProfileTutorships";
+import TutorProfileCreateTutorship from "../components/TutorProfileCreateTutorship";
+import styles from "../assets/styles/pages/TutorProfile.module.scss";
+import { useRouter } from "next/router";
 
-function TutorProfile({ props }) {
-  const currentPage = props.match.params.section;
+function TutorProfile() {
+  const router = useRouter();
+  const { section } = router.query;
+
   const pages = {
     edit: <TutorProfileEdit />,
-    'create-tutorship': <TutorProfileCreateTutorship />,
+    "create-tutorship": <TutorProfileCreateTutorship />,
     tutorships: <TutorProfileTutorships />,
   };
 
   return (
     <div className={styles.tutorProfileContainer}>
       <section className={styles.tutorProfileMenuContainer}>
-        <TutorDashboard page={currentPage} />
+        <TutorDashboard page={section} />
       </section>
-      <main className={styles.tutorProfileMain}>{pages[currentPage]}</main>
+      <main className={styles.tutorProfileMain}>{pages[section]}</main>
     </div>
   );
 }

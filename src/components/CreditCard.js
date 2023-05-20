@@ -3,11 +3,17 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import styles from "../assets/styles/components/CreditCard.module.scss";
 import { useSelector } from "react-redux";
 import axios from "../utils/axios";
+import { useRouter } from "next/router";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 function CreditCard({ tutorshipId, tutorshipDetails }) {
   const stripe = useStripe();
   const elements = useElements();
   const globalState = useSelector((state) => state);
+  const router = useRouter();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -25,6 +31,7 @@ function CreditCard({ tutorshipId, tutorshipDetails }) {
 
     if (error) {
       console.log("[error]", error);
+      MySwal.fire("Oops...", error.message, "error");
       return;
     } else {
       console.log("[PaymentMethod]", paymentMethod);
@@ -45,8 +52,23 @@ function CreditCard({ tutorshipId, tutorshipDetails }) {
       try {
         let response = await axios.post("/payment", paymentInfo);
         console.log(response.data);
+
+        MySwal.fire({
+          title: "Payment Successful!",
+          text: "Redirecting to home page...",
+          icon: "success",
+          timer: 3000,
+          showConfirmButton: false,
+        }).then(() => {
+          router.push("/homePage");
+        });
       } catch (err) {
         console.log(err);
+        MySwal.fire(
+          "Oops...",
+          "Something went wrong while processing your payment. Please try again later.",
+          "error"
+        );
       }
     }
   };
