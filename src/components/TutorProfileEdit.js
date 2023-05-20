@@ -268,6 +268,9 @@ function TutorProfilePage() {
   };
 
   function onChangeFile(e) {
+    if (!e.target.files.length) {
+      return;
+    }
     setImage(e.target.files[0]);
     setPreviewPhoto(URL.createObjectURL(e.target.files[0]));
     setUserData((state) => ({
@@ -282,12 +285,12 @@ function TutorProfilePage() {
     if (image) {
       formData.append("image", image);
     }
+
     updateTutorProfile(userData.inputs, formData, token);
   };
 
   const updateTutorProfile = async (inputs, formData, token) => {
     try {
-      const { data: url } = await axios.patch("/uploadProfileImage", formData);
       const response = await axios.patch("/update", {
         formData,
         inputs,
@@ -295,6 +298,7 @@ function TutorProfilePage() {
         token,
         type: "tutor",
       });
+      const { data: url } = await axios.patch("/uploadProfileImage", formData);
       localStorage.setItem("token", response.data);
       swalstylesd
         .fire({
@@ -314,7 +318,7 @@ function TutorProfilePage() {
       }));
     }
   };
-  
+
   const fetchTutorData = () => {
     axios
       .get(`/tutor/${globalUser.currentUser._id}`)
@@ -334,7 +338,6 @@ function TutorProfilePage() {
         console.error(err);
       });
   };
-  
 
   return (
     <>

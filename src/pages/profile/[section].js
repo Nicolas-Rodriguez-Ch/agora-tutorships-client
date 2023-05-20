@@ -6,7 +6,6 @@ function ProfileSection() {
   const role = useSelector((state) => {
     return state.user.currentUser.type;
   });
-  console.log("User role:", role);
   if (role === "tutor") {
     return <TutorProfile />;
   } else {

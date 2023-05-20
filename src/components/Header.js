@@ -29,7 +29,7 @@ function Header() {
   const router = useRouter();
 
   const { currentUser } = globalState.user;
-  console.log("🚀 ~ file: Header.js:32 ~ Header ~ globalState:", globalState)
+  console.log("🚀 ~ file: Header.js:32 ~ Header ~ globalState:", currentUser.profile_photo)
 
   const handleChange = (e) => {
     setState((prevState) => ({ ...prevState, searchInput: e.target.value }));
