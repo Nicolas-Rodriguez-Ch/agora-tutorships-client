@@ -3,18 +3,15 @@ import axios from "../utils/axios";
 import { useSelector } from "react-redux";
 import styles from "../assets/styles/pages/TutorEditProfile.module.scss";
 import Swal from "sweetalert2";
-import { useLocation } from "react-router-dom";
+import { useRouter } from 'next/router';
 // import styless from "../assets/styles/pages/Tutorship.module.scss";
 
 function TutorProfileCreateTutorship() {
-  function useQuery() {
-    return new URLSearchParams(useLocation().search);
-  }
-  let query = useQuery();
-  const email = query.get("email");
-  const date = query.get("date");
-  const time = query.get("time");
-  const tutor_id = useSelector((state) => state.currentUser._id);
+  const router = useRouter();
+  const email = router.query.email;
+  const date = router.query.date;
+  const time = router.query.time;
+  const tutor_id = useSelector((state) => state.user.currentUser._id);
   const [tutorshipData, setTutorshipData] = useState({
     email: email || "",
     date: date || "",

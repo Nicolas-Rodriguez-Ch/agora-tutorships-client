@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap");
 
 $subtitleColor: #5b5b5b;
 $titleColor: #3f3f3f;
@@ -14,50 +14,38 @@ $inputMargin: 10px 0px;
 $warningColor: rgb(235, 99, 99);
 
 .creditCardBody {
+  height: 80px;
+  width: 350px;
+  padding: 10px;
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
   margin-bottom: 20px;
   padding: 10px;
-}
-
-.creditCardText {
-  font-family: 'Open Sans';
-  font-size: 0.9rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  text-align: center;
 }
 
 .creditCardButton {
   background-color: white;
-  border: $borderWidth solid rgb(197, 197, 197);
-  border-radius: 50%;
-  height: 20px;
-  width: 20px;
-  font-size: 1rem;
+  color: $colorB;
+  border: $borderWidth solid $colorB;
+  height: 50px;
+  margin: 20px auto;
+  width: 150px;
+  font-size: 1.2rem;
   font-weight: $fontSelectedWeight;
   letter-spacing: 1px;
-  &:hover {
+  display: inline-block;
+  &:hover:enabled {
     background-color: $colorB;
     color: white;
     border: $borderWidth solid $colorB;
     cursor: pointer;
   }
-  &-selected {
-    background-color: $colorB;
-    border: $borderWidth solid $colorB;
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
-    font-size: 1rem;
-    font-weight: $fontSelectedWeight;
-    letter-spacing: 1px;
+  &:disabled {
+    color: $subtitleColor;
+    border: $borderWidth solid $subtitleColor;
   }
 }
-
 .creditCardButtonDelete {
   background-color: white;
   color: $warningColor;

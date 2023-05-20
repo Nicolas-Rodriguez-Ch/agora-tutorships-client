@@ -26,7 +26,7 @@ const SearchPage = () => {
         router.push({
           pathname: `/search/`,
           query: { query, page: Page }
-        });
+        }, undefined, { shallow: true });
         if (responseTut.data.data.length > 0) {
           setNotFound(false);
         } else {

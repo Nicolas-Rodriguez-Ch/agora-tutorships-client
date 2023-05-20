@@ -31,7 +31,6 @@ const initialState = {
   isProfileTooltipCollapsed: true,
 };
 
-// Modify the reducer in order to receive the actions
 const reducer = function (state = initialState, action) {
   if (action.type === LOGIN) {
     return {

@@ -8,13 +8,12 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import styles from "../assets/styles/pages/TutorEditProfile.module.scss";
 
 function TutorProfilePage() {
-  const globalUser = useSelector((state) => state.currentUser);
-  const token = useSelector((state) => state.token);
+  const globalUser = useSelector((state) => state.user);
+  const token = useSelector((state) => state.user.token);
   const [previewPhoto, setPreviewPhoto] = useState("");
   const [image, setImage] = useState("");
   const [isDisabled, setIsDisabled] = useState({
     name: true,
-    email: true,
     password: true,
     schedule: true,
     description: true,
@@ -31,7 +30,6 @@ function TutorProfilePage() {
   const [userData, setUserData] = useState({
     inputs: {
       name: "",
-      email: "",
       password: "",
       description: "",
       schedule: "",
@@ -39,7 +37,6 @@ function TutorProfilePage() {
     },
     errors: {
       name: "",
-      email: "",
       password: "",
       schedule: "",
       price: "",
@@ -47,7 +44,6 @@ function TutorProfilePage() {
     isValid: {
       name: true,
       password: true,
-      email: true,
       schedule: true,
       price: true,
       description: true,
@@ -72,21 +68,23 @@ function TutorProfilePage() {
   }
 
   useEffect(() => {
-    axios.get(`/tutor/${globalUser._id}`).then((result) => {
-      setPreviewData((state) => ({
-        ...state,
-        rating: result.data.rating || `You don't have any ratings yet`,
-      }));
-    });
-    setPreviewData((state) => ({
-      ...state,
-      name: globalUser.name,
-      email: globalUser.email,
-      description: globalUser.description,
-      schedule: globalUser.schedule,
-      price: globalUser.price,
-    }));
-    setPreviewPhoto(globalUser.profile_photo);
+    axios
+      .get(`/tutor/${globalUser.currentUser._id}`)
+      .then((result) => {
+        setPreviewData((state) => ({
+          ...state,
+          rating: result.data.rating || `You don't have any ratings yet`,
+          name: globalUser.currentUser.name,
+          email: globalUser.currentUser.email,
+          description: globalUser.currentUser.description,
+          schedule: globalUser.currentUser.schedule,
+          price: result.data.price || `You don't have any ratings yet`,
+        }));
+        setPreviewPhoto(globalUser.profile_photo);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, [globalUser]);
 
   function handleChange(e) {
@@ -134,7 +132,6 @@ function TutorProfilePage() {
           isValid: { ...state.isValid, name: true },
           enableUpload:
             state.isValid.password &&
-            state.isValid.email &&
             state.isValid.schedule &&
             state.isValid.price,
         }));
@@ -259,30 +256,15 @@ function TutorProfilePage() {
     }
   }
 
-  const handleClick = (e) => {
-    const buttonClass = e.currentTarget.className;
-    if (buttonClass.match(/email/)) {
-      setIsDisabled((prevState) => ({ ...prevState, email: !prevState.email }));
-    } else if (buttonClass.match(/password/)) {
-      setIsDisabled((prevState) => ({
-        ...prevState,
-        password: !prevState.password,
-      }));
-    } else if (buttonClass.match(/name/)) {
-      setIsDisabled((prevState) => ({ ...prevState, name: !prevState.name }));
-    } else if (buttonClass.match(/description/)) {
-      setIsDisabled((prevState) => ({
-        ...prevState,
-        description: !prevState.description,
-      }));
-    } else if (buttonClass.match(/schedule/)) {
-      setIsDisabled((prevState) => ({
-        ...prevState,
-        schedule: !prevState.schedule,
-      }));
-    } else if (buttonClass.match(/price/)) {
-      setIsDisabled((prevState) => ({ ...prevState, price: !prevState.price }));
-    }
+  const handleClick = () => {
+    setIsDisabled((prevState) => ({
+      ...prevState,
+      name: !prevState.name,
+      password: !prevState.password,
+      schedule: !prevState.schedule,
+      description: !prevState.description,
+      price: !prevState.price,
+    }));
   };
 
   function onChangeFile(e) {
@@ -320,7 +302,7 @@ function TutorProfilePage() {
           title: "Your data was updated successfully",
         })
         .then(() => {
-          history.go(0);
+          fetchTutorData();
         });
     } catch (error) {
       setUserData((state) => ({
@@ -332,6 +314,27 @@ function TutorProfilePage() {
       }));
     }
   };
+  
+  const fetchTutorData = () => {
+    axios
+      .get(`/tutor/${globalUser.currentUser._id}`)
+      .then((result) => {
+        setPreviewData((state) => ({
+          ...state,
+          rating: result.data.rating || `You don't have any ratings yet`,
+          name: globalUser.currentUser.name,
+          email: globalUser.currentUser.email,
+          description: globalUser.currentUser.description,
+          schedule: globalUser.currentUser.schedule,
+          price: result.data.price || `You don't have any ratings yet`,
+        }));
+        setPreviewPhoto(globalUser.profile_photo);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  
 
   return (
     <>
@@ -362,33 +365,13 @@ function TutorProfilePage() {
           <div className={styles.tutorEditFormSlotContainer}>
             <input
               onBlur={validateInput}
+              defaultValue={previewData.name}
               type="text"
               name="name"
-              defaultValue={previewData.name}
               onChange={handleChange}
               disabled={isDisabled.name}
             />
-            <button
-              onClick={handleClick}
-              className={styles.tutorProfileCredentialsNameInputButton}
-              type="button"
-            >
-              <FontAwesomeIcon icon={faPencilAlt} />
-            </button>
-          </div>
-          <span className={styles.tutorEditErrors}>{userData.errors.name}</span>
-        </div>
-        <div className={styles.tutorEditFormSlot}>
-          <label>Email</label>
-          <div className={styles.tutorEditFormSlotContainer}>
-            <input
-              onBlur={validateInput}
-              defaultValue={previewData.email}
-              type="email"
-              name="email"
-              onChange={handleChange}
-              disabled={isDisabled.email}
-            />
+
             <button
               onClick={handleClick}
               className={styles.tutorProfileCredentialsEmailInputButton}
@@ -397,9 +380,7 @@ function TutorProfilePage() {
               <FontAwesomeIcon icon={faPencilAlt} />
             </button>
           </div>
-          <span className={styles.tutorEditErrors}>
-            {userData.errors.email}
-          </span>
+          <span className={styles.tutorEditErrors}>{userData.errors.name}</span>
         </div>
         <div className={styles.tutorEditFormSlot}>
           <label>Password</label>
@@ -461,19 +442,19 @@ function TutorProfilePage() {
             />
             <button
               onClick={handleClick}
-              className={style.tutorProfileCredentialsScheduleInputButton}
+              className={styles.tutorProfileCredentialsScheduleInputButton}
               type="button"
             >
               <FontAwesomeIcon icon={faPencilAlt} />
             </button>
           </div>
-          <span className={style.tutorEditErrors}>
+          <span className={styles.tutorEditErrors}>
             {userData.errors.schedule}
           </span>
         </div>
-        <div className={style.tutorEditFormSlot}>
+        <div className={styles.tutorEditFormSlot}>
           <label>Description</label>
-          <div className={style.tutorEditFormSlotContainer}>
+          <div className={styles.tutorEditFormSlotContainer}>
             <textarea
               id="form"
               name="description"
@@ -483,25 +464,23 @@ function TutorProfilePage() {
               placeholder="Let our students know something about you"
               cols="30"
               rows="10"
-              className={style.tutorEditFormDescription}
+              className={styles.tutorEditFormDescription}
               disabled={isDisabled.description}
             ></textarea>
             <button
               onClick={handleClick}
-              className={style.tutorProfileCredentialsDescriptionInputButton}
+              className={styles.tutorProfileCredentialsDescriptionInputButton}
               type="button"
             >
               <FontAwesomeIcon icon={faPencilAlt} />
             </button>
           </div>
         </div>
-        <div className={style.tutorEditButtonContainer}>
+        <div className={styles.tutorEditButtonContainer}>
           <input
             type="submit"
             value="save changes"
-            className={`${style.tutorEditButtonSubmit} ${
-              !userData.enableUpload && "disabled"
-            }`}
+            className={styles.tutorEditButtonSubmit}
             disabled={!userData.enableUpload}
           />
         </div>

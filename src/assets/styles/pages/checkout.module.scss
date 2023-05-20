@@ -82,30 +82,43 @@ $warningColor: rgb(235, 99, 99);
 .paymentFormSlot {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
-  input {
-    box-sizing: border-box;
-    padding: 0px 10px;
-    padding-left: 10px;
-    width: 100%;
-    height: $inputHeight;
-    border: 1px solid $subtitleColor;
-    text-align: left;
-    margin: $inputMargin;
-    color: $subtitleColor;
-    font-family: 1rem;
-    font-family: "Open Sans";
-    font-weight: 600;
-  }
-  label {
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+
+  .paymentFormSlotTitle {
     font-family: "Open Sans";
     font-weight: 700;
     color: $subtitleColor;
-  }
-  .paymentErrors {
-    color: $warningColor;
+    text-align: center;
+    font-size: 2rem;
     margin-bottom: 20px;
+  }
+
+  .paymentFormSlotContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+
+    .paymentFormSlotText {
+      font-family: "Open Sans";
+      font-weight: 700;
+      color: $subtitleColor;
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 1.2rem;
+
+      &.price {
+        font-family: "Open Sans";
+        font-weight: 800;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+    }
   }
 }
 
@@ -232,9 +245,9 @@ $warningColor: rgb(235, 99, 99);
   background-color: white;
   color: $colorB;
   border: $borderWidth solid $colorB;
-  height: 60px;
-  margin: 10px 0px 15px 0px;
-  width: 100%;
+  height: 50px;
+  margin: 20px auto;
+  width: 150px;
   font-size: 1.2rem;
   font-weight: $fontSelectedWeight;
   letter-spacing: 1px;

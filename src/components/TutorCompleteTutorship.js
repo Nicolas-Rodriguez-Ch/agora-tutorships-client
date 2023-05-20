@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "../utils/axios";
 
-import styles from "../assets/styles/components/TutorCompleteTutorship.module.scss";
+import style from "../assets/styles/components/TutorCompleteTutorship.module.scss";
 
 function TutorCancelTutorship({ swal, tutorshipId, setState }) {
   const handleClick = (e) => {

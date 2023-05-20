@@ -9,7 +9,7 @@ function StudentProfileMenu({ page }) {
   const handleSelect = (e) => {
     const value = e.target.id || e.target.value;
     setSelected(value);
-    router.push(`/profile/${value}`);
+    router.push(`/profile/${value}`, undefined, { shallow: true });
   };
 
   useEffect(() => {
