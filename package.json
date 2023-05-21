@@ -59,6 +59,7 @@
   },
   "devDependencies": {
     "cypress": "^8.5.0",
+    "eslint": "^8.41.0",
     "sass": "^1.62.1"
   }
 }
