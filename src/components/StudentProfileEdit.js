@@ -143,9 +143,6 @@ const StudentProfileEdit = () => {
         .fire({
           icon: "success",
           title: "Your data was updated successfully",
-        })
-        .then(() => {
-          history.go(0);
         });
     } catch (error) {
       setErrors((prevState) => ({

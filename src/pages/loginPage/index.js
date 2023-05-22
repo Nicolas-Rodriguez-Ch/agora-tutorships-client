@@ -25,7 +25,7 @@ function LoginPage() {
     if (isAuthenticated) {
       router.push("/homePage", undefined, { shallow: true });
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated,router]);
 
   const validateInputs = (e) => {
     const inputName = e.target.name;
@@ -183,7 +183,7 @@ function LoginPage() {
         </fieldset>
         <fieldset className={`${styles.loginSignupFieldset}`}>
           <p className={`${styles.signupText}`}>
-            Don't have an account? <Link href="/register">Register</Link>
+            Do not have an account? <Link href="/register">Register</Link>
           </p>
         </fieldset>
       </form>

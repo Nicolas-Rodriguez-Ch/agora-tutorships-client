@@ -4,7 +4,7 @@ import SelectPage from "../components/selectPage.js";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Loader from "../components/Loader.js";
 import axios from "../utils/axios.js";
-import styles from "../assets/styles/components/searchPage.module.scss";
+import styles from "../assets/styles/components/SearchPageFirst.module.scss";
 import { useRouter } from "next/router";
 
 const SearchPage = () => {
@@ -38,7 +38,7 @@ const SearchPage = () => {
       }
     };
     search();
-  }, [Page, query]);
+  }, [Page, query, router]);
 
   useEffect(() => {
     if (parseInt(page) === 1) setPage(parseInt(page));

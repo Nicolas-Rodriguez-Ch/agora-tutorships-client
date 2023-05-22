@@ -72,7 +72,7 @@ function TutorProfileTutorships() {
         <Loader />
       ) : state.tutorships.length === 0 ? (
         <p className={styles.tutorTutorshipsTitle}>
-          You don't have any pending tutorships
+          You do not have any pending tutorships
         </p>
       ) : (
         state.tutorships.map((tutorship, i) => {

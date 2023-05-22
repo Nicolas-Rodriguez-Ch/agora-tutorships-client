@@ -31,7 +31,7 @@ function TutorDetailsPage() {
     if (id) {
       tutorDetailsData(id);
     }
-  }, [id]);
+  }, [id, router]);
 
   return (
     <>

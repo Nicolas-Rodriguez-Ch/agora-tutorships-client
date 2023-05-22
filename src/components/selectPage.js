@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../assets/styles/components/SearchPage.module.scss";
+import styles from "../assets/styles/components/SearchPageFirst.module.scss";
 
 const SelectPage = ({ Page, setPage, Pages }) => {
   const prevPage = (e) => {

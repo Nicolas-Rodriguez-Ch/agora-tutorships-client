@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import styles from "../assets/styles/pages/TutorEditProfile.module.scss";
+import Image from "next/image";
 
 function TutorProfilePage() {
   const globalUser = useSelector((state) => state.user);
@@ -342,7 +343,13 @@ function TutorProfilePage() {
   return (
     <>
       <div className={styles.tutorEditPhotoContainer}>
-        <img src={previewPhoto} className={styles.tutorEditPhoto} alt="user" />
+        <Image
+          src={previewPhoto}
+          className={styles.tutorEditPhoto}
+          width={100}
+          height={100}
+          alt="user"
+        />
         <label htmlFor="upload" className={styles.tutorEditButtonPhoto}>
           upload photo
         </label>

@@ -5,6 +5,7 @@ import {
   faFacebookSquare,
   faWhatsapp,
 } from '@fortawesome/free-brands-svg-icons';
+import Link from 'next/link';
 
 import '../assets/styles/components/Footer.scss';
 
@@ -18,15 +19,15 @@ function Footer() {
         <span>Made with love in Make it Real</span>
       </div>
       <div className="footer__social">
-        <a href="/">
+        <Link href="/">
           <FontAwesomeIcon icon={faInstagram} />
-        </a>
-        <a href="/">
+        </Link>
+        <Link href="/">
           <FontAwesomeIcon icon={faFacebookSquare} />
-        </a>
-        <a href="/">
+        </Link>
+        <Link href="/">
           <FontAwesomeIcon icon={faWhatsapp} />
-        </a>
+        </Link>
       </div>
     </footer>
   );

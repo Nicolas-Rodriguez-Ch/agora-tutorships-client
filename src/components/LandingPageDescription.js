@@ -36,7 +36,7 @@ function LandingPageDescription() {
             Ask{" "}
             <span className={styles.descriptionTextHighlight}>anything</span>,{" "}
             <span className={styles.descriptionTextBreack}>
-              we've got you covered
+              we have got you covered
             </span>
           </p>
           <p className={styles.descriptionSubtitle}>

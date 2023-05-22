@@ -65,7 +65,7 @@ function TutorsSchedule(props) {
     if (id) {
       getTutorData();
     }
-  }, [id]);
+  }, [id, router]);
 
   const handleChange = (e) => {
     setState((prevState) => ({
