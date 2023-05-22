@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styles from '../assets/styles/components/CategoriesBar.module.scss';
+import React, { useState } from "react";
+import styles from "../assets/styles/components/CategoriesBar.module.scss";
 
 function CategoriesBar({ Categories, setFilter }) {
   const [selected, setSelected] = useState(null);
@@ -22,7 +22,11 @@ function CategoriesBar({ Categories, setFilter }) {
 
       {Categories.map((e, i) => (
         <button
-          className={selected === e.subject ? styles.categoryButtonSelected : styles.categoryButton}
+          className={
+            selected === e.subject
+              ? styles.categoryButtonSelected
+              : styles.categoryButton
+          }
           key={i}
           onClick={() => {
             setFilter(e.subject);

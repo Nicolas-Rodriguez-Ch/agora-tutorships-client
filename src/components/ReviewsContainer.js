@@ -1,6 +1,6 @@
-import React from 'react';
-import { Review } from './Review';
-import styles from '../assets/styles/pages/TutorViewProfile.module.scss';
+import React from "react";
+import { Review } from "./Review";
+import styles from "../assets/styles/pages/TutorViewProfile.module.scss";
 
 function ReviewsContainer({ reviews }) {
   return (
@@ -23,4 +23,3 @@ function ReviewsContainer({ reviews }) {
 }
 
 export { ReviewsContainer };
-

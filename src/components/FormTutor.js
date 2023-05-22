@@ -2,7 +2,13 @@ const FormTutor = ({ handleChange, validateInputs, errors, categories }) => {
   return (
     <>
       <div className="register-form__inputs">
-        <input onBlur={validateInputs} type="text" placeholder="Profession" name="profession" onChange={handleChange} />
+        <input
+          onBlur={validateInputs}
+          type="text"
+          placeholder="Profession"
+          name="profession"
+          onChange={handleChange}
+        />
       </div>
       <span className="register-form__errors">{errors.profession}</span>
 
