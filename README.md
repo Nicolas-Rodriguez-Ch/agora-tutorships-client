@@ -47,3 +47,6 @@ To start the application in development mode, run `npm run dev`. This will start
 To build the application for production, run `npm run build`. This will create a `next build` which you can then start with `npm run start`.
 
 This application uses Stripe for payment processing, so make sure you have valid Stripe keys.
+
+This is how it should look like when running 
+![Project Screenhot](https://res.cloudinary.com/dhyu9pxjh/image/upload/v1684854498/Captura_de_pantalla_2023-05-23_100738_fiyugf.png)
