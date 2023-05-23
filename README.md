@@ -1,4 +1,4 @@
-# Agora tutordhips 2.0
+# Agora Tutorships v2.0
 
 This project is a Next.js based web application that was migrated from Create React App (CRA). We have also migrated from Epayco to Stripe for payment processing, and Redux to Redux Toolkit for state management. The image uploading functionality has been updated as well.
 
@@ -23,17 +23,14 @@ To get started with this project:
 
 2. **Navigate into the directory**: cd repository
 
-
 3. **Install the dependencies**: npm install
-
 
 4. **Create a `.env.local` file and add your environment variables**: touch .env.local
 
 Open the `.env.local` file and add the following (replace the values with your own):
 
-NEXT_PUBLIC_STRIPE_PUBLIC_KEY=your_stripe_public_key
-NEXT_PUBLIC_APP_BACKEND_URL=your_backend_url
-
+- NEXT_PUBLIC_STRIPE_PUBLIC_KEY=your_stripe_public_key
+- NEXT_PUBLIC_APP_BACKEND_URL=your_backend_url
 
 5. **Run the application**:
 In development mode: npm run dev
