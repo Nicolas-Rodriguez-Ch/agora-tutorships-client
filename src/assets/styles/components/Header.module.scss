@@ -166,9 +166,8 @@ $secondaryColorDark: #e2e2e2;
 }
 
 .headerProfileTooltip {
-  visibility: visible;
+  display: none;
   position: absolute;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -176,14 +175,15 @@ $secondaryColorDark: #e2e2e2;
   width: 200px;
   height: 200px;
   background-color: $primaryColorDark;
-  top: -100px;
-  transition: top 400ms;
+  transform: translateY(-100px);
+  transition: transform 400ms;
+  top: 141px;
   z-index: -1;
 }
 
 .headerProfileTooltipActive {
-  visibility: visible;
-  top: 141px;
+  display: flex;
+  transform: translateY(0);
 }
 
 .profileTooltipProfile,

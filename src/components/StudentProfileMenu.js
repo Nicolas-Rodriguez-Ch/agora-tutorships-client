@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../assets/styles/pages/StudentProfile.module.scss";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 function StudentProfileMenu({ page }) {
   const [selected, setSelected] = useState("Edit Profile");
@@ -26,12 +26,6 @@ function StudentProfileMenu({ page }) {
         <option className={styles.studentProfileMenuOption} value="edit">
           Edit Profile
         </option>
-        <option
-          className={styles.studentProfileMenuOption}
-          value="payment-methods"
-        >
-          Payment methods
-        </option>
         <option className={styles.studentProfileMenuOption} value="tutorships">
           My tutorships
         </option>
@@ -47,17 +41,6 @@ function StudentProfileMenu({ page }) {
               }`}
             >
               Profile
-            </li>
-          </div>
-          <div to="payment-methods">
-            <li
-              onClick={handleSelect}
-              id="payment-methods"
-              className={`${styles.studentProfileMenuItem} ${
-                selected === "payment-methods" ? styles.selected : ""
-              }`}
-            >
-              Payment Methods
             </li>
           </div>
           <div to="tutorships">
