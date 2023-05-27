@@ -6,6 +6,7 @@ import { ReviewsContainer } from '../../components/ReviewsContainer';
 import styles from '../../assets/styles/pages/TutorViewProfile.module.scss';
 import axios from '../../utils/axios';
 import Loader from '../../components/Loader';
+import ChatBox from '../../components/ChatBox';
 
 function TutorDetailsPage() {
   const [tutor, setTutor] = useState({});
@@ -43,6 +44,7 @@ function TutorDetailsPage() {
             <TutorPageHead tutor={tutor} tutorId={id} />
             <TutorDescription tutor={tutor} />
             <ReviewsContainer reviews={reviews} />
+            <ChatBox/>
           </>
         )}
       </div>
