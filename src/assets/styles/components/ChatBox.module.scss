@@ -50,6 +50,9 @@ $colorB: rgb(41, 202, 103);
   border: 1px solid $colorB;
   border-radius: 5px;
   padding: 5px;
+  div:nth-child(even) {
+    background-color: lightgray;
+  }
 }
 
 .chatBoxLabel {

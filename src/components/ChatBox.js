@@ -8,6 +8,7 @@ let socket;
 const ChatBox = ({ roomId: roomIdProp }) => {
   const dispatch = useDispatch();
   const { roomId: roomIdState, isOpen } = useSelector((state) => state.chat);
+  const { name, type } = useSelector((state) => state.user.currentUser)
   const roomId = roomIdProp || roomIdState;
 
   const [message, setMessage] = useState("");
