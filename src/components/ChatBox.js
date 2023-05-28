@@ -1,31 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
+import { useSelector, useDispatch } from "react-redux";
+import { closeChat } from "../slices/chatSlice";
 import styles from "../assets/styles/components/ChatBox.module.scss";
 let socket;
 
-const ChatBox = () => {
+const ChatBox = ({ roomId: roomIdProp }) => {
+  const dispatch = useDispatch();
+  const { roomId: roomIdState, isOpen } = useSelector((state) => state.chat);
+  const roomId = roomIdProp || roomIdState;
+
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
-    socket = io("http://localhost:3001");
+    if (!isOpen) return;
 
-    socket.on("message", (payload) => {
-      setChat([...chat, payload]);
+    socket = io(
+      process.env.NEXT_PUBLIC_APP_BACKEND_URL || "http://localhost:3001"
+    );
+
+    socket.on("welcome", (data) => {
+      setChat((prevChat) => [...prevChat, data.message]);
+    });
+
+    // use roomId here instead of tutorId
+    socket.emit("join room", { roomId });
+    socket.on("new message", (data) => {
+      console.log("Received new message", data);
+      setChat((prevChat) => [...prevChat, data]);
     });
 
     return () => {
-      socket.emit("no longer connected");
-      socket.off();
+      socket.close();
+      socket.removeAllListeners();
     };
-  }, [chat]);
+  }, [isOpen, roomId]);
 
   const sendMessage = (event) => {
     event.preventDefault();
 
     if (message) {
-      socket.emit("message", message);
+      socket.emit("message", { message, roomId });
       setMessage("");
     }
   };
@@ -34,11 +51,23 @@ const ChatBox = () => {
     setIsExpanded(!isExpanded);
   };
 
+  const handleCloseChat = () => {
+    dispatch(closeChat());
+  };
+
+  if (!isOpen) return null;
+
   return (
     <div
       className={isExpanded ? styles.chatBoxExpanded : styles.chatBoxCollapsed}
       onClick={!isExpanded ? toggleExpand : undefined}
     >
+      {isExpanded && (
+        <button className={styles.closeChatButton} onClick={handleCloseChat}>
+          Close
+        </button>
+      )}
+
       {isExpanded && (
         <>
           <div className={styles.chatBoxHeader} onClick={toggleExpand}>
@@ -46,7 +75,9 @@ const ChatBox = () => {
           </div>
           <div className={styles.chatBoxBody}>
             {chat.map((payload, index) => (
-              <div key={index}>{payload}</div>
+              <div key={index}>
+                <p>{payload}</p>
+              </div>
             ))}
           </div>
           <form className={styles.chatBoxForm} onSubmit={sendMessage}>
