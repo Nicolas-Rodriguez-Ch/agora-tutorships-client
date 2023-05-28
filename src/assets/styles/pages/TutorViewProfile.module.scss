@@ -206,3 +206,32 @@ $colorB: rgb(41, 202, 103);
     margin-bottom: 50px;
   }
 }
+.chatButton {
+  border: none;
+  text-align: center;
+  height: 40px;
+  padding: 0px 20px;
+  margin-top: 30px;
+  font-family: "Source Code Pro", monospace;
+  line-height: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  cursor: pointer;
+  background-color: $colorB;
+  color: white;
+  border: 2px solid $colorB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.chatButton:hover {
+  background-color: white;
+  color: $colorB;
+}
+
+.chatButton:focus {
+  outline: none;
+}
