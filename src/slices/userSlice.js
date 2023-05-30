@@ -90,7 +90,9 @@ const userSlice = createSlice({
       })
       .addCase(login.rejected, (state) => {
         state.login_failed = true;
+        state.auth_status = "unauthorized";
       })
+
       .addCase(register.fulfilled, (state, action) => {
         state.token = action.payload.token;
         state.auth_status = "loading";

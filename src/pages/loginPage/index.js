@@ -22,10 +22,10 @@ function LoginPage() {
   });
 
   useEffect(() => {
-    if (isAuthenticated) {
-      router.push("/homePage", undefined, { shallow: true });
+    if (globalState.user.auth_status === "authorized") {
+      router.push("/homePage");
     }
-  }, [isAuthenticated,router]);
+  }, [globalState.user.auth_status, router]);
 
   const validateInputs = (e) => {
     const inputName = e.target.name;

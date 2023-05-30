@@ -33,7 +33,7 @@ function TutorPageHead({ tutor, tutorId }) {
         alt="tutor profile"
         className={styles.tutorProfilePhoto}
         width={100}
-        height={75}
+        height={100}
       />
       <div className={styles.tutorProfileProfileContainerText}>
         <h1 className={styles.tutorProfileTitle}>{tutor.name}</h1>
