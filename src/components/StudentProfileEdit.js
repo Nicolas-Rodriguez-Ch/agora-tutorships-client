@@ -124,19 +124,20 @@ const StudentProfileEdit = () => {
 
   const updateStudentProfile = async (inputs, formData, token) => {
     try {
-      const { data: url } = await axios.patch("/uploadProfileImage", formData);
-  
       const updatedInputs = Object.fromEntries(
         Object.entries(inputs).filter(([key, value]) => value)
-      );
-  
-      const response = await axios.patch("/update", {
-        formData,
-        inputs: updatedInputs,
-        url,
-        token,
-        type: "student",
-      });
+        );
+        
+        const response = await axios.patch("/update", {
+          formData,
+          inputs: updatedInputs,
+          url,
+          token,
+          type: "student",
+        });
+        formData.append("token", token);
+        formData.append("type", "student");
+        const { data: url } = await axios.patch("/uploadProfileImage", formData);
   
       localStorage.setItem("token", response.data);
       swalStyled

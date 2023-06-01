@@ -299,6 +299,8 @@ function TutorProfilePage() {
         token,
         type: "tutor",
       });
+      formData.append("token", token);
+      formData.append("type", "tutor");
       const { data: url } = await axios.patch("/uploadProfileImage", formData);
       localStorage.setItem("token", response.data);
       swalstylesd
