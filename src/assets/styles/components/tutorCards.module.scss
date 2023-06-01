@@ -14,7 +14,7 @@ $colorA: #22b8d9;
   width: 100%;
   height: 60vw;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   font-family: "Open Sans";
   cursor: pointer;
@@ -29,7 +29,6 @@ $colorA: #22b8d9;
 }
 
 .cardVisualInfo {
-  display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
@@ -141,7 +140,7 @@ $colorA: #22b8d9;
       font-size: 1.3rem;
     }
     p {
-      width: 15rem;
+      width: 13rem;
       height: 9.5rem;
       font-size: 1rem;
     }
