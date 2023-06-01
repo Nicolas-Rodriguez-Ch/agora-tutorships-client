@@ -6,73 +6,80 @@ $tutorProfileAlphaBackground: #55555555;
 $tutorProfileColorB: rgb(41, 202, 103);
 $tutorProfileColorBDark: #0b753d;
 
-.tutorProfileMenuContainer {
+.tutorProfileProfileContainer {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: 10px;
+  margin-bottom: 20px;
+  gap: 15px;
 }
 
-.tutorProfileMain {
-  margin: 10px 10px 40px 10px;
-  box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 15%);
-  min-height: 500px;
+.tutorProfilePhoto {
+  border-radius: 50%;
+}
+
+.tutorProfileProfileContainerText {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 20px 20px;
+  margin-right: 20px;
+  align-items: flex-start;
 }
 
-@media (min-width: 992px) {
-  .tutorProfileContainer {
-    width: 930px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    margin: 50px auto 30px auto;
-  }
-
-  .tutorProfileMenuContainer {
-    top: 160px;
-    margin-right: 30px;
-    margin-bottom: 50px;
-    width: 25%;
-  }
-
-  .tutorProfileMain {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row-reverse;
-    padding: 30px;
-    width: 100%;
-    background-color: white;
-    box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 15%);
-    margin-bottom: 50px;
-  }
+.tutorProfileTitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: $tutorProfilePrimaryColorDark;
+  margin-bottom: 10px;
+  text-align: right;
 }
 
-@media (min-width: 1200px) {
-  .tutorProfileContainer {
-    width: 1130px;
-  }
-
-  .tutorProfileMenuContainer {
-    width: 23%;
-    position: sticky;
-    top: 190px;
-  }
+.tutorProfileSubtitle {
+  font-size: 18px;
+  margin-bottom: 5px;
+  text-align: right;
 }
 
-@media (min-width: 1400px) {
-  .tutorProfileContainer {
-    width: 1330px;
-  }
+.tutorProfileSubtitle.profession,
+.tutorProfileSubtitle.area {
+  color: $tutorProfilePrimaryColor;
+}
 
-  .tutorProfileMenuContainer {
-    width: 25%;
-    top: 190px;
-  }
+.tutorProfileStars {
+  display: flex;
+  margin-top: 10px;
+  color: $tutorProfilePrimaryColor;
+  justify-content: flex-start;
+}
+
+.tutorProfileScheduleContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  align-items: flex-start;
+}
+
+.tutorProfileAvailability {
+  font-size: 18px;
+  color: $tutorProfilePrimaryColor;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.tutorProfileScheduleButton {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: $tutorProfileSecondaryColor;
+  background-color: $tutorProfilePrimaryColor;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.tutorProfileScheduleButton:hover {
+  background-color: $tutorProfilePrimaryColorDark;
 }
